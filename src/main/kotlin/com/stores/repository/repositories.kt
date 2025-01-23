@@ -10,3 +10,5 @@ interface ProductoRepository: MongoRepository<Producto, String>
 interface MascotaRepository: MongoRepository<Mascota, String>
 interface ProveedorRepository: MongoRepository<Proveedor, String>
 interface ClienteRepository: MongoRepository<Usuario, String>
+interface OpinionesRepository: MongoRepository<Opiniones, String>
+interface NotificacionesRepository: MongoRepository<Notificaciones, String>

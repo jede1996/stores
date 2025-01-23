@@ -1,0 +1,37 @@
+package com.stores.request
+
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
+import java.util.*
+
+class RequestRegistroConsulta(
+    val usuario: String?,
+    val cliente: String?,
+    val mascota: String?,
+    val motivo: String?,
+    val sintomas: String?,
+    val diagnostico: String?,
+    val tratamiento: String?,
+    val peso: String?,
+    val temperatura: String?,
+    val notasPropietario: String?,
+    val notasDoctor: String?,
+    val procedimientosRealizados: String?,
+    val montoPorCobrar: String?,
+    val pagado: Boolean?,
+    val agendado: Boolean?,
+    val duracion: String?,
+    val tipoServicio: String?,
+    val estadoCita: String?
+)
+
+data class RequestBusquedaConsulta(
+    @field:NotNull(message = "ID_REQUERIDO") @field:NotEmpty(message = "ID_REQUERIDO") val id: String?,
+)
+
+data class RequestProgramacionConsulta(
+    @field:NotNull(message = "ID_REQUERIDO") @field:NotEmpty(message = "ID_REQUERIDO") val id: String?,
+    @field:NotNull(message = "FECHA_REQUERIDO") @field:NotEmpty(message = "FECHA_REQUERIDO") val fecha: Date?,
+)
