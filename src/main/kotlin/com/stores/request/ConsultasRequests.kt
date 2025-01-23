@@ -24,14 +24,14 @@ class RequestRegistroConsulta(
     val agendado: Boolean?,
     val duracion: String?,
     val tipoServicio: String?,
-    val estadoCita: String?
+    val estadoCita: String?,
 )
 
 data class RequestBusquedaConsulta(
-    @field:NotNull(message = "ID_REQUERIDO") @field:NotEmpty(message = "ID_REQUERIDO") val id: String?,
+    @field:NotNull(message = "CONSULTA_REQUERIDO") @field:NotEmpty(message = "CONSULTA_REQUERIDO") val consulta: String?,
 )
 
 data class RequestProgramacionConsulta(
-    @field:NotNull(message = "ID_REQUERIDO") @field:NotEmpty(message = "ID_REQUERIDO") val id: String?,
+    @field:NotNull(message = "CONSULTA_REQUERIDO") @field:NotEmpty(message = "CONSULTA_REQUERIDO") val consulta: String?,
     @field:NotNull(message = "FECHA_REQUERIDO") @field:NotEmpty(message = "FECHA_REQUERIDO") val fecha: Date?,
 )

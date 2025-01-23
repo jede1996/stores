@@ -5,6 +5,5 @@ import jakarta.validation.constraints.NotNull
 
 class RequestReportes(
     @field:NotNull(message = "FECHA_REQUERIDO") @field:NotEmpty(message = "FECHA_REQUERIDO") val fechaInicio: String?,
-
-    @field:NotNull(message = "FECHA_REQUERIDO") @field:NotEmpty(message = "FECHA_REQUERIDO") val FechaFinal: String?,
+    @field:NotNull(message = "FECHA_REQUERIDO") @field:NotEmpty(message = "FECHA_REQUERIDO") val FechaFinal: String?
 )

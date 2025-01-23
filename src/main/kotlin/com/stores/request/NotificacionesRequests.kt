@@ -8,7 +8,7 @@ import java.util.*
 
 
 class RequestConsultaNotificaciones(
-    val id: String?,
+    val notificacion: String?,
     val aplicaion: String?,
 )
 

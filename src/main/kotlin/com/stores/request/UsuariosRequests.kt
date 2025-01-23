@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
 class RequestsRegistroUsuario(
-    @field:NotNull(message = "USER_REQUERIDO") @field:NotEmpty(message = "USER_REQUERIDO") val usuario: String?,
+    @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
     @field:NotNull(message = "NOMBRE_REQUERIDO") @field:NotEmpty(message = "NOMBRE_REQUERIDO") val nombre: String?,
     @field:NotNull(message = "AP_REQUERIDO") @field:NotEmpty(message = "AP_REQUERIDO") val apellidoPaterno: String?,
     apellidoMaterno: String?,
@@ -27,7 +27,7 @@ class RequestValidacionCodigo(
 )
 
 class RequestActualizacionUsuario(
-    @field:NotNull(message = "USER_REQUERIDO") @field:NotEmpty(message = "USER_REQUERIDO") val usuario: String?,
+    @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
     @field:NotNull(message = "PASS_REQUERIDO") @field:NotEmpty(message = "PASS_REQUERIDO") val contrasennaNueva: String?,
     @field:NotNull(message = "NOMBRE_REQUERIDO") @field:NotEmpty(message = "NOMBRE_REQUERIDO") val nombre: String?,
     @field:NotNull(message = "AP_REQUERIDO") @field:NotEmpty(message = "AP_REQUERIDO") val apellidoPaterno: String?,
@@ -41,5 +41,5 @@ class RequestActualizacionUsuario(
 )
 
 class RequestConsultaUsuario(
-    @field:NotNull(message = "USER_ID_REQUERIDO") @field:NotEmpty(message = "USER_ID_REQUERIDO") val usuarioId: String?
+    @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?
 )
