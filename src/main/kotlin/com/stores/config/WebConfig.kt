@@ -19,7 +19,7 @@ class WebConfig : AbstractMongoClientConfiguration() {
 
     override fun mongoClient(): MongoClient {
         val mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(ConnectionString("mongodb+srv://store:store@store.ymz8d.mongodb.net/?retryWrites=true&w=majority&appName=store"))
+            .applyConnectionString(ConnectionString("mongodb+srv://store:store@store.ymz8d.mongodb.net/store?retryWrites=true&w=majority&appName=store&readPreference=nearest"))
             .build()
         return MongoClients.create(mongoClientSettings)
     }

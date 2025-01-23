@@ -53,7 +53,7 @@ fun buildresponse(
     response: Any? = null,
     descripcion: CatalogoResponses? = null,
     detalle: String = ""
-): ResponseEntity<Any> {
+): ResponseEntity<Respuesta> {
     if (response != null) return ResponseEntity(Respuesta(0, response), ResponseStatus.EXITO.httpStatus)
     return ResponseEntity(
         Respuesta(

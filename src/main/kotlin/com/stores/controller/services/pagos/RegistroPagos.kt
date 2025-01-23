@@ -1,5 +1,6 @@
 package com.stores.controller.services.pagos
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import org.slf4j.Logger
@@ -14,7 +15,7 @@ class RegistroPagos  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroPagos(request: Any?): ResponseEntity<Any>{
+    fun registroPagos(request: Any?): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

@@ -1,5 +1,6 @@
 package com.stores.controller.services.notificaciones
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ConsultasRepository
@@ -11,12 +12,15 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class RegistroNotificaciones  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+class RegistroNotificaciones @Autowired constructor(
+    private val tracer: ServiceInterceptor
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun notificacionesRecordatorios(request: RequestsRegistroUsuario?, consultasRepository: ConsultasRepository): ResponseEntity<Any>{
+    fun notificacionesRecordatorios(
+        request: RequestsRegistroUsuario?,
+        consultasRepository: ConsultasRepository
+    ): ResponseEntity<Respuesta> {
         return buildresponse(response = "")
     }
 

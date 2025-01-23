@@ -1,8 +1,12 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.notificaciones.*
+import com.stores.repository.NotificacionesRepository
+import com.stores.request.RequestConsultaNotificaciones
+import com.stores.request.RequestNotificaciones
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,44 +17,26 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("notificacion")
 class NotificacionesController(
-    val notificacionesRecordatorios: NotificacionesRecordatorios,
-    val inventariosNotificaciones: InventariosNotificaciones,
+    val notificacionesRepository: NotificacionesRepository,
     val consultaNotificaciones: ConsultaNotificaciones,
     val notificacionesPersonalizadas: NotificacionesPersonalizadas,
-    val listadoNotificaciones: ListadoNotificaciones
 ) {
-    @PostMapping("recordatorios")
-    fun notificacionesRecordatorios(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    @PostMapping("registro")
+    fun notificacionesPersonalizado(@Valid @RequestBody request: RequestNotificaciones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return inventariosNotificaciones.notificacionInventarioBajo(request)
+        return notificacionesPersonalizadas.notificacionesPersonalizadas(request, notificacionesRepository)
     }
 
-
-    @PostMapping("invnetario-bajo")
-    fun notificacionInventarioBajo(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    @PostMapping("enviar")
+    fun enviarNotificaciones(@Valid @RequestBody request: RequestConsultaNotificaciones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return notificacionesRecordatorios.notificacionesRecordatorios(request)
+        return consultaNotificaciones.enviarNotificaciones(request, notificacionesRepository)
     }
-
-
-    @PostMapping("personalizado")
-    fun notificacionesPersonalizado(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return notificacionesPersonalizadas.notificacionesPersonalizadas(request)
-    }
-
-
-    @PostMapping("consulta")
-    fun consultaNotificaciones(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return consultaNotificaciones.consultaNotificaciones(request)
-    }
-
 
     @PostMapping("listado")
-    fun listadoNotificaciones(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    fun consultaNotificacionesPorApp(@Valid @RequestBody request: RequestConsultaNotificaciones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return listadoNotificaciones.listadoNotificaciones(request)
+        return consultaNotificaciones.consultaNotificaciones(request, notificacionesRepository)
     }
 
 }

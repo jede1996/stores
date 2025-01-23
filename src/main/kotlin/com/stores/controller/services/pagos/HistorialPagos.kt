@@ -1,5 +1,6 @@
 package com.stores.controller.services.pagos
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import org.slf4j.Logger
@@ -14,11 +15,11 @@ class HistorialPagos  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun historialPagos(request: Any?): ResponseEntity<Any>{
+    fun historialPagos(request: Any?): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 
-    fun historialGeneralPagos(request: Any?): ResponseEntity<Any>{
+    fun historialGeneralPagos(request: Any?): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

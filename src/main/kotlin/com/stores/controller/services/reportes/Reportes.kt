@@ -1,8 +1,10 @@
 package com.stores.controller.services.reportes
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
+import com.stores.request.RequestReportes
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,19 +17,7 @@ class Reportes @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun reporteDiario(request: Any?): ResponseEntity<Any> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-    }
-
-    fun reportePorMes(request: Any?): ResponseEntity<Any> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-    }
-
-    fun reportePorAnno(request: Any?): ResponseEntity<Any> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-    }
-
-    fun repostePorFecha(request: Any?): ResponseEntity<Any> {
+    fun repostePorFecha(request: RequestReportes?): ResponseEntity<Respuesta> {
         return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
     }
 

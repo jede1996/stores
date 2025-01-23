@@ -1,5 +1,6 @@
 package com.stores.controller.services.mascota
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.MascotaRepository
@@ -15,7 +16,7 @@ class ListadoMascota  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun listadoMascotas(request: Any?, mascotaRepository: MascotaRepository): ResponseEntity<Any>{
+    fun listadoMascotas(mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

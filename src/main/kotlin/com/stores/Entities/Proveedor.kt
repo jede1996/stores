@@ -7,19 +7,14 @@ import kotlin.collections.ArrayList
 
 @Document("proveedor")
 data class Proveedor(
-    @Field("_id")
-    val id: String?,
+    @Field("_id") val proveedor: String?,
+    val empresa: String?,
     val nombre: String?,
-    @Field("apellido_paterno")
-    val apellidoPaterno: String?,
-    @Field("apellido_materno")
-    val apellidoMaterno: String?,
+    @Field("apellido_paterno") val apellidoPaterno: String?,
+    @Field("apellido_materno") val apellidoMaterno: String?,
     val genero: String?,
-    @Field("correo_electronico")
-    var correosElectronicos: ArrayList<CorreosElectronicos>?,
+    @Field("correo_electronico") var correosElectronicos: ArrayList<CorreosElectronicos>?,
     val telefonos: ArrayList<Telefonos>?,
-    @Field("fecha_registro")
-    val fechaRegistro: Date?,
-    @Field("fecha_modificacion")
-    var fechaModificacion: Date?
+    @Field("fecha_registro") val fechaRegistro: Date?,
+    @Field("fecha_modificacion") var fechaModificacion: Date?,
 )

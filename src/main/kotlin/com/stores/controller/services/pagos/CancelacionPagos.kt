@@ -1,5 +1,6 @@
 package com.stores.controller.services.pagos
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import org.slf4j.Logger
@@ -14,7 +15,7 @@ class CancelacionPagos  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun cancelacionPagos(request: Any?): ResponseEntity<Any>{
+    fun cancelacionPagos(request: Any?): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

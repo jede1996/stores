@@ -1,5 +1,6 @@
 package com.stores.controller.services.productos
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ProductoRepository
@@ -15,7 +16,7 @@ class ModificacionProducto  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun modificacionInventario(request: Any?, productoRepository: ProductoRepository): ResponseEntity<Any>{
+    fun modificacionInventario(request: Any?, productoRepository: ProductoRepository): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

@@ -1,5 +1,6 @@
 package com.stores.controller.services.login
 
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ClienteRepository
@@ -15,7 +16,7 @@ class validacionUser  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun validacionActualizacion(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Any>{
+    fun validacionActualizacion(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
         return buildresponse(response = "")
     }
 

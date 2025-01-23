@@ -33,14 +33,13 @@ class CustomExceptionHandler : ResponseEntityExceptionHandler() {
             break
         }
         return when (errorMessage!!.toString()) {
-            "NOMBRE_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.NOMBRE_REQUERIDO)
-            "AP_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.AP_REQUERIDO)
-            "AM_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.AM_REQUERIDO)
-            "FN_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.FN_REQUERIDO)
-            "GENERO_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.GENERO_REQUERIDO)
-            "NOTIFICACION_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.NOTIFICACION_REQUERIDO)
-
-            else -> buildresponse(descripcion = CatalogoResponses.ERROR_INESPERADO)
+            "NOMBRE_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.NOMBRE_REQUERIDO) as ResponseEntity<Any>?
+            "AP_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.AP_REQUERIDO) as ResponseEntity<Any>?
+            "AM_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.AM_REQUERIDO) as ResponseEntity<Any>?
+            "FN_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.FN_REQUERIDO) as ResponseEntity<Any>?
+            "GENERO_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.GENERO_REQUERIDO) as ResponseEntity<Any>?
+            "NOTIFICACION_REQUERIDO" -> buildresponse(descripcion = CatalogoResponses.NOTIFICACION_REQUERIDO) as ResponseEntity<Any>?
+            else -> buildresponse(descripcion = CatalogoResponses.ERROR_INESPERADO) as ResponseEntity<Any>?
         }
     }
 }

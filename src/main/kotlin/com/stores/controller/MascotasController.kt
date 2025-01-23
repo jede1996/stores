@@ -1,9 +1,12 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.mascota.*
 import com.stores.repository.MascotaRepository
+import com.stores.request.RequestConsultaMascota
+import com.stores.request.RequestMascota
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -22,37 +25,31 @@ class MascotasController(
     val listadoMascota: ListadoMascota
 ) {
     @PostMapping("registro")
-    fun registroMascota(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    fun registroMascota(@Valid @RequestBody request: RequestMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
         return registroMascota.registroMascota(request, mascotaRepository)
     }
 
-
     @PostMapping("baja")
-    fun bajaMascota(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    fun bajaMascota(@Valid @RequestBody request: RequestConsultaMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
         return bajaMascota.bajaMascota(request, mascotaRepository)
     }
 
-
     @PostMapping("modificacion")
-    fun modificacionMascota(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    fun modificacionMascota(@Valid @RequestBody request: RequestMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
         return modificacionMascota.modificacionMascota(request, mascotaRepository)
     }
 
-
     @PostMapping("consulta")
-    fun consultaMascota(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
+    fun consultaMascota(@Valid @RequestBody request: RequestConsultaMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
         return consultaMascota.ConsultaMascota(request, mascotaRepository)
     }
 
-
     @PostMapping("listado")
-    fun listadoMascotas(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return listadoMascota.listadoMascotas(request, mascotaRepository)
+    fun listadoMascotas(): ResponseEntity<Respuesta> {
+        return listadoMascota.listadoMascotas(mascotaRepository)
     }
-
 }
