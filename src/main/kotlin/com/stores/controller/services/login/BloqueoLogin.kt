@@ -3,8 +3,6 @@ package com.stores.controller.services.login
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ClienteRepository
-import com.stores.repository.ConsultasRepository
-import com.stores.request.RequestsRegistroUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
