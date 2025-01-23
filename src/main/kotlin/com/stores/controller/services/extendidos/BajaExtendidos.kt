@@ -1,9 +1,10 @@
-package com.stores.controller.services.login
+package com.stores.controller.services.extendidos
 
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
-import com.stores.repository.ClienteRepository
 import com.stores.repository.ConsultasRepository
+import com.stores.repository.ExtCamaDelPerroRepository
+import com.stores.repository.ExtLunaVetRepository
 import com.stores.request.RequestsRegistroUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -12,13 +13,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class ActualizacionContrasenna  @Autowired constructor(
+class BajaExtendidos  @Autowired constructor(
     private val tracer : ServiceInterceptor
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun actualizacontrasenna(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Any>{
+    fun bajaExtendidos(request: Any?, extLunaVetRepository: ExtLunaVetRepository, extCamaDelPerroRepository: ExtCamaDelPerroRepository): ResponseEntity<Any>{
         return buildresponse(response = "")
     }
-
 }

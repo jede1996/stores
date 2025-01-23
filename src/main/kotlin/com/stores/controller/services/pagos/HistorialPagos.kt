@@ -1,8 +1,7 @@
-package com.stores.controller.services.login
+package com.stores.controller.services.pagos
 
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
-import com.stores.repository.ClienteRepository
 import com.stores.repository.ConsultasRepository
 import com.stores.request.RequestsRegistroUsuario
 import org.slf4j.Logger
@@ -12,12 +11,16 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class ActualizacionContrasenna  @Autowired constructor(
+class HistorialPagos  @Autowired constructor(
     private val tracer : ServiceInterceptor
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun actualizacontrasenna(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Any>{
+    fun historialPagos(request: Any?): ResponseEntity<Any>{
+        return buildresponse(response = "")
+    }
+
+    fun historialGeneralPagos(request: Any?): ResponseEntity<Any>{
         return buildresponse(response = "")
     }
 

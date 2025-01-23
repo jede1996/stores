@@ -12,12 +12,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class ActualizacionContrasenna  @Autowired constructor(
+class BloqueoLogin  @Autowired constructor(
     private val tracer : ServiceInterceptor
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun actualizacontrasenna(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Any>{
+    fun BloqueoSesion(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Any>{
         return buildresponse(response = "")
     }
 
