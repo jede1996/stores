@@ -18,11 +18,11 @@ class HistorialConsultas  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun historialConsultasCliente(request: RequestBusquedaConsulta?, consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
     fun historialConsultasGeneral(consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

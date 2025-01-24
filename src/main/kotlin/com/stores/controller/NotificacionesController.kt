@@ -23,19 +23,19 @@ class NotificacionesController(
 ) {
     @PostMapping("registro")
     fun notificacionesPersonalizado(@Valid @RequestBody request: RequestNotificaciones?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return notificacionesPersonalizadas.notificacionesPersonalizadas(request, notificacionesRepository)
     }
 
     @PostMapping("enviar")
     fun enviarNotificaciones(@Valid @RequestBody request: RequestConsultaNotificaciones?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaNotificaciones.enviarNotificaciones(request, notificacionesRepository)
     }
 
     @PostMapping("listado")
     fun consultaNotificacionesPorApp(@Valid @RequestBody request: RequestConsultaNotificaciones?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaNotificaciones.consultaNotificaciones(request, notificacionesRepository)
     }
 

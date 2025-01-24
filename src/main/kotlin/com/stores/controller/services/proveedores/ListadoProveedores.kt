@@ -17,7 +17,7 @@ class ListadoProveedores @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun listadoProveedores(proveedorRepository: ProveedorRepository): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

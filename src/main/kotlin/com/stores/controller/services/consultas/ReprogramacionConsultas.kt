@@ -18,7 +18,7 @@ class ReprogramacionConsultas  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun reprogramacionConsulta(request: RequestProgramacionConsulta?, consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

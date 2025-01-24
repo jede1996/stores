@@ -20,13 +20,13 @@ class ConsultaNotificaciones @Autowired constructor(
         request: Any?,
         notificacionesRepository: NotificacionesRepository,
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
     fun enviarNotificaciones(
         request: Any?,
         notificacionesRepository: NotificacionesRepository,
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 }

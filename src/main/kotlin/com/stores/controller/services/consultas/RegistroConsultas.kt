@@ -21,7 +21,7 @@ class RegistroConsultas @Autowired constructor(
         request: RequestRegistroConsulta?,
         consultasRepository: ConsultasRepository,
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

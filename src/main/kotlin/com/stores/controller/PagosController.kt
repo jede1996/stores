@@ -23,26 +23,26 @@ class PagosController(
     //TODO
     @PostMapping("registro")
     fun registroPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroPagos.registroPagos(request)
     }
 
     @PostMapping("cancelacion")
     fun cancelacionPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return cancelacionPagos.cancelacionPagos(request)
     }
 
     @PostMapping("historial")
     fun historialPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialPagos.historialPagos(request)
     }
 
 
     @PostMapping("historial-general")
     fun historialGeneralPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialPagos.historialGeneralPagos(request)
     }
 }

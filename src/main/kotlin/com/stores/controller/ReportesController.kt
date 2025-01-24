@@ -19,7 +19,7 @@ class ReportesController(
 ) {
     @PostMapping("fecha")
     fun reportePorFecha(@Valid @RequestBody request: RequestReportes?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return reportes.repostePorFecha(request)
     }
 }

@@ -17,7 +17,7 @@ class ListadoMascota  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun listadoMascotas(mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

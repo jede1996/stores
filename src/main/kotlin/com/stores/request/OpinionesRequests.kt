@@ -2,9 +2,6 @@ package com.stores.request
 
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
-import org.springframework.data.mongodb.core.mapping.Document
-import org.springframework.data.mongodb.core.mapping.Field
-import java.util.*
 
 
 class RequestRegistroOpinion(

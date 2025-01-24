@@ -24,8 +24,8 @@ class RegistroUsuario @Autowired constructor(
         @Valid @RequestBody request: RequestsRegistroUsuario?,
         clienteRepository: ClienteRepository
     ): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
-        return buildresponse(descripcion = com.stores.config.CatalogoResponses.NOTIFICACION_REQUERIDO)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = com.stores.config.CatalogoResponses.NOTIFICACION_REQUERIDO)
     }
 
 }

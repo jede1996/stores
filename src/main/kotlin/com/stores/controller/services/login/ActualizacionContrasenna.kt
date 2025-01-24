@@ -17,7 +17,7 @@ class ActualizacionContrasenna  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun actualizacontrasenna(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

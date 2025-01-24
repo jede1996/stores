@@ -21,7 +21,7 @@ class RegistroNotificaciones @Autowired constructor(
         request: RequestsRegistroUsuario?,
         consultasRepository: ConsultasRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

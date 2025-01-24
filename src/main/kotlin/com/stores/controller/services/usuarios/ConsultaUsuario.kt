@@ -22,6 +22,6 @@ class ConsultaUsuario @Autowired constructor(
         request: RequestConsultaUsuario?,
         clienteRepository: ClienteRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 }

@@ -27,25 +27,25 @@ class ProductoController(
 ) {
     @PostMapping("registro")
     fun registroProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroProducto.registroInventario(request, productoRepository)
     }
 
     @PostMapping("baja")
     fun bajaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaProducto.bajaInventario(request, productoRepository)
     }
 
     @PostMapping("modificacion")
     fun modificacionProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionProducto.modificacionInventario(request, productoRepository)
     }
 
     @PostMapping("consulta")
     fun consultaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaProducto.consultaInventario(request, productoRepository)
     }
 

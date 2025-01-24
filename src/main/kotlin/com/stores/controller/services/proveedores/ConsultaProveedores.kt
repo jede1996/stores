@@ -20,6 +20,6 @@ class ConsultaProveedores @Autowired constructor(
     fun consultaProveedor(
         request: RequestConsultaProveedor?, proveedorRepository: ProveedorRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 }

@@ -19,8 +19,8 @@ data class Programacion(
     val tipo: String,
     val frecuencia: String,
     val intervalo: Int,
-    val fecha_inicio: Date,
-    val fecha_fin: Date,
+    val fechaInicio: Date,
+    val fechaFin: Date,
 )
 
 data class Emisores(

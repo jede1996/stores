@@ -3,8 +3,6 @@ package com.stores.request
 import com.stores.Entities.Programacion
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
-import org.springframework.data.mongodb.core.mapping.Field
-import java.util.*
 
 
 class RequestConsultaNotificaciones(

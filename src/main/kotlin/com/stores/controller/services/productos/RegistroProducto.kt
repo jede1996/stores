@@ -18,7 +18,7 @@ class RegistroProducto  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun registroInventario(request: RequestProducto?, productoRepository: ProductoRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

@@ -21,18 +21,18 @@ class ModificacionUsuario  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun modificacionUsuario(request: RequestActualizacionUsuario?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun envioCodigo(request: RequestEnvioCodigo?): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun validacionEmail(request: RequestValidacionCodigo?): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun actualizaContrasenna(request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 }

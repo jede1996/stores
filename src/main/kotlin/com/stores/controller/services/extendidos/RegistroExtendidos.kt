@@ -21,7 +21,7 @@ class RegistroExtendidos @Autowired constructor(
     fun registroExtendidos(
         request: RequestExt?, extLunaVetRepository: ExtLunaVetRepository, extCamaDelPerroRepository: ExtCamaDelPerroRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

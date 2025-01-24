@@ -18,7 +18,7 @@ class NotificacionesPersonalizadas  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun notificacionesPersonalizadas(request: RequestNotificaciones?, notificacionesRepository: NotificacionesRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

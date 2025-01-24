@@ -27,25 +27,25 @@ class ProveedoresController(
 ) {
     @PostMapping("registro")
     fun registroProveedores(@Valid @RequestBody request: RequestsRegistroProveedor?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroProveedores.registroProveedores(request, proveedorRepository)
     }
 
     @PostMapping("baja")
     fun bajaProveedores(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaProveedores.bajaProveedores(request, proveedorRepository)
     }
 
     @PostMapping("modificacion")
     fun modificacionProveedor(@Valid @RequestBody request: RequestActualizacionProveedor?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionProveedores.modificacionProveedores(request, proveedorRepository)
     }
 
     @PostMapping("consulta")
     fun consultaProveedor(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaProveedores.consultaProveedor(request, proveedorRepository)
     }
 

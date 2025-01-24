@@ -22,7 +22,7 @@ class BajaUsuario @Autowired constructor(
         request: RequestActualizacionUsuario?,
         clienteRepository: ClienteRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
 

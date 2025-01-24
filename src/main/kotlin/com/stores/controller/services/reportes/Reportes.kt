@@ -18,7 +18,7 @@ class Reportes @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun repostePorFecha(request: RequestReportes?): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
 }

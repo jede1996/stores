@@ -18,7 +18,7 @@ class RegistroMascota  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun registroMascota(request: RequestMascota?, mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

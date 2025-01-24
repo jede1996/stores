@@ -3,7 +3,6 @@ package com.stores.Entities
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @Document("opiniones")

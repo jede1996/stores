@@ -21,7 +21,7 @@ class ModificacionProveedores @Autowired constructor(
         request: RequestActualizacionProveedor?,
         proveedorRepository: ProveedorRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 
 }

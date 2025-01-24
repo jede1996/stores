@@ -23,6 +23,6 @@ class BajaExtendidos @Autowired constructor(
         extLunaVetRepository: ExtLunaVetRepository,
         extCamaDelPerroRepository: ExtCamaDelPerroRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 }

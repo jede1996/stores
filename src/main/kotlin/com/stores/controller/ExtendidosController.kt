@@ -30,25 +30,25 @@ class ExtendidosController(
 ) {
     @PostMapping("registro")
     fun registroExtendido(@Valid @RequestBody request: RequestExt?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroExtendidos.registroExtendidos(request, extLunaVetRepository, extCamaDelPerroRepository)
     }
 
     @PostMapping("baja")
     fun bajaExtendido(@Valid @RequestBody request: RequestBusquedaExt?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaExtendidos.bajaExtendidos(request, extLunaVetRepository, extCamaDelPerroRepository)
     }
 
     @PostMapping("modificacion")
     fun modificacionExtendido(@Valid @RequestBody request: RequestExt?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionExtendidos.modificacionExtendidos(request, extLunaVetRepository, extCamaDelPerroRepository)
     }
 
     @PostMapping("consulta")
     fun consultaExtendido(@Valid @RequestBody request: RequestBusquedaExt?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaExtendidos.consultaExtendidos(request, extLunaVetRepository, extCamaDelPerroRepository)
     }
 }

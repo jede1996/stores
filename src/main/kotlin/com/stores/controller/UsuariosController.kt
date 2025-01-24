@@ -28,25 +28,25 @@ class UsuariosController(
 
     @PostMapping("registro")
     fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroUsuario.registroUsuario(request, clienteRepository)
     }
 
     @PostMapping("baja")
     fun bajaUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaUsuario.bajaUsuario(request, clienteRepository)
     }
 
     @PostMapping("modificacion")
     fun modificacionUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.modificacionUsuario(request, clienteRepository)
     }
 
     @PostMapping("consulta")
     fun consultaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaUsuario.consultaUsuario(request, clienteRepository)
     }
 
@@ -57,19 +57,19 @@ class UsuariosController(
 
     @PostMapping("codigo-email")
     fun envioCodigo(@Valid @RequestBody request: RequestEnvioCodigo?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.envioCodigo(request)
     }
 
     @PostMapping("valicacion-email")
     fun validacionEmail(@Valid @RequestBody request: RequestValidacionCodigo?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.validacionEmail(request)
     }
 
     @PostMapping("actualizacion-contrasenna")
     fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.actualizaContrasenna(request)
     }
 }

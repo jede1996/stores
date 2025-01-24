@@ -30,25 +30,25 @@ class ConsultasController(
 ) {
     @PostMapping("registro")
     fun registroConsulta(@Valid @RequestBody request: RequestRegistroConsulta?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroConsultas.registroConsulta(request, consultasRepository)
     }
 
     @PostMapping("cancelacion")
     fun cancelacionConsulta(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return cancelacionConsultas.cancelacionConsulta(request, consultasRepository)
     }
 
     @PostMapping("reprogramacion")
     fun reprogramacionConsulta(@Valid @RequestBody request: RequestProgramacionConsulta?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return reprogramacionConsultas.reprogramacionConsulta(request, consultasRepository)
     }
 
     @PostMapping("historial")
     fun historialConsultasCliente(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialConsultas.historialConsultasCliente(request, consultasRepository)
     }
 

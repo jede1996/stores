@@ -20,6 +20,6 @@ class BajaProveedores @Autowired constructor(
     fun bajaProveedores(
         request: RequestConsultaProveedor?, proveedorRepository: ProveedorRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 }

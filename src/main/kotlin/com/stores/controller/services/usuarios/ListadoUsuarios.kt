@@ -18,6 +18,6 @@ class ListadoUsuarios @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun listadoUsuarios(clienteRepository: ClienteRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 }

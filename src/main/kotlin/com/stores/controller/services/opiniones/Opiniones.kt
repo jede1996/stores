@@ -20,18 +20,18 @@ class Opiniones @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun registrarOpinion(request: RequestRegistroOpinion?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun cerrarOpinion(request: RequestOpiniones?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun consultarOpinion(request: RequestOpiniones?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 
     fun listarOpiniones(opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(descripcion = CatalogoResponses.BODY_NULL)
+        return buildresponse(error = CatalogoResponses.BODY_NULL)
     }
 }

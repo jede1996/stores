@@ -11,13 +11,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class validacionUser  @Autowired constructor(
+class ValidacionUser  @Autowired constructor(
     private val tracer : ServiceInterceptor
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun validacionActualizacion(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
-
 }

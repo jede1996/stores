@@ -4,8 +4,6 @@ import com.stores.Entities.Precios
 import com.stores.Entities.Stock
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
-import org.springframework.data.mongodb.core.mapping.Field
-import java.util.*
 
 class RequestProducto(
     @field:NotNull(message = "PRODUCTO_REQUERIDO") @field:NotEmpty(message = "PRODUCTO_REQUERIDO") val producto: String?,

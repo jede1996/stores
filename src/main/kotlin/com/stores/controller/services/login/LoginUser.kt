@@ -18,6 +18,6 @@ class LoginUser  @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun login(request: RequesLogin?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
-        return buildresponse(response = "")
+        return buildresponse(respuesta = "")
     }
 }
