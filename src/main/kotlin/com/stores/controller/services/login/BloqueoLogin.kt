@@ -18,14 +18,14 @@ class BloqueoLogin  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun BloqueoSesion(request: RequestBloqueoUsuario?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
+    fun bloqueoSesion(request: RequestBloqueoUsuario?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de bloqueo de sesion: $request")
 
             return buildresponse(respuesta =  "")
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
-            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
     }
 

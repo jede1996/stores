@@ -45,7 +45,7 @@ class MascotasController(
     @PostMapping("consulta")
     fun consultaMascota(@Valid @RequestBody request: RequestConsultaMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return consultaMascota.ConsultaMascota(request, mascotaRepository)
+        return consultaMascota.consultaMascota(request, mascotaRepository)
     }
 
     @PostMapping("listado")

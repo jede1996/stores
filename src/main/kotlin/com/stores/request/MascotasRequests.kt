@@ -1,6 +1,6 @@
 package com.stores.request
 
-import com.stores.Entities.Vacunas
+import com.stores.entities.Vacunas
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import kotlin.collections.ArrayList

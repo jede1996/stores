@@ -1,4 +1,4 @@
-package com.stores.Entities
+package com.stores.entities
 
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field

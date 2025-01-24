@@ -2,6 +2,8 @@ package com.stores.config
 
 import com.mongodb.ConnectionString
 import com.mongodb.MongoClientSettings
+import com.mongodb.ReadPreference
+import com.mongodb.WriteConcern
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
 import org.springframework.context.annotation.Configuration
@@ -19,7 +21,11 @@ class WebConfig : AbstractMongoClientConfiguration() {
 
     override fun mongoClient(): MongoClient {
         val mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(ConnectionString("mongodb+srv://store:store@store.ymz8d.mongodb.net/store?retryWrites=true&w=majority&appName=store&readPreference=nearest"))
+            .applyConnectionString(ConnectionString("mongodb+srv://store:store@store.ymz8d.mongodb.net"))
+            .retryWrites(true)
+            .writeConcern(WriteConcern.MAJORITY)
+            .applicationName("store")
+            .readPreference(ReadPreference.nearest())
             .build()
         return MongoClients.create(mongoClientSettings)
     }

@@ -18,14 +18,14 @@ class ConsultaMascota  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun ConsultaMascota(request: RequestConsultaMascota?, mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
+    fun consultaMascota(request: RequestConsultaMascota?, mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de consulta de mascotas: $request")
 
             return buildresponse(respuesta =  "")
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
-            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
     }
 

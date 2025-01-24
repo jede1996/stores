@@ -1,6 +1,6 @@
 package com.stores.request
 
-import com.stores.Entities.Programacion
+import com.stores.entities.Programacion
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 

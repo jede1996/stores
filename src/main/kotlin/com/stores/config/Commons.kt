@@ -31,7 +31,7 @@ enum class CatalogoResponses(
     GENERO_REQUERIDO(ResponseStatus.ERROR_PROTOCOLO, 0, "La genero no fue enviado"),
     NOTIFICACION_REQUERIDO(ResponseStatus.ERROR_PROTOCOLO, 0, "El estado de notificaciones no fue enviado"),
     BODY_NULL(ResponseStatus.ERROR_PROTOCOLO, 0, "El body no fue enviado"),
-    ERROR_INESPERADO(ResponseStatus.PETICION_INCORRECTA, 1, "Error inesperado no fue enviado"),
+    ERROR_INESPERADO(ResponseStatus.ERROR_INESPERADO, 1, "Error inesperado no fue enviado"),
     CONSULTA_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "La consulta no fue enviado"),
     NICKNAME_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El nickname no fue enviado"),
     TIPO_BLOQUEO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El bloqueo no fue enviado"),
@@ -49,10 +49,13 @@ enum class CatalogoResponses(
     CALIFICACION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El comentario no fue enviado"),
     OPINION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "La opinion no fue enviado"),
     PRODUCTO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El producto no fue enviado"),
+    USUARIO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El usuario ya esta registrado"),
+    TELEFONO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El telefono ya lo tiene registrado un usuario"),
+    CORREO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El correo ya lo tiene registrado un usuario"),
 }
 
 fun buildresponse(
-    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String = "",
+    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = "",
 ): ResponseEntity<Respuesta> {
     if (respuesta != null) return ResponseEntity(Respuesta(0, respuesta), ResponseStatus.EXITO.httpStatus)
     return ResponseEntity(
@@ -85,4 +88,11 @@ fun aesGCM(data: String, cifrado: Boolean = true): String {
 data class Aplicaciones(
     val vet: String = "LunaVet",
     val camaDelPerro: String = "LaCamaDelPerro",
+)
+
+data class Servicios(
+    val consultaDatosBasicos: String = "Consulta por datos basicos",
+    val consultaTelefono: String = "Consulta por telefono",
+    val consultaCorreo: String = "Consulta por correo",
+    val consultaId: String = "Consulta por id",
 )

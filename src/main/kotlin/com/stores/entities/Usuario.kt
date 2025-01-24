@@ -1,4 +1,4 @@
-package com.stores.Entities
+package com.stores.entities
 
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
@@ -7,15 +7,13 @@ import kotlin.collections.ArrayList
 
 
 data class Telefonos(
-    @Field("codigo_pais") val codigoPais: String?,
-    val telefono: String?,
-    val tipo: String?,
+    var verificado: Boolean?,
+    val telefono: String?
 )
 
 data class CorreosElectronicos(
     var verificado: Boolean?,
-    var direccion: String?,
-    val tipo: String?,
+    var direccion: String?
 )
 
 data class Domicilios(
@@ -30,14 +28,6 @@ data class Domicilios(
     val tipo: String?,
 )
 
-data class Preferencias(
-    var terminosCondiciones: Boolean,
-    var medioNotificaciones: String,
-    var notificaciones: Boolean,
-    val tipo: String?,
-)
-
-
 @Document("usaurio")
 data class Usuario(
     @Field("_id") val usuario: String?,
@@ -51,7 +41,7 @@ data class Usuario(
     @Field("fecha_nacimiento") val fechaNacimiento: String?,
     @Field("pais_nacimiento") val paisNacimiento: String?,
     val domicilios: ArrayList<Domicilios>?,
-    @Field("preferencias_notificaciones") var preferenciasNotificaciones: ArrayList<Preferencias?>,
+    @Field("preferencias_notificaciones") var notificaciones: Boolean,
     @Field("fecha_registro") val fechaRegistro: Date?,
     @Field("fecha_modificacion") var fechaModificacion: Date?,
 )

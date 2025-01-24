@@ -1,6 +1,5 @@
 package com.stores.controller
 
-
 import com.stores.config.CatalogoResponses
 import com.stores.config.Respuesta
 import com.stores.config.buildresponse
@@ -25,7 +24,6 @@ class UsuariosController(
     val consultaUsuario: ConsultaUsuario,
     val listadoUsuarios: ListadoUsuarios
 ) {
-
     @PostMapping("registro")
     fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)

@@ -25,7 +25,7 @@ class HistorialConsultas  @Autowired constructor(
             return buildresponse(respuesta =  "")
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
-            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
     }
 
@@ -36,7 +36,7 @@ class HistorialConsultas  @Autowired constructor(
             return buildresponse(respuesta =  "")
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
-            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
     }
 

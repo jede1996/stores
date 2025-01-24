@@ -34,6 +34,6 @@ class LoginController(
     @PostMapping("bloqueo")
     fun bloqueoSesion(@Valid @RequestBody request: RequestBloqueoUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return bloqueoLogin.BloqueoSesion(request, clienteRepository)
+        return bloqueoLogin.bloqueoSesion(request, clienteRepository)
     }
 }

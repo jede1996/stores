@@ -1,7 +1,7 @@
 package com.stores.request
 
-import com.stores.Entities.Precios
-import com.stores.Entities.Stock
+import com.stores.entities.Precios
+import com.stores.entities.Stock
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
