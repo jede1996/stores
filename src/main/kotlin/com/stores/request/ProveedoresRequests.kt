@@ -3,7 +3,7 @@ package com.stores.request
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
-class RequestsRegistroProveedor(
+data class RequestsRegistroProveedor(
     @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
     @field:NotNull(message = "NOMBRE_REQUERIDO") @field:NotEmpty(message = "NOMBRE_REQUERIDO") val nombre: String?,
     @field:NotNull(message = "AP_REQUERIDO") @field:NotEmpty(message = "AP_REQUERIDO") val apellidoPaterno: String?,
@@ -13,7 +13,7 @@ class RequestsRegistroProveedor(
     val correo: String?,
  )
 
-class RequestActualizacionProveedor(
+data class RequestActualizacionProveedor(
     @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
     @field:NotNull(message = "NOMBRE_REQUERIDO") @field:NotEmpty(message = "NOMBRE_REQUERIDO") val nombre: String?,
     @field:NotNull(message = "AP_REQUERIDO") @field:NotEmpty(message = "AP_REQUERIDO") val apellidoPaterno: String?,
@@ -23,6 +23,6 @@ class RequestActualizacionProveedor(
     val correo: String?,
    )
 
-class RequestConsultaProveedor(
+data class RequestConsultaProveedor(
     @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val proveedor: String?
 )

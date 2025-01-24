@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import java.util.*
 
-class RequestRegistroConsulta(
+data class RequestRegistroConsulta(
     val usuario: String?,
     val cliente: String?,
     val mascota: String?,

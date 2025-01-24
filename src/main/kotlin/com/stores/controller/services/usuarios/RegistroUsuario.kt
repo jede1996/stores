@@ -24,8 +24,13 @@ class RegistroUsuario @Autowired constructor(
         @Valid @RequestBody request: RequestsRegistroUsuario?,
         clienteRepository: ClienteRepository
     ): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return buildresponse(error = com.stores.config.CatalogoResponses.NOTIFICACION_REQUERIDO)
-    }
+        try {
+            logs.info("Request para el servicio de registro de usuarios: $request")
 
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
+    }
 }

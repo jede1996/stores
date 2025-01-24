@@ -1,5 +1,6 @@
 package com.stores.controller.services.productos
 
+import com.stores.config.CatalogoResponses
 import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
@@ -12,13 +13,23 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class ConsultaProducto  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+class ConsultaProducto @Autowired constructor(
+    private val tracer: ServiceInterceptor,
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun consultaInventario(request: RequestConsultaProducto?, productoRepository: ProductoRepository): ResponseEntity<Respuesta>{
-        return buildresponse(respuesta = "")
+    fun consultaInventario(
+        request: RequestConsultaProducto?,
+        productoRepository: ProductoRepository,
+    ): ResponseEntity<Respuesta> {
+        try {
+            logs.info("Request para el servicio de consulta de inventarios: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
 }

@@ -15,24 +15,55 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class ModificacionUsuario  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+class ModificacionUsuario @Autowired constructor(
+    private val tracer: ServiceInterceptor,
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun modificacionUsuario(request: RequestActualizacionUsuario?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+    fun modificacionUsuario(
+        request: RequestActualizacionUsuario?,
+        clienteRepository: ClienteRepository,
+    ): ResponseEntity<Respuesta> {
+        try {
+            logs.info("Request para el servicio de actualizacion de usuario: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun envioCodigo(request: RequestEnvioCodigo?): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de envio de codigo de verificacion: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun validacionEmail(request: RequestValidacionCodigo?): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de validacion de email: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun actualizaContrasenna(request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de actualizacion de contraseña: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 }

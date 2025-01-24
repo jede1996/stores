@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import kotlin.collections.ArrayList
 
-class RequestConsultaMascota(
+data class RequestConsultaMascota(
     @field:NotNull(message = "MASCOTA_REQUERIDO") @field:NotEmpty(message = "MASCOTA_REQUERIDO") val mascota: String?
 )
 

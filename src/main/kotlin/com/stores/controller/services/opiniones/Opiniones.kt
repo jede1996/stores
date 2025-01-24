@@ -15,23 +15,56 @@ import org.springframework.stereotype.Service
 
 @Service
 class Opiniones @Autowired constructor(
-    private val tracer: ServiceInterceptor
+    private val tracer: ServiceInterceptor,
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registrarOpinion(request: RequestRegistroOpinion?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+    fun registrarOpinion(
+        request: RequestRegistroOpinion?,
+        opinionesRepository: OpinionesRepository,
+    ): ResponseEntity<Respuesta> {
+        try {
+            logs.info("Request para el servicio de registro de opiniones: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun cerrarOpinion(request: RequestOpiniones?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de cerrado de opiniones: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
-    fun consultarOpinion(request: RequestOpiniones?, opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+    fun consultarOpinion(
+        request: RequestOpiniones?,
+        opinionesRepository: OpinionesRepository,
+    ): ResponseEntity<Respuesta> {
+        try {
+            logs.info("Request para el servicio de consulta de opiniones: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun listarOpiniones(opinionesRepository: OpinionesRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 }

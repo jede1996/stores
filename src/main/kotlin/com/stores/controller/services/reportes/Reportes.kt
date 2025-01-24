@@ -18,7 +18,14 @@ class Reportes @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun repostePorFecha(request: RequestReportes?): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de reportes: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
 }

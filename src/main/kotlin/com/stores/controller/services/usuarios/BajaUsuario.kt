@@ -22,8 +22,13 @@ class BajaUsuario @Autowired constructor(
         request: RequestActualizacionUsuario?,
         clienteRepository: ClienteRepository
     ): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Request para el servicio de eliminacion de usuario: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
-
-
 }

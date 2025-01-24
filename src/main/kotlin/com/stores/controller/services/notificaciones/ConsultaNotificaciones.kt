@@ -1,5 +1,6 @@
 package com.stores.controller.services.notificaciones
 
+import com.stores.config.CatalogoResponses
 import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
@@ -20,13 +21,27 @@ class ConsultaNotificaciones @Autowired constructor(
         request: Any?,
         notificacionesRepository: NotificacionesRepository,
     ): ResponseEntity<Respuesta> {
-        return buildresponse(respuesta = "")
+        try {
+            logs.info("Request para el servicio de consulta de notificaciones: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 
     fun enviarNotificaciones(
         request: Any?,
         notificacionesRepository: NotificacionesRepository,
     ): ResponseEntity<Respuesta> {
-        return buildresponse(respuesta = "")
+        try {
+            logs.info("Request para el servicio de envio de notificaciones: $request")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 }

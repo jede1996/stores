@@ -18,6 +18,13 @@ class ListadoUsuarios @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun listadoUsuarios(clienteRepository: ClienteRepository): ResponseEntity<Respuesta> {
-        return buildresponse(error = CatalogoResponses.BODY_NULL)
+        try {
+            logs.info("Servicio de listado de usaurios")
+
+            return buildresponse(respuesta =  "")
+        }catch (e: Exception){
+            logs.error("Error al realizar la peticion: $e")
+            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO)
+        }
     }
 }

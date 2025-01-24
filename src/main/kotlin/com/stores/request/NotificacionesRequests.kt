@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
 
-class RequestConsultaNotificaciones(
+data class RequestConsultaNotificaciones(
     val notificacion: String?,
     val aplicaion: String?,
 )

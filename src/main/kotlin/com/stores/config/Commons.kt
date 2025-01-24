@@ -52,26 +52,32 @@ enum class CatalogoResponses(
 }
 
 fun buildresponse(
-    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String = ""
+    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String = "",
 ): ResponseEntity<Respuesta> {
     if (respuesta != null) return ResponseEntity(Respuesta(0, respuesta), ResponseStatus.EXITO.httpStatus)
-    return ResponseEntity(Respuesta(error!!.estatus.status, DetallesResponseError(
+    return ResponseEntity(
+        Respuesta(
+            error!!.estatus.status, DetallesResponseError(
                 "${error.estatus.status}.${error.subcodigo}", error.mensajeDefault, detalle
-    )), error.estatus.httpStatus)
+            )
+        ), error.estatus.httpStatus
+    )
 }
 
-private val restoredSecretKey = SecretKeySpec(Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="), "AES")
-private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo=")
+private val restoredSecretKey =
+    SecretKeySpec(Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="), "AES")
+private val restoredIv =
+    GCMParameterSpec(128, Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="))
 
 fun aesGCM(data: String, cifrado: Boolean = true): String {
-    if(data.isEmpty()) return ""
+    if (data.isEmpty()) return ""
 
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-    return if(cifrado){
-        cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+    return if (cifrado) {
+        cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, restoredIv)
         Base64.getEncoder().encodeToString(cipher.doFinal(data.toByteArray()))
-    }else{
-        cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+    } else {
+        cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, restoredIv)
         String(cipher.doFinal(Base64.getDecoder().decode(data)))
     }
 }
