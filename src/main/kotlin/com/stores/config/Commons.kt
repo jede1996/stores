@@ -7,6 +7,11 @@ import javax.crypto.Cipher
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
+private val restoredSecretKey =
+    SecretKeySpec(Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="), "AES")
+private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo=")
+val mongoString = decrypt("eVkbyAoGgInqLXi1t2FBvHMSMfR+E7N9/rX+AQHsW9W7afomHxFvIHDo2MMA3Zo3pu4k8FVNhY7i4t0mcKzLjPA=")
+
 data class DetallesResponseError(
     val codigo: String?, val mensaje: String?, val detalle: String?,
 )
@@ -57,7 +62,7 @@ enum class CatalogoResponses(
 }
 
 fun buildresponse(
-    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = ""
+    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = "",
 ): ResponseEntity<Respuesta> {
     if (respuesta != null) return ResponseEntity(Respuesta(0, respuesta), ResponseStatus.EXITO.httpStatus)
     return ResponseEntity(
@@ -68,10 +73,6 @@ fun buildresponse(
         ), error.estatus.httpStatus
     )
 }
-
-private val restoredSecretKey =
-    SecretKeySpec(Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="), "AES")
-private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo=")
 
 fun encrypt(data: String): String {
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
@@ -88,8 +89,7 @@ fun decrypt(encryptedData: String?): String {
 data class Aplicaciones(
     val lunaVet: String = "LunaVet",
     val safariVet: String = "SafariVet",
-    val laCamaDelPerro: String = "LaCamaDelPerro",
-
+    val laCamaDelPerro: String = "LaCamaDelPerro"
 )
 
 data class Servicios(
@@ -109,7 +109,7 @@ data class Servicios(
     val eliminaUsuario: String = "Eliminacion de usuario",
     val anulaRegistro: String = "Anulacion de registro de usaurio",
 
-    val preparacionRespuesta: String = "Preparacion respuesta",
+    val preparacionRespuesta: String = "Preparacion respuesta"
 )
 
 fun regresaLlaveDuplicada(e: Exception): String? {

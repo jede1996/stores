@@ -25,7 +25,7 @@ class WebConfig : AbstractMongoClientConfiguration() {
 
     override fun mongoClient(): MongoClient {
         val mongoClientSettings = MongoClientSettings.builder()
-            .applyConnectionString(ConnectionString("mongodb+srv://store:store@store.ymz8d.mongodb.net"))
+            .applyConnectionString(ConnectionString(mongoString))
             .retryWrites(true)
             .writeConcern(WriteConcern.MAJORITY)
             .applicationName("store")

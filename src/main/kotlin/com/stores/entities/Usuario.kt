@@ -1,12 +1,8 @@
 package com.stores.entities
 
-import org.springframework.data.mongodb.core.index.CompoundIndex
-import org.springframework.data.mongodb.core.index.CompoundIndexes
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 import java.util.*
-import kotlin.collections.ArrayList
-
 
 data class Domicilios(
     var calle: String?,

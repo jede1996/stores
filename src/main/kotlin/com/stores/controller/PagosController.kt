@@ -20,7 +20,6 @@ class PagosController(
     val cancelacionPagos: CancelacionPagos,
     val historialPagos: HistorialPagos
 ) {
-    //TODO
     @PostMapping("registro")
     fun registroPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
