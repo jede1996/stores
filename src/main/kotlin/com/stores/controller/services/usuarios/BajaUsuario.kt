@@ -1,9 +1,6 @@
 package com.stores.controller.services.usuarios
 
-import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
-import com.stores.config.ServiceInterceptor
-import com.stores.config.buildresponse
+import com.stores.config.*
 import com.stores.repository.ClienteRepository
 import com.stores.request.RequestActualizacionUsuario
 import org.slf4j.Logger
@@ -24,8 +21,17 @@ class BajaUsuario @Autowired constructor(
     ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de eliminacion de usuario: $request")
+            val consultarRegistro = tracer.duration(Servicios().consultaUsuarioId, fun(): Boolean {
+                return clienteRepository.findById(request!!.usuario!!).isPresent
+            })
 
-            return buildresponse(respuesta =  "")
+            if (consultarRegistro) {
+                tracer.duration(Servicios().eliminaUsuario, fun() {
+                    return clienteRepository.deleteById(request!!.usuario!!)
+                })
+            }
+
+            return buildresponse(respuesta =  "Eliminado")
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
             return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)

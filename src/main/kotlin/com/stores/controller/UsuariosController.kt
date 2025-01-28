@@ -5,6 +5,9 @@ import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.usuarios.*
 import com.stores.repository.ClienteRepository
+import com.stores.repository.ExtCamaDelPerroRepository
+import com.stores.repository.ExtLunaVetRepository
+import com.stores.repository.ExtSafariVetRepository
 import com.stores.request.*
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -22,12 +25,17 @@ class UsuariosController(
     val bajaUsuario: BajaUsuario,
     val modificacionUsuario: ModificacionUsuario,
     val consultaUsuario: ConsultaUsuario,
-    val listadoUsuarios: ListadoUsuarios
+    val listadoUsuarios: ListadoUsuarios,
+    val extLunaVetRepository: ExtLunaVetRepository,
+    val extSafariVetRepository: ExtSafariVetRepository,
+    val extCamaDelPerroRepository: ExtCamaDelPerroRepository
 ) {
     @PostMapping("registro")
     fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return registroUsuario.registroUsuario(request, clienteRepository)
+        return registroUsuario.registroUsuario(
+            request, clienteRepository,  extLunaVetRepository, extSafariVetRepository, extCamaDelPerroRepository
+        )
     }
 
     @PostMapping("baja")

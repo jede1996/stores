@@ -3,9 +3,11 @@ package com.stores.repository
 import com.stores.entities.*
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
+import java.util.*
 
 interface ConsultasRepository : MongoRepository<Consultas, String>
 interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>
+interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>
 interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>
 interface ProductoRepository : MongoRepository<Producto, String>
 interface MascotaRepository : MongoRepository<Mascota, String>
@@ -17,13 +19,7 @@ interface ClienteRepository : MongoRepository<Usuario, String> {
         apellidoPaterno: String,
         apellidoMaterno: String,
         fechaNacimiento: String,
-    ): Usuario?
-
-    @Query("{ telefonos.telefono: ?0 }")
-    fun findByTelefono(telefono: String): Usuario?
-
-    @Query("{ correosElectronicos.direccion: ?0 }")
-    fun findByCorreo(correo: String): Usuario?
+    ): Optional<Usuario>
 }
 
 interface OpinionesRepository : MongoRepository<Opiniones, String>

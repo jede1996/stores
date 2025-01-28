@@ -1,9 +1,6 @@
 package com.stores.controller.services.usuarios
 
-import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
-import com.stores.config.ServiceInterceptor
-import com.stores.config.buildresponse
+import com.stores.config.*
 import com.stores.repository.ClienteRepository
 import com.stores.request.RequestConsultaUsuario
 import org.slf4j.Logger
@@ -24,6 +21,10 @@ class ConsultaUsuario @Autowired constructor(
     ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de consulta de usuario: $request")
+
+            val consultarRegistro = tracer.duration(Servicios().consultaUsuarioId, fun(): Boolean {
+                return clienteRepository.findById(request!!.usuario!!).isPresent
+            })
 
             return buildresponse(respuesta =  "")
         }catch (e: Exception){

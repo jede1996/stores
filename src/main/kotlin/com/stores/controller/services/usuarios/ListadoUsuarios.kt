@@ -1,9 +1,7 @@
 package com.stores.controller.services.usuarios
 
-import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
-import com.stores.config.ServiceInterceptor
-import com.stores.config.buildresponse
+import com.stores.config.*
+import com.stores.entities.Usuario
 import com.stores.repository.ClienteRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -21,7 +19,11 @@ class ListadoUsuarios @Autowired constructor(
         try {
             logs.info("Servicio de listado de usaurios")
 
-            return buildresponse(respuesta =  "")
+            val listaUsuario = tracer.duration(Servicios().consultaUsuarioId, fun(): MutableList<Usuario> {
+                return clienteRepository.findAll()
+            })
+
+            return buildresponse(respuesta =  listaUsuario)
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
             return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
