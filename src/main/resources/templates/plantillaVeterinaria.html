@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones - Luna Vet</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .contacto {
+            background: #2980b9;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Términos y Condiciones de la Veterinaria</h1>
+    <h2>1. Introducción</h2>
+    <p>Bienvenido a <strong th:text="${nombre}"></strong>. Al acceder y utilizar nuestros servicios, usted acepta los siguientes términos y condiciones. Le recomendamos leer detenidamente este documento antes de hacer uso de nuestros servicios. En caso de dudas, nuestro equipo estará disponible para brindarle la información necesaria antes de proceder con cualquier servicio.</p>
+
+    <h2>2. Servicios Ofrecidos</h2>
+    <p>Nuestra veterinaria ofrece servicios de consulta, vacunación, cirugía, tratamientos especializados, emergencia veterinaria y venta de productos para el cuidado animal. Los servicios están sujetos a disponibilidad y requisitos específicos según el caso. Nos reservamos el derecho de rechazar cualquier tratamiento si se considera que no es seguro para el animal o si el propietario no acepta las condiciones del procedimiento. Nos reservamos el derecho de modificar los servicios disponibles en cualquier momento sin previo aviso.</p>
+
+    <h2>3. Citas y Cancelaciones</h2>
+    <ul>
+        <li>Las citas deben programarse con antelación y están sujetas a disponibilidad.</li>
+        <li>Se solicita a los clientes llegar con al menos 10 minutos de anticipación.</li>
+        <li>Las cancelaciones deben notificarse con al menos 24 horas de anticipación. En caso de cancelación tardía o inasistencia, se podra aplicar una tarifa de cancelación.</li>
+        <li>En casos de cirugías programadas, se requiere un depósito no reembolsable para asegurar la reserva del procedimiento.</li>
+        <li>La repetida inasistencia o cancelaciones sin previo aviso resultarán en la restricción de acceso a nuestros servicios.</li>
+    </ul>
+
+    <h2>4. Responsabilidad del Propietario</h2>
+    <ul>
+        <li>Los propietarios son responsables de proporcionar información veraz y completa sobre la salud y comportamiento de su mascota.</li>
+        <li>Se debe garantizar que el animal esté correctamente sujeto o transportado al ingresar a las instalaciones.</li>
+        <li>En caso de conducta agresiva del animal, el propietario debe informarlo previamente y proporcionar los medios necesarios para su contención en caso de ser necesario.</li>
+        <li>El propietario es responsable de los daños ocasionados por su mascota dentro de las instalaciones o hacia terceros.</li>
+        <li>Cualquier negligencia o imprudencia del propietario que ponga en riesgo la salud del animal o de nuestro personal derivará en la negación del servicio y posibles acciones legales.</li>
+    </ul>
+
+    <h2>5. Tratamientos, Cirugías y Procedimientos</h2>
+        <ul>
+            <li>Antes de realizar cualquier procedimiento médico, quirúrgico o anestésico, el propietario debe firmar un consentimiento informado en el cual declara haber comprendido y aceptado los riesgos del procedimiento.</li>
+            <li>Los riesgos asociados a los tratamientos serán explicados previamente por el profesional veterinario y la firma del consentimiento implica la aceptación de dichos riesgos.</li>
+            <li>En caso de complicaciones imprevistas durante un procedimiento, el veterinario actuará en el mejor interés del paciente sin previo aviso si la situación lo requiere.</li>
+            <li>Los costos de cualquier intervención adicional necesaria durante un procedimiento serán asumidos por el propietario.</li>
+            <li>Si el propietario se niega a seguir las recomendaciones veterinarias y esto conlleva un deterioro en la salud del animal, la veterinaria no se hará responsable de las consecuencias.</li>
+            <li>Se requiere que el propietario permanezca localizable durante cualquier procedimiento, en caso contrario, el veterinario tomará decisiones en beneficio del paciente sin responsabilidad adicional por parte de la veterinaria.</li>
+        </ul>
+
+    <h2>6. Validación y Consentimiento del Cliente</h2>
+    <ul>
+       <li>Antes de recibir cualquier servicio, el cliente deberá validar su identidad proporcionando información básica requerida por la veterinaria.</li>
+       <li>Se solicitará la firma de un documento de consentimiento para garantizar que el propietario ha leído, comprendido y aceptado los términos y condiciones.</li>
+       <li>La firma del documento de consentimiento implica la aceptación de compartir información clínica del animal con afiliados comerciales y tiendas asociadas con fines de bienestar animal y tratamientos complementarios.</li>
+    </ul>
+
+    <h2>7. Pago y Facturación</h2>
+    <ul>
+        <li>Los servicios deben ser pagados en su totalidad al momento de la consulta o intervención, salvo acuerdo previo por escrito.</li>
+        <li>Se aceptan diferentes métodos de pago, los cuales serán informados en el establecimiento.</li>
+        <li>No se realizarán reembolsos una vez prestado el servicio, salvo casos justificados y a discreción de la veterinaria.</li>
+        <li>En casos de hospitalización prolongada, se solicitarán pagos parciales anticipados y el saldo restante deberá ser liquidado antes de la alta del paciente.</li>
+    </ul>
+
+    <h2>8. Medicación y Prescripciones</h2>
+    <ul>
+        <li>La venta de medicamentos solo se realizará bajo prescripción veterinaria.</li>
+        <li>Es responsabilidad del propietario administrar la medicación según indicaciones del veterinario y reportar cualquier reacción adversa de inmediato.</li>
+        <li>No se realizarán devoluciones ni reembolsos de medicamentos una vez vendidos.</li>
+
+    </ul>
+
+    <h2>9. Emergencias</h2>
+    <ul>
+        <li>En caso de emergencia, la atención estará sujeta a disponibilidad y prioridad de los casos más urgentes.</li>
+        <li>Se recomienda contactar previamente para verificar disponibilidad de atención inmediata.</li>
+        <li>En situaciones críticas donde no se pueda localizar al propietario, se tomarán decisiones en base al bienestar del animal, y el propietario asumirá los costos derivados.</li>
+    </ul>
+
+    <h2>10. Responsabilidad Legal y Exoneración de Responsabilidad</h2>
+        <ul>
+            <li>La veterinaria no se hará responsable de complicaciones derivadas de condiciones preexistentes no informadas por el propietario.</li>
+            <li>Si un propietario no sigue las recomendaciones veterinarias y esto deriva en un problema de salud o fallecimiento del animal, la responsabilidad recae exclusivamente sobre el propietario.</li>
+            <li>La veterinaria se reserva el derecho de negar la atención en casos donde la seguridad del personal, otros animales o el mismo paciente pueda verse comprometida.</li>
+            <li>No se garantiza un resultado específico en ningún tratamiento o procedimiento médico, ya que cada caso depende de múltiples factores individuales del paciente.</li>
+        </ul>
+    <h2>11. Confidencialidad y Protección de Datos</h2>
+        <ul>
+            <li>Toda la información proporcionada por el propietario y el historial clínico del animal será tratada con confidencialidad.</li>
+            <li>Los datos personales serán utilizados únicamente para la prestación de los servicios y comunicación con el cliente.</li>
+            <li>El propietario autoriza a la veterinaria a compartir información médica del animal con clínicas afiliadas y tiendas especializadas para garantizar el mejor tratamiento posible.</li>
+            <li>La información almacenada en nuestros sistemas es protegida mediante cifrado y medidas de seguridad avanzadas. Sin embargo, no estamos exentos de posibles ataques cibernéticos o robos de información. En caso de una brecha de seguridad, se tomarán las medidas necesarias para minimizar el impacto y se notificará a los clientes afectados.</li>
+            <li>El propietario podrá solicitar la eliminación de su información en cualquier momento, salvo en casos en los que sea requerida por normativas de salud animal.</li>
+        </ul>
+    <h2>12. Modificaciones de los Términos y Condiciones</h2>
+    <p>Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios serán publicados en nuestras instalaciones y/o plataformas digitales, y entrarán en vigencia inmediatamente a su publicación.</p>
+
+    <h2>13. Contacto</h2>
+    <div class="contacto">
+        <p>Para cualquier consulta sobre nuestros servicios o estos términos y condiciones, puede comunicarse con nosotros a través de:</p>
+        <p>Telefono:  <strong th:text="${telefono}"></strong></p>
+        <p>Direccion: <strong th:text="${direccion}"></strong></p>
+        <p>Al utilizar nuestros servicios, usted reconoce haber leído, comprendido y aceptado estos términos y condiciones, así como autoriza la recopilación y uso de su información según lo estipulado en este documento.</p>
+    </div>
+</div>
+</body>
+</html>

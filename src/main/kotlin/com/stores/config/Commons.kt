@@ -47,6 +47,8 @@ enum class CatalogoResponses(
     CODIGO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El codigo no fue enviado"),
     MAIL_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El correo no fue enviado"),
     APLICACION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "La aplicacion no fue enviado"),
+    APLICACION_INVALIDA(ResponseStatus.PETICION_INCORRECTA, 0, "La aplicacion no esta registrada"),
+    ROL_INVALIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El rol no esta registrado"),
     ASUNTO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El asunto no fue enviado"),
     MENSAJE_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El mensaje no fue enviado"),
     PROGRAMACION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "la programacion no fue enviado"),
@@ -89,16 +91,47 @@ fun decrypt(encryptedData: String?): String {
 data class Aplicaciones(
     val lunaVet: String = "LunaVet",
     val safariVet: String = "SafariVet",
-    val laCamaDelPerro: String = "LaCamaDelPerro"
+    val laCamaDelPerro: String = "LaCamaDelPerro",
 )
 
+
+data class Roles(
+    val cliente: String = "cliente",
+    val medico: String = "medico",
+    val administrador: String = "administrador"
+)
+
+data class Medios(
+    val telefono: String = "telefono",
+    val correo: String = "correo"
+)
+
+fun validaMedios(medio: String): Boolean {
+    return listOf(
+        Medios().telefono, Medios().correo
+    ).contains(medio)
+}
+
+fun validaAplicaiones(app: String): Boolean {
+    return listOf(
+        Aplicaciones().lunaVet, Aplicaciones().safariVet, Aplicaciones().laCamaDelPerro
+    ).contains(app)
+}
+
+fun validaRoles(app: String): Boolean {
+    return listOf(
+        Roles().medico, Roles().administrador, Roles().cliente
+    ).contains(app)
+}
+
 data class Servicios(
-    val consultaUsuarioId: String = "Consulta de usuario por id",
     val consultaUsuarioDatosBasicos: String = "Consulta por datos basicos",
     val consultaUsuarioCorreo: String = "Consulta por correo",
     val consultaUsuarioTelefono: String = "Consulta por telefono",
-    val consultaExtLunaVet: String = "Consulta de extendido para luna vet",
+
+    val consultaUsuarioId: String = "Consulta de usuario por id",
     val consultaExtSafariVet: String = "Consulta de extendido para safari vet",
+    val consultaExtLunaVet: String = "Consulta de extendido para luna vet",
     val consultaExtCamaDelPerro: String = "Consulta de extendido para cama del perro",
 
     val registroUsuario: String = "Registro de usuario",
@@ -106,9 +139,17 @@ data class Servicios(
     val registroExtSafariVet: String = "Registro  de extendido para safari vet",
     val registroExtCamaDelPerro: String = "Registro de extendido para cama del perro",
 
-    val eliminaUsuario: String = "Eliminacion de usuario",
-    val anulaRegistro: String = "Anulacion de registro de usaurio",
+    val actualizacionUsuario: String = "Actualizacion de usuario",
+    val actualizacionExtLunaVet: String = "Actualizacion de extendido para luna vet",
+    val actualizacionExtSafariVet: String = "Actualizacion  de extendido para safari vet",
+    val actualizacionExtCamaDelPerro: String = "Actualizacion de extendido para cama del perro",
 
+    val eliminaUsuario: String = "Eliminacion de usuario",
+    val eliminaExtLunaVet: String = "Eliminacion de extendido para luna vet",
+    val eliminaExtSafariVet: String = "Eliminacion  de extendido para safari vet",
+    val eliminaExtCamaDelPerro: String = "Eliminacion de extendido para cama del perro",
+
+    val anulaRegistro: String = "Anulacion de registro de usaurio",
     val preparacionRespuesta: String = "Preparacion respuesta"
 )
 

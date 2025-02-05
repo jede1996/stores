@@ -23,7 +23,6 @@ data class Extendidos(
 )
 
 data class ExtendidosRespuesta(
-    var usuario: String,
     var nickname: String,
     var rol: String,
 )
@@ -37,8 +36,8 @@ fun preparaRespopnseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseU
         decrypt(usaurio.rol),
         decrypt(usaurio.fechaNacimiento),
         decrypt(usaurio.aplicacion),
-        decrypt(usaurio.correosElectronicos.direccion),
-        decrypt(usaurio.telefonos.telefono),
+        decrypt(usaurio.correo.direccion),
+        decrypt(usaurio.telefono.telefono),
         extendidos
     )
 }

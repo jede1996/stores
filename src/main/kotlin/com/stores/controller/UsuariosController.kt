@@ -4,77 +4,68 @@ import com.stores.config.CatalogoResponses
 import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.usuarios.*
-import com.stores.repository.ClienteRepository
-import com.stores.repository.ExtCamaDelPerroRepository
-import com.stores.repository.ExtLunaVetRepository
-import com.stores.repository.ExtSafariVetRepository
 import com.stores.request.*
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("usuarios")
 class UsuariosController(
-    val clienteRepository: ClienteRepository,
     val registroUsuario: RegistroUsuario,
     val bajaUsuario: BajaUsuario,
     val modificacionUsuario: ModificacionUsuario,
     val consultaUsuario: ConsultaUsuario,
-    val listadoUsuarios: ListadoUsuarios,
-    val extLunaVetRepository: ExtLunaVetRepository,
-    val extSafariVetRepository: ExtSafariVetRepository,
-    val extCamaDelPerroRepository: ExtCamaDelPerroRepository
+    val listadoUsuarios: ListadoUsuarios
 ) {
+
     @PostMapping("registro")
     fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return registroUsuario.registroUsuario(
-            request, clienteRepository,  extLunaVetRepository, extSafariVetRepository, extCamaDelPerroRepository
-        )
+        return registroUsuario.registroUsuario(request)
     }
 
     @PostMapping("baja")
-    fun bajaUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
+    fun bajaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return bajaUsuario.bajaUsuario(request, clienteRepository)
+        return bajaUsuario.bajaUsuario(request)
     }
 
     @PostMapping("modificacion")
     fun modificacionUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionUsuario.modificacionUsuario(request, clienteRepository)
+        return modificacionUsuario.modificacionUsuario(request)
     }
 
     @PostMapping("consulta")
     fun consultaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return consultaUsuario.consultaUsuario(request, clienteRepository)
+        return consultaUsuario.consultaUsuario(request)
     }
 
-    @GetMapping("listado")
-    fun listadoUsuarios(): ResponseEntity<Respuesta> {
-        return listadoUsuarios.listadoUsuarios(clienteRepository)
+    @PostMapping("listado")
+    fun listadoUsuarios(@Valid @RequestBody request: RequestConsultaUsuarios?): ResponseEntity<Respuesta> {
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
+        return listadoUsuarios.listadoUsuarios(request)
     }
 
-    @PostMapping("codigo-email")
+    @PostMapping("codigo")
     fun envioCodigo(@Valid @RequestBody request: RequestEnvioCodigo?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.envioCodigo(request)
     }
 
-    @PostMapping("valicacion-email")
+    @PostMapping("valicacion")
     fun validacionEmail(@Valid @RequestBody request: RequestValidacionCodigo?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionUsuario.validacionEmail(request)
+        return modificacionUsuario.validacionEmailOCorreo(request)
     }
 
     @PostMapping("actualizacion-contrasenna")
-    fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
+    fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionContrasenna?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.actualizaContrasenna(request)
     }

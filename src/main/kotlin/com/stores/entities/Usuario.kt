@@ -23,14 +23,14 @@ data class Usuario(
     @Field("apellido_paterno") var apellidoPaterno: String?,
     @Field("apellido_materno") var apellidoMaterno: String?,
     var genero: String?,
-    @Field("correo_electronico") var correosElectronicos: CorreosElectronicos,
-    val telefonos: Telefonos,
+    @Field("correo_electronico") var correo: CorreosElectronicos,
+    var telefono: Telefonos,
     var rol: String?,
     @Field("fecha_nacimiento") var fechaNacimiento: String?,
     @Field("pais_nacimiento") val paisNacimiento: String?,
     val domicilios: Domicilios?,
     var aplicacion: String?,
-    @Field("preferencias_notificaciones") val notificaciones: Boolean,
+    @Field("preferencias_notificaciones") var notificaciones: Boolean,
     @Field("fecha_registro") val fechaRegistro: Date?,
     @Field("fecha_modificacion") var fechaModificacion: Date?,
 )
@@ -51,3 +51,23 @@ data class Roles(
     val usuario: String = "usuario",
     val cliente: String = "cliente",
 )
+
+
+data class UsersConsultado(
+    val id: String,
+    val nombre: String,
+    val apellidoPaterno: String,
+    val apellidoMaterno: String,
+    var telefono: String?,
+    var correo: String?
+)
+
+fun responseUsuarios(users: List<UsersConsultado>): List<UsersConsultado> {
+    val regex = """"\w+":\s*"([^"]+)"""".toRegex()
+    return users.map { user ->
+        user.copy(
+            telefono = regex.find(user.telefono!!)?.groups?.get(1)?.value,
+            correo = regex.find(user.correo!!)?.groups?.get(1)?.value
+        )
+    }
+}

@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service
 
 @Service
 class ConsultaUsuario @Autowired constructor(
-    private val tracer: ServiceInterceptor
+    private val tracer: ServiceInterceptor,
+    private val clienteRepository: ClienteRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun consultaUsuario(
-        request: RequestConsultaUsuario?,
-        clienteRepository: ClienteRepository
+        request: RequestConsultaUsuario?
     ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de consulta de usuario: $request")

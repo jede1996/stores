@@ -20,6 +20,12 @@ interface ClienteRepository : MongoRepository<Usuario, String> {
         apellidoMaterno: String,
         fechaNacimiento: String,
     ): Optional<Usuario>
+
+    @Query(
+        value = "{}",
+        fields = "{  'nombre': 1, 'apellido_paterno': 1, 'apellido_materno': 1, 'telefono.telefono': 1, 'correo.direccion': 1 }"
+    )
+    fun findByAllUsers(): List<UsersConsultado>
 }
 
 interface OpinionesRepository : MongoRepository<Opiniones, String>

@@ -11,13 +11,11 @@ import com.stores.responses.Extendidos
 import com.stores.responses.ExtendidosRespuesta
 import com.stores.responses.ResponseUsuaro
 import com.stores.responses.preparaRespopnseUsuario
-import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestBody
 import java.util.Date
 import java.util.Optional
 import java.util.UUID
@@ -25,29 +23,31 @@ import java.util.UUID
 @Service
 class RegistroUsuario @Autowired constructor(
     private val tracer: ServiceInterceptor,
+    private val clienteRepository: ClienteRepository,
+    private val extLunaVetRepository: ExtLunaVetRepository,
+    private val extSafariVetRepository: ExtSafariVetRepository,
+    private val extCamaDelPerroRepository: ExtCamaDelPerroRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroUsuario(
-        @Valid @RequestBody request: RequestsRegistroUsuario?,
-        clienteRepository: ClienteRepository,
-        extLunaVetRepository: ExtLunaVetRepository,
-        extSafariVetRepository: ExtSafariVetRepository,
-        extCamaDelPerroRepository: ExtCamaDelPerroRepository,
-    ): ResponseEntity<Respuesta> {
+    fun registroUsuario(request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
         var registroNuevo = false
         val idUser = encrypt(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de usuarios: ${request!!}")
 
+            if(!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
+
+            if(!validaRoles(request.rol)) return buildresponse(error = CatalogoResponses.ROL_INVALIDO)
+
             val extLunaVet = ExtLunaVet(
-                idUser, encrypt(request.nickname), encrypt(request.nickname), encrypt(request.rol), Date(), Date()
+                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
             )
             val extSafariVet = ExtSafariVet(
-                idUser, encrypt(request.nickname), encrypt(request.nickname), encrypt(request.rol), Date(), Date()
+                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
             )
             val extCamaDelPerro = ExtCamaDelPerro(
-                idUser, encrypt(request.nickname), encrypt(request.nickname), encrypt(request.rol), Date(), Date()
+                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
             )
 
             var usuarioConsultado: Optional<Usuario>
@@ -170,27 +170,30 @@ class RegistroUsuario @Autowired constructor(
             }
 
             if (extentidoLunaConsultado != null) {
-                lunaVet = ExtendidosRespuesta(
-                    decrypt(extentidoLunaConsultado.get().usuario),
-                    decrypt(extentidoLunaConsultado.get().nickname),
-                    decrypt(extentidoLunaConsultado.get().rol)
-                )
+                if (extentidoLunaConsultado.isPresent) {
+                    lunaVet = ExtendidosRespuesta(
+                        decrypt(extentidoLunaConsultado.get().nickname),
+                        decrypt(extentidoLunaConsultado.get().rol)
+                    )
+                }
             }
 
             if (extentidoSafariConsultado != null) {
-                safariVet = ExtendidosRespuesta(
-                    decrypt(extentidoSafariConsultado.get().usuario),
-                    decrypt(extentidoSafariConsultado.get().nickname),
-                    decrypt(extentidoSafariConsultado.get().rol)
-                )
+                if (extentidoSafariConsultado.isPresent) {
+                    safariVet = ExtendidosRespuesta(
+                        decrypt(extentidoSafariConsultado.get().nickname),
+                        decrypt(extentidoSafariConsultado.get().rol)
+                    )
+                }
             }
 
             if (extentidoCamaConsultado != null) {
-                camaDelPerro = ExtendidosRespuesta(
-                    decrypt(extentidoCamaConsultado.get().usuario),
-                    decrypt(extentidoCamaConsultado.get().nickname),
-                    decrypt(extentidoCamaConsultado.get().rol)
-                )
+                if (extentidoCamaConsultado.isPresent) {
+                    camaDelPerro = ExtendidosRespuesta(
+                        decrypt(extentidoCamaConsultado.get().nickname),
+                        decrypt(extentidoCamaConsultado.get().rol)
+                    )
+                }
             }
 
             val respuesta: ResponseUsuaro = tracer.duration(Servicios().preparacionRespuesta, fun(): ResponseUsuaro {

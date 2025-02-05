@@ -1,5 +1,6 @@
 package com.stores.request
 
+import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
@@ -13,18 +14,19 @@ data class RequestsRegistroUsuario(
     val correo: String?,
     val rol: String,
     val nickname: String,
-    val contrasenna: String,
     @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
     @field:NotNull(message = "NOTIFICACION_REQUERIDO") val notificaciones: Boolean,
 )
 
 data class RequestEnvioCodigo(
-    @field:NotNull(message = "MAIL_REQUERIDO") @field:NotEmpty(message = "MAIL_REQUERIDO") val correo: String?,
+    @field:NotNull(message = "TIPO_REQUERIDO") @field:NotEmpty(message = "TIPO_REQUERIDO") val tipo: String? = null,
+    @field:NotNull(message = "MEDIO_REQUERIDO") @field:NotEmpty(message = "MEDIO_REQUERIDO") val medio: String? = null
 )
 
 data class RequestValidacionCodigo(
-    @field:NotNull(message = "MAIL_REQUERIDO") @field:NotEmpty(message = "MAIL_REQUERIDO") val correo: String?,
-    @field:NotNull(message = "CODIGO_REQUERIDO") @field:NotEmpty(message = "CODIGO_REQUERIDO") val codigo: String?,
+    @field:NotNull(message = "TIPO_REQUERIDO") @field:NotEmpty(message = "TIPO_REQUERIDO") val tipo: String? = null,
+    @field:NotNull(message = "MEDIO_REQUERIDO") @field:NotEmpty(message = "MEDIO_REQUERIDO") val medio: String? = null,
+    @field:NotNull(message = "CODIGO_REQUERIDO") @field:NotEmpty(message = "CODIGO_REQUERIDO") val codigo: String? = null
 )
 
 data class RequestActualizacionUsuario(
@@ -38,9 +40,23 @@ data class RequestActualizacionUsuario(
     val telefono: String?,
     val correo: String?,
     val rol: String?,
+    val nickname: String,
+    @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
+    @field:NotNull(message = "NOTIFICACION_REQUERIDO") val notificaciones: Boolean?,
+)
+
+data class RequestActualizacionContrasenna(
+    @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
+    @field:NotNull(message = "PASS_REQUERIDO") @field:NotEmpty(message = "PASS_REQUERIDO") val contrasennaNueva: String?,
+    @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
     @field:NotNull(message = "NOTIFICACION_REQUERIDO") val notificaciones: Boolean?,
 )
 
 data class RequestConsultaUsuario(
     @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
+    @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
+)
+
+data class RequestConsultaUsuarios(
+    @field:NotBlank(message = "APLICACION_REQUERIDO") val aplicacion: String? = null
 )
