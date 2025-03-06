@@ -5,9 +5,7 @@ import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.proveedores.*
 import com.stores.repository.ProveedorRepository
-import com.stores.request.RequestActualizacionProveedor
-import com.stores.request.RequestConsultaProveedor
-import com.stores.request.RequestsRegistroProveedor
+import com.stores.request.*
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,29 +26,30 @@ class ProveedoresController(
     @PostMapping("registro")
     fun registroProveedores(@Valid @RequestBody request: RequestsRegistroProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return registroProveedores.registroProveedores(request, proveedorRepository)
+        return registroProveedores.registroProveedores(request)
     }
 
     @PostMapping("baja")
     fun bajaProveedores(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return bajaProveedores.bajaProveedores(request, proveedorRepository)
+        return bajaProveedores.bajaProveedores(request)
     }
 
     @PostMapping("modificacion")
-    fun modificacionProveedor(@Valid @RequestBody request: RequestActualizacionProveedor?): ResponseEntity<Respuesta> {
+    fun modificacionProveedor(@Valid @RequestBody request: RequestsModificaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionProveedores.modificacionProveedores(request, proveedorRepository)
+        return modificacionProveedores.modificacionProveedores(request)
     }
 
     @PostMapping("consulta")
     fun consultaProveedor(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return consultaProveedores.consultaProveedor(request, proveedorRepository)
+        return consultaProveedores.consultaProveedor(request)
     }
 
     @PostMapping("listado")
-    fun listadoProveedores(): ResponseEntity<Respuesta> {
-        return listadoProveedores.listadoProveedores(proveedorRepository)
+    fun listadoProveedores(request: RequestConsultaProveedores): ResponseEntity<Respuesta> {
+        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
+        return listadoProveedores.listadoProveedores(request)
     }
 }

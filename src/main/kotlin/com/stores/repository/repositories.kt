@@ -18,7 +18,13 @@ interface MascotaRepository : MongoRepository<Mascota, String>{
     fun findByAllMascotasByUser(propietario: String): List<Mascota>
 }
 
-interface ProveedorRepository : MongoRepository<Proveedor, String>
+interface ProveedorRepository : MongoRepository<Proveedor, String>{
+    @Query(value = "{ aplicacion: ?0, empresa: ?1 }")
+    fun findByAplicacion(aplicacion: String, empresa: String): Optional<Proveedor>
+
+    @Query(value = "{ aplicacion: ?0")
+    fun findAllByAplicacion(aplicacion: String): List<Proveedor>
+}
 
 interface ClienteRepository : MongoRepository<Usuario, String> {
     @Query("{ nombre: ?0, apellido_paterno: ?1, apellido_materno: ?2, fecha_nacimiento: ?3 }")

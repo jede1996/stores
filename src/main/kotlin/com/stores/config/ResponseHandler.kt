@@ -53,6 +53,7 @@ enum class CatalogoResponses(
     TELEFONO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El telefono ya lo tiene registrado un usuario"),
     CORREO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El correo ya lo tiene registrado un usuario"),
     USUARIO_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El usuario no esta registrado"),
+    PROVEEDOR_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El proveedor no esta registrado"),
     MASCOTA_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La mascota esta registrado"),
     MASCOTA_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La mascota no esta registrado"),
 }
