@@ -20,13 +20,13 @@ class ListadoUsuarios @Autowired constructor(
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun listadoUsuarios(
-        request: RequestConsultaUsuarios?
+        request: RequestConsultaUsuarios
     ): ResponseEntity<Respuesta> {
         try {
-            logs.info("Request para el servicio de listado de usaurios: ${request!!}")
+            logs.info("Request para el servicio de listado de usaurios: $request")
 
-            var usuariosConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): List<UsersConsultado> {
-                return clienteRepository.findByAllUsers()
+            val usuariosConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): List<UsersConsultado> {
+                return clienteRepository.findByAllUsers(encrypt(request.aplicacion!!))
             })
 
             return buildresponse(respuesta =  responseUsuarios(usuariosConsultado))

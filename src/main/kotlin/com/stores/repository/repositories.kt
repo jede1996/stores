@@ -22,10 +22,10 @@ interface ClienteRepository : MongoRepository<Usuario, String> {
     ): Optional<Usuario>
 
     @Query(
-        value = "{}",
+        value = "{ aplicacion: ?0 }",
         fields = "{  'nombre': 1, 'apellido_paterno': 1, 'apellido_materno': 1, 'telefono.telefono': 1, 'correo.direccion': 1 }"
     )
-    fun findByAllUsers(): List<UsersConsultado>
+    fun findByAllUsers(aplicacion: String): List<UsersConsultado>
 }
 
 interface OpinionesRepository : MongoRepository<Opiniones, String>

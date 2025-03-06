@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class BajaUsuario @Autowired constructor(
@@ -27,18 +28,18 @@ class BajaUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun bajaUsuario(request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
+    fun bajaUsuario(request: RequestConsultaUsuario): ResponseEntity<Respuesta> {
         try {
-            logs.info("Request para el servicio de eliminacion de usuario: ${request!!}")
+            logs.info("Request para el servicio de eliminacion de usuario: $request")
 
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
-            val extentidoLunaConsultado: Optional<ExtLunaVet>?
-            val extentidoSafariConsultado: Optional<ExtSafariVet>?
-            val extentidoCamaConsultado: Optional<ExtCamaDelPerro>?
+            val extentidoLunaConsultado: ExtLunaVet?
+            val extentidoSafariConsultado: ExtSafariVet?
+            val extentidoCamaConsultado: ExtCamaDelPerro?
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(request.usuario!!)
+                return clienteRepository.findById(encrypt(request.usuario))
             })
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
@@ -46,43 +47,42 @@ class BajaUsuario @Autowired constructor(
 
             when (request.aplicacion) {
                 Aplicaciones().lunaVet -> {
-                    tracer.duration(Servicios().registroExtLunaVet, fun() {
-                        extLunaVetRepository.deleteById(usuarioConsultado.get().usuario!!)
+                    tracer.duration(Servicios().eliminaExtLunaVet, fun() {
+                        extLunaVetRepository.deleteById(usuarioConsultado.get().usuario)
                     })
                 }
 
                 Aplicaciones().safariVet -> {
-                    tracer.duration(Servicios().registroExtSafariVet, fun() {
-                        extSafariVetRepository.deleteById(usuarioConsultado.get().usuario!!)
+                    tracer.duration(Servicios().eliminaExtSafariVet, fun() {
+                        extSafariVetRepository.deleteById(usuarioConsultado.get().usuario)
                     })
                 }
 
                 Aplicaciones().laCamaDelPerro -> {
-                    tracer.duration(Servicios().registroExtCamaDelPerro, fun() {
-                        extCamaDelPerroRepository.deleteById(usuarioConsultado.get().usuario!!)
+                    tracer.duration(Servicios().eliminaExtCamaDelPerro, fun() {
+                        extCamaDelPerroRepository.deleteById(usuarioConsultado.get().usuario)
                     })
                 }
             }
 
-            extentidoLunaConsultado = tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
-                return extLunaVetRepository.findById(usuarioConsultado.get().usuario!!)
+            extentidoLunaConsultado = tracer.duration(Servicios().consultaExtLunaVet, fun(): ExtLunaVet? {
+                return extLunaVetRepository.findById(usuarioConsultado.get().usuario).getOrNull()
             })
-            extentidoSafariConsultado =
-                tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
-                    return extSafariVetRepository.findById(usuarioConsultado.get().usuario!!)
-                })
-            extentidoCamaConsultado =
-                tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
-                    return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario!!)
-                })
+            extentidoSafariConsultado = tracer.duration(Servicios().consultaExtSafariVet, fun(): ExtSafariVet? {
+                return extSafariVetRepository.findById(usuarioConsultado.get().usuario).getOrNull()
+            })
+            extentidoCamaConsultado = tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): ExtCamaDelPerro? {
+                return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario).getOrNull()
+            })
 
             if (extentidoLunaConsultado == null && extentidoSafariConsultado == null && extentidoCamaConsultado == null) {
                 tracer.duration(Servicios().eliminaUsuario, fun() {
-                    return clienteRepository.deleteById(usuarioConsultado.get().usuario!!)
+                    return clienteRepository.deleteById(usuarioConsultado.get().usuario)
                 })
             }
 
-            return buildresponse(respuesta = "Eliminado")
+            logs.info("Informacion a regresar: Usuario eliminado")
+            return buildresponse(respuesta = "usuario eliminado")
         } catch (e: Exception) {
             logs.error("Error al realizar la peticion: $e")
             return buildresponse(error = CatalogoResponses.ERROR_INESPERADO, detalle = e.message)

@@ -76,13 +76,15 @@ fun buildresponse(
     )
 }
 
-fun encrypt(data: String): String {
+fun encrypt(data: String?): String {
+    if(data.isNullOrEmpty()) return ""
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
     return Base64.getEncoder().encodeToString(cipher.doFinal(data.toByteArray()))
 }
 
 fun decrypt(encryptedData: String?): String {
+    if(encryptedData.isNullOrEmpty()) return ""
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
     return String(cipher.doFinal(Base64.getDecoder().decode(encryptedData)))

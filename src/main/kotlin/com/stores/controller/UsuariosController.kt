@@ -52,18 +52,6 @@ class UsuariosController(
         return listadoUsuarios.listadoUsuarios(request)
     }
 
-    @PostMapping("codigo")
-    fun envioCodigo(@Valid @RequestBody request: RequestEnvioCodigo?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionUsuario.envioCodigo(request)
-    }
-
-    @PostMapping("valicacion")
-    fun validacionEmail(@Valid @RequestBody request: RequestValidacionCodigo?): ResponseEntity<Respuesta> {
-        if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionUsuario.validacionEmailOCorreo(request)
-    }
-
     @PostMapping("actualizacion-contrasenna")
     fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionContrasenna?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)

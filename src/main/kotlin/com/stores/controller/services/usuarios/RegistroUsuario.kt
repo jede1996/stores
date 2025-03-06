@@ -10,7 +10,7 @@ import com.stores.request.RequestsRegistroUsuario
 import com.stores.responses.Extendidos
 import com.stores.responses.ExtendidosRespuesta
 import com.stores.responses.ResponseUsuaro
-import com.stores.responses.preparaRespopnseUsuario
+import com.stores.responses.preparaResponseUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,188 +30,150 @@ class RegistroUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroUsuario(request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
+    fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Respuesta> {
         var registroNuevo = false
         val idUser = encrypt(UUID.randomUUID().toString().replace("-", ""))
         try {
-            logs.info("Request para el servicio de registro de usuarios: ${request!!}")
+            logs.info("Request para el servicio de registro de usuarios: $request")
 
-            if(!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
+            if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
-            if(!validaRoles(request.rol)) return buildresponse(error = CatalogoResponses.ROL_INVALIDO)
+            if (!validaRoles(request.rol)) return buildresponse(error = CatalogoResponses.ROL_INVALIDO)
 
-            val extLunaVet = ExtLunaVet(
-                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
-            )
-            val extSafariVet = ExtSafariVet(
-                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
-            )
-            val extCamaDelPerro = ExtCamaDelPerro(
-                idUser, encrypt(request.nickname), encrypt("999999"), encrypt(request.rol), Date(), Date()
-            )
-
-            var usuarioConsultado: Optional<Usuario>
-            var extentidoLunaConsultado: Optional<ExtLunaVet>? = null
-            var extentidoSafariConsultado: Optional<ExtSafariVet>? = null
-            var extentidoCamaConsultado: Optional<ExtCamaDelPerro>? = null
+            var extentidoLunaConsultado: Optional<ExtLunaVet>?
+            var extentidoSafariConsultado: Optional<ExtSafariVet>?
+            var extentidoCamaConsultado: Optional<ExtCamaDelPerro>?
 
             var lunaVet: ExtendidosRespuesta? = null
             var safariVet: ExtendidosRespuesta? = null
             var camaDelPerro: ExtendidosRespuesta? = null
 
-            usuarioConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): Optional<Usuario> {
+            var usuarioConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): Optional<Usuario> {
                 return clienteRepository.findByBatosBasicos(
                     encrypt(request.nombre),
                     encrypt(request.apellidoPaterno),
-                    encrypt(request.apellidoMaterno.toString()),
+                    encrypt(request.apellidoMaterno),
                     encrypt(request.fechaNacimiento)
                 )
             })
 
-            if (usuarioConsultado.isPresent) {
-                when (request.aplicacion) {
-                    Aplicaciones().lunaVet -> {
-                        extentidoLunaConsultado =
-                            tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
-                                return extLunaVetRepository.findById(usuarioConsultado.get().usuario!!)
-                            })
-                        if (!extentidoLunaConsultado.isPresent) {
-                            tracer.duration(Servicios().registroExtLunaVet, fun() {
-                                extLunaVet.usuario = usuarioConsultado.get().usuario!!
-                                extLunaVetRepository.save(extLunaVet)
-                            })
-                        }
-                    }
-
-                    Aplicaciones().safariVet -> {
-                        extentidoSafariConsultado =
-                            tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
-                                return extSafariVetRepository.findById(usuarioConsultado.get().usuario!!)
-                            })
-                        if (!extentidoSafariConsultado.isPresent) {
-                            tracer.duration(Servicios().registroExtSafariVet, fun() {
-                                extSafariVet.usuario = usuarioConsultado.get().usuario!!
-                                extSafariVetRepository.save(extSafariVet)
-                            })
-                        }
-                    }
-
-                    Aplicaciones().laCamaDelPerro -> {
-                        extentidoCamaConsultado =
-                            tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
-                                return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario!!)
-                            })
-                        if (!extentidoCamaConsultado.isPresent) {
-                            tracer.duration(Servicios().registroExtCamaDelPerro, fun() {
-                                extCamaDelPerro.usuario = usuarioConsultado.get().usuario!!
-                                extCamaDelPerroRepository.save(extCamaDelPerro)
-                            })
-                        }
-                    }
-                }
-            } else {
+            if (!usuarioConsultado.isPresent) {
                 registroNuevo = true
-                val cliente = Usuario(
-                    idUser,
-                    encrypt(request.nombre),
-                    encrypt(request.apellidoPaterno),
-                    encrypt(request.apellidoMaterno.toString()),
-                    encrypt(request.genero),
-                    CorreosElectronicos(false, encrypt(request.correo.toString())),
-                    Telefonos(false, encrypt(request.telefono.toString())),
-                    encrypt(request.rol),
-                    encrypt(request.fechaNacimiento),
-                    null,
-                    null,
-                    encrypt(request.aplicacion),
-                    request.notificaciones,
-                    Date(),
-                    Date()
-                )
-
-                tracer.duration(Servicios().registroUsuario, fun() {
-                    clienteRepository.save(cliente)
-                })
-
-                when (request.aplicacion) {
-                    Aplicaciones().lunaVet -> {
-                        tracer.duration(Servicios().registroExtLunaVet, fun() {
-                            extLunaVetRepository.save(extLunaVet)
-                        })
-                    }
-
-                    Aplicaciones().safariVet -> {
-                        tracer.duration(Servicios().registroExtSafariVet, fun() {
-                            extSafariVetRepository.save(extSafariVet)
-                        })
-                    }
-
-                    Aplicaciones().laCamaDelPerro -> {
-                        tracer.duration(Servicios().registroExtCamaDelPerro, fun() {
-                            extCamaDelPerroRepository.save(extCamaDelPerro)
-                        })
-                    }
-                }
-
+                registraUsuario(idUser, request)
                 usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
                     return clienteRepository.findById(idUser)
                 })
-                extentidoLunaConsultado = tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
-                    return extLunaVetRepository.findById(idUser)
-                })
-                extentidoSafariConsultado =
-                    tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
-                        return extSafariVetRepository.findById(idUser)
-                    })
-                extentidoCamaConsultado =
-                    tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
-                        return extCamaDelPerroRepository.findById(idUser)
-                    })
             }
 
-            if (extentidoLunaConsultado != null) {
-                if (extentidoLunaConsultado.isPresent) {
-                    lunaVet = ExtendidosRespuesta(
-                        decrypt(extentidoLunaConsultado.get().nickname),
-                        decrypt(extentidoLunaConsultado.get().rol)
-                    )
+            when (request.aplicacion) {
+                Aplicaciones().lunaVet -> {
+                    extentidoLunaConsultado =
+                        tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
+                            return extLunaVetRepository.findById(usuarioConsultado.get().usuario)
+                        })
+                    if (!extentidoLunaConsultado.isPresent) {
+                        tracer.duration(Servicios().registroExtLunaVet, fun() {
+                            extLunaVetRepository.save(
+                                ExtLunaVet(
+                                    usuarioConsultado.get().usuario,
+                                    encrypt(request.nickname),
+                                    encrypt("999999"),
+                                    encrypt(request.rol),
+                                    Date(),
+                                    Date()
+                                )
+                            )
+                        })
+                    }
+
+                    extentidoLunaConsultado =
+                        tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
+                            return extLunaVetRepository.findById(idUser)
+                        })
+
+                    if (extentidoLunaConsultado.isPresent) {
+                        lunaVet = ExtendidosRespuesta(
+                            decrypt(extentidoLunaConsultado.get().nickname), decrypt(extentidoLunaConsultado.get().rol)
+                        )
+                    }
                 }
-            }
 
-            if (extentidoSafariConsultado != null) {
-                if (extentidoSafariConsultado.isPresent) {
-                    safariVet = ExtendidosRespuesta(
-                        decrypt(extentidoSafariConsultado.get().nickname),
-                        decrypt(extentidoSafariConsultado.get().rol)
-                    )
+                Aplicaciones().safariVet -> {
+                    extentidoSafariConsultado =
+                        tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
+                            return extSafariVetRepository.findById(usuarioConsultado.get().usuario)
+                        })
+                    if (!extentidoSafariConsultado.isPresent) {
+                        tracer.duration(Servicios().registroExtSafariVet, fun() {
+                            extSafariVetRepository.save(
+                                ExtSafariVet(
+                                    usuarioConsultado.get().usuario,
+                                    encrypt(request.nickname),
+                                    encrypt("999999"),
+                                    encrypt(request.rol),
+                                    Date(),
+                                    Date()
+                                )
+                            )
+                        })
+                    }
+                    extentidoSafariConsultado =
+                        tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
+                            return extSafariVetRepository.findById(idUser)
+                        })
+
+                    if (extentidoSafariConsultado.isPresent) {
+                        safariVet = ExtendidosRespuesta(
+                            decrypt(extentidoSafariConsultado.get().nickname),
+                            decrypt(extentidoSafariConsultado.get().rol)
+                        )
+                    }
+
                 }
-            }
 
-            if (extentidoCamaConsultado != null) {
-                if (extentidoCamaConsultado.isPresent) {
-                    camaDelPerro = ExtendidosRespuesta(
-                        decrypt(extentidoCamaConsultado.get().nickname),
-                        decrypt(extentidoCamaConsultado.get().rol)
-                    )
+                Aplicaciones().laCamaDelPerro -> {
+                    extentidoCamaConsultado =
+                        tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
+                            return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario)
+                        })
+                    if (!extentidoCamaConsultado.isPresent) {
+                        tracer.duration(Servicios().registroExtCamaDelPerro, fun() {
+                            extCamaDelPerroRepository.save(
+                                ExtCamaDelPerro(
+                                    usuarioConsultado.get().usuario,
+                                    encrypt(request.nickname),
+                                    encrypt("999999"),
+                                    encrypt(request.rol),
+                                    Date(),
+                                    Date()
+                                )
+                            )
+                        })
+                    }
+                    extentidoCamaConsultado =
+                        tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
+                            return extCamaDelPerroRepository.findById(idUser)
+                        })
+
+                    if (extentidoCamaConsultado.isPresent) {
+                        camaDelPerro = ExtendidosRespuesta(
+                            decrypt(extentidoCamaConsultado.get().nickname), decrypt(extentidoCamaConsultado.get().rol)
+                        )
+                    }
                 }
             }
 
             val respuesta: ResponseUsuaro = tracer.duration(Servicios().preparacionRespuesta, fun(): ResponseUsuaro {
-                return preparaRespopnseUsuario(
+                return preparaResponseUsuario(
                     usuarioConsultado.get(), Extendidos(lunaVet, safariVet, camaDelPerro)
                 )
             })
 
-            logs.info("informacion a regresar: $respuesta")
+            logs.info("Informacion a regresar: $respuesta")
             return buildresponse(respuesta = respuesta)
         } catch (e: Exception) {
-            if(registroNuevo){
-                tracer.duration(Servicios().anulaRegistro, fun() {
-                    clienteRepository.deleteById(idUser)
-                    extLunaVetRepository.deleteById(idUser)
-                    extSafariVetRepository.deleteById(idUser)
-                    extCamaDelPerroRepository.deleteById(idUser)
-                })
+            if (registroNuevo) {
+                anulaRegistro(idUser)
             }
             logs.error("Error al realizar la peticion: ${e.message}")
             if (e.message!!.contains("duplicate key error collection")) {
@@ -219,5 +181,36 @@ class RegistroUsuario @Autowired constructor(
             }
             return buildresponse(error = CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
+    }
+
+    fun registraUsuario(idUser: String, request: RequestsRegistroUsuario) {
+        tracer.duration(Servicios().registroUsuario, fun() {
+            clienteRepository.save(
+                Usuario(
+                    idUser,
+                    encrypt(request.nombre),
+                    encrypt(request.apellidoPaterno),
+                    encrypt(request.apellidoMaterno),
+                    encrypt(request.genero),
+                    CorreosElectronicos(false, encrypt(request.correo)),
+                    Telefonos(false, encrypt(request.telefono)),
+                    encrypt(request.rol),
+                    encrypt(request.fechaNacimiento),
+                    encrypt(request.aplicacion),
+                    request.notificaciones,
+                    Date(),
+                    Date()
+                )
+            )
+        })
+    }
+
+    fun anulaRegistro(idUser: String) {
+        tracer.duration(Servicios().anulaRegistro, fun() {
+            clienteRepository.deleteById(idUser)
+            extLunaVetRepository.deleteById(idUser)
+            extSafariVetRepository.deleteById(idUser)
+            extCamaDelPerroRepository.deleteById(idUser)
+        })
     }
 }

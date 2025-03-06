@@ -27,7 +27,7 @@ data class ExtendidosRespuesta(
     var rol: String,
 )
 
-fun preparaRespopnseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseUsuaro {
+fun preparaResponseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseUsuaro {
     return ResponseUsuaro(
         decrypt(usaurio.nombre),
         decrypt(usaurio.apellidoPaterno),
@@ -36,7 +36,7 @@ fun preparaRespopnseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseU
         decrypt(usaurio.rol),
         decrypt(usaurio.fechaNacimiento),
         decrypt(usaurio.aplicacion),
-        decrypt(usaurio.correo.direccion),
+        decrypt(usaurio.correo?.direccion),
         decrypt(usaurio.telefono.telefono),
         extendidos
     )
