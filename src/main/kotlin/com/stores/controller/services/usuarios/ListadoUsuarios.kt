@@ -28,7 +28,7 @@ class ListadoUsuarios @Autowired constructor(
                 return clienteRepository.findByAllUsers(encrypt(request.aplicacion!!))
             })
 
-            return buildresponse(respuesta =  responseUsuarios(usuariosConsultado))
+            return buildresponse(respuesta =  usuariosConsultado)
         }catch (e: Exception){
             logs.error("Error al realizar la peticion: $e")
             return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)

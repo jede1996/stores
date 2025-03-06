@@ -2,7 +2,6 @@ package com.stores.controller.services.proveedores
 
 import com.stores.config.*
 import com.stores.entities.Proveedor
-import com.stores.entities.Usuario
 import com.stores.repository.ProveedorRepository
 import com.stores.request.RequestConsultaProveedor
 import org.slf4j.Logger

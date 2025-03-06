@@ -2,8 +2,6 @@ package com.stores.controller.services.mascota
 
 import com.stores.config.*
 import com.stores.entities.Mascota
-import com.stores.entities.UsersConsultado
-import com.stores.entities.responseUsuarios
 import com.stores.repository.MascotaRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -17,7 +15,7 @@ class ListadoMascota @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun listadoMascotas(mascotaRepository: MascotaRepository): ResponseEntity<Respuesta> {
+    fun listadoMascotas(): ResponseEntity<Respuesta> {
         try {
             logs.info("Servicio de listado de mascotas")
 

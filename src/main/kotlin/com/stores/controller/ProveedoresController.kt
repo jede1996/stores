@@ -48,7 +48,7 @@ class ProveedoresController(
     }
 
     @PostMapping("listado")
-    fun listadoProveedores(request: RequestConsultaProveedores): ResponseEntity<Respuesta> {
+    fun listadoProveedores(request: RequestConsultaProveedores?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return listadoProveedores.listadoProveedores(request)
     }

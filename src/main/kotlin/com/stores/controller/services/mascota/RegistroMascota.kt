@@ -3,22 +3,16 @@ package com.stores.controller.services.mascota
 import com.stores.config.*
 import com.stores.entities.Mascota
 import com.stores.entities.Usuario
-import com.stores.entities.Vacunas
 import com.stores.repository.ClienteRepository
 import com.stores.repository.MascotaRepository
 import com.stores.request.RequestMascota
-import com.stores.responses.Extendidos
 import com.stores.responses.ResponseMascota
-import com.stores.responses.ResponseUsuaro
-import com.stores.responses.preparaResponseUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.mongodb.core.mapping.Field
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import java.util.*
-import kotlin.jvm.optionals.getOrNull
 
 @Service
 class RegistroMascota @Autowired constructor(

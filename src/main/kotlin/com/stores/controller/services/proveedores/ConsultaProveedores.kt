@@ -2,12 +2,8 @@ package com.stores.controller.services.proveedores
 
 import com.stores.config.*
 import com.stores.entities.Proveedor
-import com.stores.entities.Usuario
 import com.stores.repository.ProveedorRepository
 import com.stores.request.RequestConsultaProveedor
-import com.stores.responses.Extendidos
-import com.stores.responses.ResponseUsuaro
-import com.stores.responses.preparaResponseUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired

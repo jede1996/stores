@@ -1,6 +1,5 @@
 package com.stores.request
 
-import com.stores.config.Aplicaciones
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import java.util.*

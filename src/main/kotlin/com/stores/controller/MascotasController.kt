@@ -27,29 +27,29 @@ class MascotasController(
     @PostMapping("registro")
     fun registroMascota(@Valid @RequestBody request: RequestMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return registroMascota.registroMascota(request, mascotaRepository)
+        return registroMascota.registroMascota(request)
     }
 
     @PostMapping("baja")
     fun bajaMascota(@Valid @RequestBody request: RequestConsultaMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return bajaMascota.bajaMascota(request, mascotaRepository)
+        return bajaMascota.bajaMascota(request)
     }
 
     @PostMapping("modificacion")
     fun modificacionMascota(@Valid @RequestBody request: RequestMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return modificacionMascota.modificacionMascota(request, mascotaRepository)
+        return modificacionMascota.modificacionMascota(request)
     }
 
     @PostMapping("consulta")
     fun consultaMascota(@Valid @RequestBody request: RequestConsultaMascota?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return consultaMascota.consultaMascota(request, mascotaRepository)
+        return consultaMascota.consultaMascota(request)
     }
 
     @PostMapping("listado")
     fun listadoMascotas(): ResponseEntity<Respuesta> {
-        return listadoMascota.listadoMascotas(mascotaRepository)
+        return listadoMascota.listadoMascotas()
     }
 }
