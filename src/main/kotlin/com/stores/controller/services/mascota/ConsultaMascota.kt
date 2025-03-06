@@ -1,31 +1,46 @@
 package com.stores.controller.services.mascota
 
-import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
-import com.stores.config.ServiceInterceptor
-import com.stores.config.buildresponse
+import com.stores.config.*
+import com.stores.entities.Mascota
+import com.stores.entities.Usuario
 import com.stores.repository.MascotaRepository
 import com.stores.request.RequestConsultaMascota
+import com.stores.responses.Extendidos
+import com.stores.responses.ResponseUsuaro
+import com.stores.responses.preparaResponseUsuario
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
-class ConsultaMascota  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+class ConsultaMascota @Autowired constructor(
+    private val tracer: ServiceInterceptor, private val mascotaRepository: MascotaRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun consultaMascota(request: RequestConsultaMascota?, mascotaRepository: MascotaRepository): ResponseEntity<Respuesta>{
+    fun consultaMascota(request: RequestConsultaMascota): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de consulta de mascotas: $request")
 
-            return buildresponse(respuesta =  "")
-        }catch (e: Exception){
+            val mascotaConsultada = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Mascota> {
+                return mascotaRepository.findById(encrypt(request.mascota))
+            })
+
+            if (!mascotaConsultada.isPresent) return buildresponse(error = CatalogoResponses.MASCOTA_INEXISTENTE)
+
+
+            val respuesta: Mascota = tracer.duration(Servicios().preparacionRespuesta, fun(): Mascota {
+                return mascotaConsultada.get()
+            })
+
+            logs.info("Informacion a regresar: $respuesta")
+            return buildresponse(respuesta = respuesta)
+        } catch (e: Exception) {
             logs.error("Error al realizar la peticion: $e")
-            return buildresponse(error =  CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
+            return buildresponse(error = CatalogoResponses.ERROR_INESPERADO, detalle = e.message)
         }
     }
 

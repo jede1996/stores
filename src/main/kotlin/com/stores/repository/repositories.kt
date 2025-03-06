@@ -10,8 +10,16 @@ interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>
 interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>
 interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>
 interface ProductoRepository : MongoRepository<Producto, String>
-interface MascotaRepository : MongoRepository<Mascota, String>
+
+interface MascotaRepository : MongoRepository<Mascota, String>{
+    @Query(
+        value = "{ propietario: ?0 }"
+    )
+    fun findByAllMascotasByUser(propietario: String): List<Mascota>
+}
+
 interface ProveedorRepository : MongoRepository<Proveedor, String>
+
 interface ClienteRepository : MongoRepository<Usuario, String> {
     @Query("{ nombre: ?0, apellido_paterno: ?1, apellido_materno: ?2, fecha_nacimiento: ?3 }")
     fun findByBatosBasicos(

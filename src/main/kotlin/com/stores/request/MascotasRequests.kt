@@ -3,6 +3,7 @@ package com.stores.request
 import com.stores.entities.Vacunas
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
+import java.util.Date
 import kotlin.collections.ArrayList
 
 data class RequestConsultaMascota(
@@ -10,18 +11,21 @@ data class RequestConsultaMascota(
 )
 
 data class RequestMascota(
-    val idPropietario: String?,
-    var nombre: String?,
-    var especie: String?,
-    var raza: String?,
-    var genero: String?,
-    var edad: Int?,
-    var fechaNacimiento: Int?,
-    var caracteristicas: String,
-    var esterilizado: Boolean,
-    var chip: String,
-    var peso: String?,
-    var tamanno: String?,
-    var vacunas: ArrayList<Vacunas?>?,
-    var alergias: ArrayList<String?>?
+    val propietario: String,
+    val aplicacion: String,
+    val foto: String,
+    val idPropietario: String,
+    val nombre: String,
+    val especie: String?,
+    val raza: String?,
+    val genero: String,
+    val edad: Int?,
+    val caracteristicas: String,
+    val esterilizado: Boolean,
+    val chip: String,
+    val peso: String?,
+    val tamanno: String?,
+    val vacunas: ArrayList<Vacunas?>?,
+    val alergias: ArrayList<String?>?,
+    val fechaNacimiento: Date?
 )

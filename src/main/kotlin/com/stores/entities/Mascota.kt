@@ -8,14 +8,14 @@ import kotlin.collections.ArrayList
 
 @Document("mascotas")
 data class Mascota(
-    @Field("_id") val mascota: String?,
-    val propietario: String?,
-    var nombre: String?,
-    var especie: String?,
+    @Field("_id") val mascota: String,
+    var propietario: String,
+    var nombre: String,
+    var especie: String,
     var raza: String?,
-    var genero: String?,
+    var genero: String,
     var edad: Int?,
-    @Field("fecha_nacimiento") var fechaNacimiento: Int?,
+    @Field("fecha_nacimiento") var fechaNacimiento: Date?,
     var caracteristicas: String,
     var esterilizado: Boolean,
     var chip: String,
@@ -23,9 +23,9 @@ data class Mascota(
     var tamanno: String?,
     var vacunas: ArrayList<Vacunas?>?,
     var alergias: ArrayList<String?>?,
-    var consultas: ArrayList<Consultas?>?,
+    var foto: String?,
     @Field("fecha_registro") val fechaRegistro: Date?,
-    @Field("fecha_modificacion") var fechaModificacion: Date?,
+    @Field("fecha_modificacion") var fechaModificacion: Date?
 )
 
 data class Vacunas(
