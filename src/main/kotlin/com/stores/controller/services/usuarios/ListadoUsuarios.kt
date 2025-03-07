@@ -2,7 +2,6 @@ package com.stores.controller.services.usuarios
 
 import com.stores.config.*
 import com.stores.entities.UsersConsultado
-import com.stores.entities.responseUsuarios
 import com.stores.repository.ClienteRepository
 import com.stores.request.RequestConsultaUsuarios
 import org.slf4j.Logger

@@ -25,29 +25,29 @@ class OpinionesController(
     @PostMapping("registro")
     fun registroOpinion(@Valid @RequestBody request: RequestRegistroOpinion?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return opinion.registrarOpinion(request, opinionesRepository)
+        return opinion.registrarOpinion(request)
     }
 
     @PostMapping("cerrar")
     fun cerrarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return opinion.cerrarOpinion(request, opinionesRepository)
+        return opinion.cerrarOpinion(request)
     }
 
     @PostMapping("consulta")
     fun consultarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return opinion.consultarOpinion(request, opinionesRepository)
+        return opinion.consultarOpinion(request)
     }
 
     @PostMapping("listado-usuario")
     fun consultarOpinionPorUsuario(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
-        return opinion.consultarOpinion(request, opinionesRepository)
+        return opinion.consultarOpinion(request)
     }
 
     @GetMapping("listado")
     fun listadoOpiniones(): ResponseEntity<Respuesta> {
-        return opinion.listarOpiniones(opinionesRepository)
+        return opinion.listarOpiniones()
     }
 }

@@ -50,17 +50,18 @@ fun validaRoles(app: String): Boolean {
 }
 
 data class Servicios(
+    val consultaUsuarioId: String = "Consulta de usuario por id",
+    val consultaUsuarioDatosBasicos: String = "Consulta por datos basicos",
+    val consultaUsuarioTelefono: String = "Consulta por telefono",
+    val consultaUsuarioCorreo: String = "Consulta por correo",
     val consultaMascotasPorId: String = "Consulta mascotas por Id",
     val consultaMascotasPorusuario: String = "Consulta mascotas por usuario",
-    val consultaUsuarioDatosBasicos: String = "Consulta por datos basicos",
-    val consultaUsuarioCorreo: String = "Consulta por correo",
-    val consultaUsuarioTelefono: String = "Consulta por telefono",
-
-    val consultaUsuarioId: String = "Consulta de usuario por id",
-    val consultaExtSafariVet: String = "Consulta de extendido para safari vet",
+    val consultaProductoPorId: String = "Consulta producto por Id",
     val consultaExtLunaVet: String = "Consulta de extendido para luna vet",
+    val consultaExtSafariVet: String = "Consulta de extendido para safari vet",
     val consultaExtCamaDelPerro: String = "Consulta de extendido para cama del perro",
 
+    val registroProducto: String = "Registro de producto",
     val registroUsuario: String = "Registro de usuario",
     val registroFotoMascota: String = "Registro de foto de la mascota",
     val registroMascota: String = "Registro de mascota",
@@ -69,18 +70,20 @@ data class Servicios(
     val registroExtCamaDelPerro: String = "Registro de extendido para cama del perro",
 
     val actualizacionFotoMascota: String = "Actualizacion de foto de la mascota",
+    val actualizacionProducto: String = "Actualizacion de producto",
     val actualizacionMascota: String = "Actualizacion de mascota",
     val actualizacionUsuario: String = "Actualizacion de usuario",
     val actualizacionExtLunaVet: String = "Actualizacion de extendido para luna vet",
     val actualizacionExtSafariVet: String = "Actualizacion  de extendido para safari vet",
     val actualizacionExtCamaDelPerro: String = "Actualizacion de extendido para cama del perro",
 
+    val eliminaProducto: String = "Eliminacion de producto",
     val eliminaUsuario: String = "Eliminacion de usuario",
     val eliminaExtLunaVet: String = "Eliminacion de extendido para luna vet",
     val eliminaExtSafariVet: String = "Eliminacion  de extendido para safari vet",
     val eliminaExtCamaDelPerro: String = "Eliminacion de extendido para cama del perro",
 
-    val anulaRegistro: String = "Anulacion de registro de usaurio",
+    val anulaRegistro: String = "Anulacion de registro",
     val preparacionRespuesta: String = "Preparacion respuesta"
 )
 

@@ -9,7 +9,12 @@ interface ConsultasRepository : MongoRepository<Consultas, String>
 interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>
 interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>
 interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>
-interface ProductoRepository : MongoRepository<Producto, String>
+interface ProductoRepository : MongoRepository<Producto, String>{
+    @Query(
+        value = "{ nombre: ?0 }"
+    )
+    fun findByNombre(nombre: String): Optional<Producto>
+}
 
 interface MascotaRepository : MongoRepository<Mascota, String>{
     @Query(

@@ -6,17 +6,17 @@ import java.util.*
 
 @Document("producto")
 data class Producto(
-    @Field("_id") val producto: String?,
-    val nombre: String,
-    val descripcion: String,
-    val categoria: String,
-    val subcategoria: String,
-    val estado: String,
-    val stock: Stock,
-    val precios: Precios,
-    val proveedor: String,
-    @Field("fecha_registro") val fechaRegistro: Date?,
-    @Field("fecha_modificacion") var fechaModificacion: Date?,
+    @Field("_id") val producto: String,
+    var nombre: String,
+    var descripcion: String,
+    var categoria: String,
+    var subcategoria: String,
+    var estado: String,
+    var stock: Stock,
+    var precios: Precios,
+    var proveedor: String,
+    @Field("fecha_registro") val fechaRegistro: Date,
+    @Field("fecha_modificacion") var fechaModificacion: Date,
 )
 
 data class Stock(

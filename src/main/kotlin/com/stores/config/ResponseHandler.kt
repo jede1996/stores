@@ -49,13 +49,25 @@ enum class CatalogoResponses(
     CALIFICACION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El comentario no fue enviado"),
     OPINION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "La opinion no fue enviado"),
     PRODUCTO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El producto no fue enviado"),
-    USUARIO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El usuario ya esta registrado"),
+
     TELEFONO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El telefono ya lo tiene registrado un usuario"),
     CORREO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El correo ya lo tiene registrado un usuario"),
+
+    USUARIO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El usuario ya esta registrado"),
     USUARIO_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El usuario no esta registrado"),
+
     PROVEEDOR_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El proveedor no esta registrado"),
-    MASCOTA_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La mascota esta registrado"),
+    PROVEEDOR_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El proveedor ya esta registrado"),
+
+    MASCOTA_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La mascota ya esta registrado"),
     MASCOTA_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La mascota no esta registrado"),
+
+    OPINION_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La opinion ya esta registrado"),
+    OPINION_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "La opinion no esta registrado"),
+
+
+    PRODUCTO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El prodcuto ya esta registrado"),
+    PRODUCTO_INEXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El prodcuto no esta registrado"),
 }
 
 fun buildresponse(
