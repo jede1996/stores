@@ -12,13 +12,11 @@ import org.springframework.stereotype.Service
 @Service
 class RegistroConsultas @Autowired constructor(
     private val tracer: ServiceInterceptor,
+    private val consultasRepository: ConsultasRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroConsulta(
-        request: RequestRegistroConsulta,
-        consultasRepository: ConsultasRepository,
-    ): ResponseEntity<Respuesta> {
+    fun registroConsulta(request: RequestRegistroConsulta): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de registro de consulta: $request")
 

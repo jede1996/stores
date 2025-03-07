@@ -15,13 +15,11 @@ import org.springframework.stereotype.Service
 @Service
 class ReprogramacionConsultas @Autowired constructor(
     private val tracer: ServiceInterceptor,
+    private val consultasRepository: ConsultasRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun reprogramacionConsulta(
-        request: RequestProgramacionConsulta?,
-        consultasRepository: ConsultasRepository,
-    ): ResponseEntity<Respuesta> {
+    fun reprogramacionConsulta(request: RequestProgramacionConsulta): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de reprogramacion de consulta: $request")
 

@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class LoginUser  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+    private val tracer : ServiceInterceptor,
+    private val clienteRepository: ClienteRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun login(request: RequesLogin?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
+    fun login(request: RequesLogin): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de login: $request")
 

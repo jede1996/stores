@@ -5,6 +5,9 @@ import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ClienteRepository
+import com.stores.repository.ExtCamaDelPerroRepository
+import com.stores.repository.ExtLunaVetRepository
+import com.stores.repository.ExtSafariVetRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,11 +16,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class ActualizacionContrasenna  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+    private val tracer : ServiceInterceptor,
+    private val extLunaVetRepository: ExtLunaVetRepository,
+    private val extSafariVetRepository: ExtSafariVetRepository,
+    private val extCamaDelPerroRepository: ExtCamaDelPerroRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun actualizacontrasenna(request: Any?, clienteRepository: ClienteRepository): ResponseEntity<Respuesta>{
+    fun actualizacontrasenna(request: Any?): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de actualizacion de contraseña: $request")
 

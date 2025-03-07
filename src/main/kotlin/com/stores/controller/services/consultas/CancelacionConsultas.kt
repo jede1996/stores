@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class CancelacionConsultas  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+    private val tracer : ServiceInterceptor,
+    private val consultasRepository: ConsultasRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun cancelacionConsulta(request: RequestBusquedaConsulta?, consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
+    fun cancelacionConsulta(request: RequestBusquedaConsulta): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de cancelacion de consulta: $request")
 

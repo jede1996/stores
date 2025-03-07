@@ -14,11 +14,12 @@ import org.springframework.stereotype.Service
 
 @Service
 class HistorialConsultas  @Autowired constructor(
-    private val tracer : ServiceInterceptor
+    private val tracer : ServiceInterceptor,
+    private val consultasRepository: ConsultasRepository
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun historialConsultasCliente(request: RequestBusquedaConsulta?, consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
+    fun historialConsultasCliente(request: RequestBusquedaConsulta): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de historial de conultas por clientes: $request")
 
@@ -29,7 +30,7 @@ class HistorialConsultas  @Autowired constructor(
         }
     }
 
-    fun historialConsultasGeneral(consultasRepository: ConsultasRepository): ResponseEntity<Respuesta>{
+    fun historialConsultasGeneral(): ResponseEntity<Respuesta>{
         try {
             logs.info("Servicio de historial general de consultas")
 
