@@ -1,7 +1,6 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.usuarios.*
 import com.stores.request.*
@@ -23,37 +22,37 @@ class UsuariosController(
 ) {
 
     @PostMapping("registro")
-    fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Respuesta> {
+    fun registroUsuario(@Valid @RequestBody request: RequestsRegistroUsuario?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroUsuario.registroUsuario(request)
     }
 
     @PostMapping("baja")
-    fun bajaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
+    fun bajaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaUsuario.bajaUsuario(request)
     }
 
     @PostMapping("modificacion")
-    fun modificacionUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Respuesta> {
+    fun modificacionUsuario(@Valid @RequestBody request: RequestActualizacionUsuario?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.modificacionUsuario(request)
     }
 
     @PostMapping("consulta")
-    fun consultaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Respuesta> {
+    fun consultaUsuario(@Valid @RequestBody request: RequestConsultaUsuario?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaUsuario.consultaUsuario(request)
     }
 
     @PostMapping("listado")
-    fun listadoUsuarios(@Valid @RequestBody request: RequestConsultaUsuarios?): ResponseEntity<Respuesta> {
+    fun listadoUsuarios(@Valid @RequestBody request: RequestConsultaUsuarios?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return listadoUsuarios.listadoUsuarios(request)
     }
 
     @PostMapping("actualizacion-contrasenna")
-    fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionContrasenna?): ResponseEntity<Respuesta> {
+    fun actualizacontrasenna(@Valid @RequestBody request: RequestActualizacionContrasenna?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionUsuario.actualizaContrasenna(request)
     }

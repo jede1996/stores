@@ -13,7 +13,6 @@ data class Usuario(
     var genero: String,
     @Field("correo_electronico") var correo: CorreosElectronicos?,
     var telefono: Telefonos,
-    var rol: String,
     @Field("fecha_nacimiento") var fechaNacimiento: String,
     var aplicacion: String,
     @Field("preferencias_notificaciones") var notificaciones: Boolean,
@@ -30,14 +29,6 @@ data class CorreosElectronicos(
     var verificado: Boolean,
     var direccion: String
 )
-
-
-data class Roles(
-    val administrador: String = "administrador",
-    val usuario: String = "usuario",
-    val cliente: String = "cliente",
-)
-
 
 data class UsersConsultado(
     val id: String,

@@ -22,7 +22,7 @@ class RegistroMascota @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroMascota(request: RequestMascota): ResponseEntity<Respuesta> {
+    fun registroMascota(request: RequestMascota): ResponseEntity<Any> {
         var registroNuevo = false
         val idMascota = encrypt(UUID.randomUUID().toString().replace("-", ""))
         try {

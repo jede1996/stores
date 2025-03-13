@@ -15,7 +15,7 @@ class ListadoMascota @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun listadoMascotas(): ResponseEntity<Respuesta> {
+    fun listadoMascotas(): ResponseEntity<Any> {
         try {
             logs.info("Servicio de listado de mascotas")
 

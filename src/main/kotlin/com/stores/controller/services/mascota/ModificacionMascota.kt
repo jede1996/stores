@@ -19,7 +19,7 @@ class ModificacionMascota  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun modificacionMascota(request: RequestMascota): ResponseEntity<Respuesta>{
+    fun modificacionMascota(request: RequestMascota): ResponseEntity<Any>{
         try {
             logs.info("Request para el servicio de actualizacion de mascota: $request")
 

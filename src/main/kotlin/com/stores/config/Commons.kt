@@ -1,6 +1,7 @@
 package com.stores.config
 
-import java.util.Base64
+import java.security.SecureRandom
+import java.util.*
 import javax.crypto.Cipher
 import javax.crypto.spec.GCMParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -11,42 +12,32 @@ private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8
 val mongoString = decrypt("eVkbyAoGgInqLXi1t2FBvHMSMfR+E7N9/rX+AQHsW9W7afomHxFvIHDo2MMA3Zo3pu4k8FVNhY7i4t0mcKzLjPA=")
 
 fun encrypt(data: String?): String {
-    if(data.isNullOrEmpty()) return ""
+    if (data.isNullOrEmpty()) return ""
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
     return Base64.getEncoder().encodeToString(cipher.doFinal(data.toByteArray()))
 }
 
 fun decrypt(encryptedData: String?): String {
-    if(encryptedData.isNullOrEmpty()) return ""
+    if (encryptedData.isNullOrEmpty()) return ""
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
     return String(cipher.doFinal(Base64.getDecoder().decode(encryptedData)))
 }
 
-data class Aplicaciones(
-    val lunaVet: String = "LunaVet",
-    val safariVet: String = "SafariVet",
-    val laCamaDelPerro: String = "LaCamaDelPerro",
-)
+enum class Aplicaciones { LunaVet, SafariVet, LaCamaDelPerro }
 
 
-data class Roles(
-    val cliente: String = "cliente",
-    val medico: String = "medico",
-    val administrador: String = "administrador"
-)
+enum class Roles { Administrador, Usuario, Cliente, Medico }
 
 fun validaAplicaiones(app: String): Boolean {
     return listOf(
-        Aplicaciones().lunaVet, Aplicaciones().safariVet, Aplicaciones().laCamaDelPerro
+        Aplicaciones.LunaVet.name, Aplicaciones.SafariVet.name, Aplicaciones.LaCamaDelPerro.name
     ).contains(app)
 }
 
 fun validaRoles(app: String): Boolean {
-    return listOf(
-        Roles().medico, Roles().administrador, Roles().cliente
-    ).contains(app)
+    return listOf(Roles.Medico.name, Roles.Administrador.name, Roles.Cliente.name).contains(app)
 }
 
 data class Servicios(
@@ -89,4 +80,10 @@ data class Servicios(
 
 fun regresaLlaveDuplicada(e: Exception): String? {
     return Regex("key:\\s*(\\{[^}]*+\\})").find(e.message!!)?.groupValues?.get(1)
+}
+
+fun generaLlaveSecreta(): String {
+    val secretKeyBytes = ByteArray(32)
+    SecureRandom().nextBytes(secretKeyBytes)
+    return Base64.getEncoder().encodeToString(secretKeyBytes)
 }

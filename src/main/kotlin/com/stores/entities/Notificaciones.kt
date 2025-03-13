@@ -23,12 +23,6 @@ data class Programacion(
     val fechaFin: Date,
 )
 
-data class Emisores(
-    val usaurio: String = "usuario",
-    val sistema: String = "sistema",
-)
+enum class Emisores { Usaurio, Sistema }
 
-data class PeriodoRepeticion(
-    val dia: String = "dia",
-    val mes: String = "mes",
-)
+enum class PeriodoRepeticion { Dia, Mes }

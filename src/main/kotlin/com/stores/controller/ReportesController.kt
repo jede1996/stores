@@ -1,7 +1,6 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.reportes.Reportes
 import com.stores.request.RequestReportes
@@ -18,7 +17,7 @@ class ReportesController(
     val reportes: Reportes
 ) {
     @PostMapping("fecha")
-    fun reportePorFecha(@Valid @RequestBody request: RequestReportes?): ResponseEntity<Respuesta> {
+    fun reportePorFecha(@Valid @RequestBody request: RequestReportes?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return reportes.repostePorFecha(request)
     }

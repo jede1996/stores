@@ -1,9 +1,7 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.buildresponse
-import com.stores.controller.services.login.ActualizacionContrasenna
 import com.stores.controller.services.login.LoginUser
 import com.stores.request.*
 import jakarta.validation.Valid
@@ -14,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("login")
-class LoginController(
-    val loginUser: LoginUser,
-    val actualizacionContrasenna: ActualizacionContrasenna
+@RequestMapping("auth")
+class AuthController(
+    val loginUser: LoginUser
 ) {
-    @PostMapping("log")
-    fun inicioSesion(@Valid @RequestBody request: RequesLogin?): ResponseEntity<Respuesta> {
+    @PostMapping("login")
+    fun inicioSesion(@Valid @RequestBody request: RequesLogin?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return loginUser.login(request)
     }

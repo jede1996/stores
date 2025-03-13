@@ -20,7 +20,7 @@ class ConsultaProveedores @Autowired constructor(
 
     fun consultaProveedor(
         request: RequestConsultaProveedor
-    ): ResponseEntity<Respuesta> {
+    ): ResponseEntity<Any> {
         try {
             logs.info("Request para el servicio de consulta de proveedores: $request")
 

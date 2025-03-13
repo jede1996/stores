@@ -19,17 +19,26 @@ repositories {
 }
 val springBootStarterValidationVersion = "2.6.3"
 val springdocOpenapiStarterWebmvcUiVersion = "2.5.0"
+val jsonwebtokenJjwt = "0.9.1"
+val jjwt = "0.12.6"
 
 dependencies {
+	implementation("io.jsonwebtoken:jjwt-api:$jjwt")
+	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenapiStarterWebmvcUiVersion")
 	implementation("org.springframework.boot:spring-boot-starter-validation:$springBootStarterValidationVersion")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jjwt")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:$jjwt")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

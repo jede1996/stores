@@ -1,7 +1,6 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.opiniones.Opiniones
 import com.stores.repository.OpinionesRepository
@@ -23,31 +22,31 @@ class OpinionesController(
 
 ) {
     @PostMapping("registro")
-    fun registroOpinion(@Valid @RequestBody request: RequestRegistroOpinion?): ResponseEntity<Respuesta> {
+    fun registroOpinion(@Valid @RequestBody request: RequestRegistroOpinion?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return opinion.registrarOpinion(request)
     }
 
     @PostMapping("cerrar")
-    fun cerrarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
+    fun cerrarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return opinion.cerrarOpinion(request)
     }
 
     @PostMapping("consulta")
-    fun consultarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
+    fun consultarOpinion(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return opinion.consultarOpinion(request)
     }
 
     @PostMapping("listado-usuario")
-    fun consultarOpinionPorUsuario(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Respuesta> {
+    fun consultarOpinionPorUsuario(@Valid @RequestBody request: RequestOpiniones?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return opinion.consultarOpinion(request)
     }
 
     @GetMapping("listado")
-    fun listadoOpiniones(): ResponseEntity<Respuesta> {
+    fun listadoOpiniones(): ResponseEntity<Any> {
         return opinion.listarOpiniones()
     }
 }

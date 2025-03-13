@@ -1,14 +1,14 @@
 package com.stores.responses
 
+import com.stores.config.Roles
 import com.stores.config.decrypt
 import com.stores.entities.Usuario
 
-data class ResponseUsuaro(
+data class ResponseUsuaro (
     val nombre: String,
     val apellidoPaterno: String,
     val apellidoMaterno: String,
     val genero: String,
-    val rol: String,
     val fechaNacimiento: String,
     val aplicacion: String,
     val correoElectronico: String,
@@ -24,16 +24,15 @@ data class Extendidos(
 
 data class ExtendidosRespuesta(
     var nickname: String,
-    var rol: String,
+    var rol: Roles,
 )
 
-fun preparaResponseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseUsuaro {
+fun preparaResponseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseUsuaro  {
     return ResponseUsuaro(
         decrypt(usaurio.nombre),
         decrypt(usaurio.apellidoPaterno),
         decrypt(usaurio.apellidoMaterno),
         decrypt(usaurio.genero),
-        decrypt(usaurio.rol),
         decrypt(usaurio.fechaNacimiento),
         decrypt(usaurio.aplicacion),
         decrypt(usaurio.correo?.direccion),

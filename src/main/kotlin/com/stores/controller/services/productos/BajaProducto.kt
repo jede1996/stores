@@ -20,7 +20,7 @@ class BajaProducto @Autowired constructor(
 
     fun bajaInventario(
         request: RequestConsultaProducto
-    ): ResponseEntity<Respuesta> {
+    ): ResponseEntity<Any> {
         try {
             logs.info("Request para el servicio de baja de productos: $request")
 

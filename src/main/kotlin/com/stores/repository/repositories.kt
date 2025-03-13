@@ -8,11 +8,13 @@ import java.util.*
 interface ConsultasRepository : MongoRepository<Consultas, String>
 interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>
 interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>
-interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>
+interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>{
+    @Query(value = "{ usernameCamaPerro: ?0 }")
+    fun findByUserName(username: String): Optional<ExtCamaDelPerro>
+}
+
 interface ProductoRepository : MongoRepository<Producto, String>{
-    @Query(
-        value = "{ nombre: ?0 }"
-    )
+    @Query(value = "{ nombre: ?0 }")
     fun findByNombre(nombre: String): Optional<Producto>
 }
 

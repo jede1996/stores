@@ -7,14 +7,12 @@ import com.stores.repository.ExtCamaDelPerroRepository
 import com.stores.repository.ExtLunaVetRepository
 import com.stores.repository.ExtSafariVetRepository
 import com.stores.request.RequestsRegistroUsuario
-import com.stores.responses.Extendidos
-import com.stores.responses.ExtendidosRespuesta
-import com.stores.responses.ResponseUsuaro
-import com.stores.responses.preparaResponseUsuario
+import com.stores.responses.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.Date
 import java.util.Optional
@@ -26,11 +24,12 @@ class RegistroUsuario @Autowired constructor(
     private val clienteRepository: ClienteRepository,
     private val extLunaVetRepository: ExtLunaVetRepository,
     private val extSafariVetRepository: ExtSafariVetRepository,
-    private val extCamaDelPerroRepository: ExtCamaDelPerroRepository
+    private val extCamaDelPerroRepository: ExtCamaDelPerroRepository,
+    private val passwordEncoder: PasswordEncoder
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Respuesta> {
+    fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Any> {
         var registroNuevo = false
         val idUser = encrypt(UUID.randomUUID().toString().replace("-", ""))
         try {
@@ -38,7 +37,7 @@ class RegistroUsuario @Autowired constructor(
 
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
-            if (!validaRoles(request.rol)) return buildresponse(error = CatalogoResponses.ROL_INVALIDO)
+            if (!validaRoles(request.rol.name)) return buildresponse(error = CatalogoResponses.ROL_INVALIDO)
 
             var extentidoLunaConsultado: Optional<ExtLunaVet>?
             var extentidoSafariConsultado: Optional<ExtSafariVet>?
@@ -66,7 +65,7 @@ class RegistroUsuario @Autowired constructor(
             }
 
             when (request.aplicacion) {
-                Aplicaciones().lunaVet -> {
+                Aplicaciones.LunaVet.name -> {
                     extentidoLunaConsultado =
                         tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
                             return extLunaVetRepository.findById(usuarioConsultado.get().usuario)
@@ -77,8 +76,8 @@ class RegistroUsuario @Autowired constructor(
                                 ExtLunaVet(
                                     usuarioConsultado.get().usuario,
                                     encrypt(request.nickname),
-                                    encrypt("999999"),
-                                    encrypt(request.rol),
+                                    passwordEncoder.encode( "999999"),
+                                    request.rol,
                                     Date(),
                                     Date()
                                 )
@@ -93,12 +92,12 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         lunaVet = ExtendidosRespuesta(
-                            decrypt(extentidoLunaConsultado.get().nickname), decrypt(extentidoLunaConsultado.get().rol)
+                            decrypt(extentidoLunaConsultado.get().usernameLuna), extentidoLunaConsultado.get().rol
                         )
                     }
                 }
 
-                Aplicaciones().safariVet -> {
+                Aplicaciones.SafariVet.name -> {
                     extentidoSafariConsultado =
                         tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
                             return extSafariVetRepository.findById(usuarioConsultado.get().usuario)
@@ -109,8 +108,8 @@ class RegistroUsuario @Autowired constructor(
                                 ExtSafariVet(
                                     usuarioConsultado.get().usuario,
                                     encrypt(request.nickname),
-                                    encrypt("999999"),
-                                    encrypt(request.rol),
+                                    passwordEncoder.encode( "999999"),
+                                    request.rol,
                                     Date(),
                                     Date()
                                 )
@@ -124,14 +123,14 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         safariVet = ExtendidosRespuesta(
-                            decrypt(extentidoSafariConsultado.get().nickname),
-                            decrypt(extentidoSafariConsultado.get().rol)
+                            decrypt(extentidoSafariConsultado.get().usernameSafary),
+                            extentidoSafariConsultado.get().rol
                         )
                     }
 
                 }
 
-                Aplicaciones().laCamaDelPerro -> {
+                Aplicaciones.LaCamaDelPerro.name -> {
                     extentidoCamaConsultado =
                         tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
                             return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario)
@@ -142,8 +141,8 @@ class RegistroUsuario @Autowired constructor(
                                 ExtCamaDelPerro(
                                     usuarioConsultado.get().usuario,
                                     encrypt(request.nickname),
-                                    encrypt("999999"),
-                                    encrypt(request.rol),
+                                    passwordEncoder.encode( "999999"),
+                                    request.rol,
                                     Date(),
                                     Date()
                                 )
@@ -157,7 +156,7 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoCamaConsultado.isPresent) {
                         camaDelPerro = ExtendidosRespuesta(
-                            decrypt(extentidoCamaConsultado.get().nickname), decrypt(extentidoCamaConsultado.get().rol)
+                            decrypt(extentidoCamaConsultado.get().usernameCamaPerro), extentidoCamaConsultado.get().rol
                         )
                     }
                 }
@@ -194,7 +193,6 @@ class RegistroUsuario @Autowired constructor(
                     encrypt(request.genero),
                     CorreosElectronicos(false, encrypt(request.correo)),
                     Telefonos(false, encrypt(request.telefono)),
-                    encrypt(request.rol),
                     encrypt(request.fechaNacimiento),
                     encrypt(request.aplicacion),
                     request.notificaciones,

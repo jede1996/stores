@@ -1,5 +1,6 @@
 package com.stores.request
 
+import com.stores.config.Roles
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
@@ -12,7 +13,7 @@ data class RequestsRegistroUsuario(
     @field:NotNull(message = "GENERO_REQUERIDO") @field:NotEmpty(message = "GENERO_REQUERIDO") val genero: String,
     val telefono: String?,
     val correo: String?,
-    val rol: String,
+    val rol: Roles,
     val nickname: String,
     @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
     @field:NotNull(message = "NOTIFICACION_REQUERIDO") val notificaciones: Boolean,
@@ -39,7 +40,7 @@ data class RequestActualizacionUsuario(
     @field:NotNull(message = "GENERO_REQUERIDO") @field:NotEmpty(message = "GENERO_REQUERIDO") val genero: String?,
     val telefono: String?,
     val correo: String?,
-    val rol: String?,
+    val rol: Roles,
     val nickname: String,
     @field:NotNull(message = "APLICACION_REQUERIDO") @field:NotEmpty(message = "APLICACION_REQUERIDO") val aplicacion: String,
     @field:NotNull(message = "NOTIFICACION_REQUERIDO") val notificaciones: Boolean,

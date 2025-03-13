@@ -30,16 +30,6 @@ data class Consultas(
     @Field("fecha_modificacion") var fechaModificacion: Date?,
 )
 
-data class Procedimientos(
-    val consulta: String = "consulta",
-    val vacunacion: String = "vacunacion",
-    val cirugia: String = "cirugia.",
-    val desparacitacion: String = "desparacitacion",
-)
+enum class Procedimientos { Consulta, Vacunacion, Cirugia, Desparacitacion }
 
-data class EstadoCita(
-    val pendiente: String = "Registrada, pero no confirmada por el veterinario.",
-    val confirmada: String = "Aprobada y asignada a un veterinario.",
-    val cancelada: String = "Anulada por el propietario o el sistema.",
-    val completada: String = "La cita se llevó a cabo.",
-)
+enum class EstadoCita { Pendiente, Confirmada, Cancelada, Completada }

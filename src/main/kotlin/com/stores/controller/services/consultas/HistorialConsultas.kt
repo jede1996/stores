@@ -1,7 +1,6 @@
 package com.stores.controller.services.consultas
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ConsultasRepository
@@ -19,7 +18,7 @@ class HistorialConsultas  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun historialConsultasCliente(request: RequestBusquedaConsulta): ResponseEntity<Respuesta>{
+    fun historialConsultasCliente(request: RequestBusquedaConsulta): ResponseEntity<Any>{
         try {
             logs.info("Request para el servicio de historial de conultas por clientes: $request")
 
@@ -30,7 +29,7 @@ class HistorialConsultas  @Autowired constructor(
         }
     }
 
-    fun historialConsultasGeneral(): ResponseEntity<Respuesta>{
+    fun historialConsultasGeneral(): ResponseEntity<Any>{
         try {
             logs.info("Servicio de historial general de consultas")
 

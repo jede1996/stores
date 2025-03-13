@@ -28,7 +28,7 @@ class BajaUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun bajaUsuario(request: RequestConsultaUsuario): ResponseEntity<Respuesta> {
+    fun bajaUsuario(request: RequestConsultaUsuario): ResponseEntity<Any> {
         try {
             logs.info("Request para el servicio de eliminacion de usuario: $request")
 
@@ -46,19 +46,19 @@ class BajaUsuario @Autowired constructor(
 
 
             when (request.aplicacion) {
-                Aplicaciones().lunaVet -> {
+                Aplicaciones.LunaVet.name -> {
                     tracer.duration(Servicios().eliminaExtLunaVet, fun() {
                         extLunaVetRepository.deleteById(usuarioConsultado.get().usuario)
                     })
                 }
 
-                Aplicaciones().safariVet -> {
+                Aplicaciones.SafariVet.name -> {
                     tracer.duration(Servicios().eliminaExtSafariVet, fun() {
                         extSafariVetRepository.deleteById(usuarioConsultado.get().usuario)
                     })
                 }
 
-                Aplicaciones().laCamaDelPerro -> {
+                Aplicaciones.LaCamaDelPerro.name -> {
                     tracer.duration(Servicios().eliminaExtCamaDelPerro, fun() {
                         extCamaDelPerroRepository.deleteById(usuarioConsultado.get().usuario)
                     })

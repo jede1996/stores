@@ -72,7 +72,7 @@ enum class CatalogoResponses(
 
 fun buildresponse(
     respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = "",
-): ResponseEntity<Respuesta> {
+): ResponseEntity<Any> {
     if (respuesta != null) return ResponseEntity(Respuesta(0, respuesta), ResponseStatus.EXITO.httpStatus)
     return ResponseEntity(
         Respuesta(

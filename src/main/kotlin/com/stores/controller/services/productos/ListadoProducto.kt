@@ -17,7 +17,7 @@ class ListadoProducto  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun listadoInventario(request: RequestConsulta): ResponseEntity<Respuesta>{
+    fun listadoInventario(request: RequestConsulta): ResponseEntity<Any>{
         try {
             logs.info("Servicio de listado de productos")
 

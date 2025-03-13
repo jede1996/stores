@@ -16,7 +16,7 @@ class RegistroConsultas @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroConsulta(request: RequestRegistroConsulta): ResponseEntity<Respuesta> {
+    fun registroConsulta(request: RequestRegistroConsulta): ResponseEntity<Any> {
         try {
             logs.info("Request para el servicio de registro de consulta: $request")
 

@@ -33,7 +33,7 @@ class ConsultaUsuario @Autowired constructor(
 
     fun consultaUsuario(
         request: RequestConsultaUsuario
-    ): ResponseEntity<Respuesta> {
+    ): ResponseEntity<Any> {
         try {
             logs.info("Request para el servicio de consulta de usuario: $request")
 
@@ -50,14 +50,16 @@ class ConsultaUsuario @Autowired constructor(
 
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(request.usuario))
+                return clienteRepository.findById(encrypt(
+                 decrypt(   request.usuario)
+                ))
             })
 
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
 
             when (request.aplicacion) {
-                Aplicaciones().lunaVet -> {
+                Aplicaciones.LunaVet.name -> {
                     extentidoLunaConsultado =
                         tracer.duration(Servicios().consultaExtLunaVet, fun(): Optional<ExtLunaVet> {
                             return extLunaVetRepository.findById(usuarioConsultado.get().usuario)
@@ -65,12 +67,12 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         lunaVet = ExtendidosRespuesta(
-                            decrypt(extentidoLunaConsultado.get().nickname), decrypt(extentidoLunaConsultado.get().rol)
+                            decrypt(extentidoLunaConsultado.get().usernameLuna), extentidoLunaConsultado.get().rol
                         )
                     }
                 }
 
-                Aplicaciones().safariVet -> {
+                Aplicaciones.SafariVet.name -> {
                     extentidoSafariConsultado =
                         tracer.duration(Servicios().consultaExtSafariVet, fun(): Optional<ExtSafariVet> {
                             return extSafariVetRepository.findById(usuarioConsultado.get().usuario)
@@ -78,21 +80,21 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         safariVet = ExtendidosRespuesta(
-                            decrypt(extentidoSafariConsultado.get().nickname),
-                            decrypt(extentidoSafariConsultado.get().rol)
+                            decrypt(extentidoSafariConsultado.get().usernameSafary),
+                            extentidoSafariConsultado.get().rol
                         )
                     }
 
                 }
 
-                Aplicaciones().laCamaDelPerro -> {
+                Aplicaciones.LaCamaDelPerro.name -> {
                     extentidoCamaConsultado =
                         tracer.duration(Servicios().consultaExtCamaDelPerro, fun(): Optional<ExtCamaDelPerro> {
                             return extCamaDelPerroRepository.findById(usuarioConsultado.get().usuario)
                         })
                     if (extentidoCamaConsultado.isPresent) {
                         camaDelPerro = ExtendidosRespuesta(
-                            decrypt(extentidoCamaConsultado.get().nickname), decrypt(extentidoCamaConsultado.get().rol)
+                            decrypt(extentidoCamaConsultado.get().usernameCamaPerro), extentidoCamaConsultado.get().rol
                         )
                     }
                 }

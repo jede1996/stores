@@ -1,7 +1,6 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.pagos.CancelacionPagos
 import com.stores.controller.services.pagos.HistorialPagos
@@ -21,26 +20,26 @@ class PagosController(
     val historialPagos: HistorialPagos
 ) {
     @PostMapping("registro")
-    fun registroPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
+    fun registroPagos(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroPagos.registroPagos(request)
     }
 
     @PostMapping("cancelacion")
-    fun cancelacionPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
+    fun cancelacionPagos(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return cancelacionPagos.cancelacionPagos(request)
     }
 
     @PostMapping("historial")
-    fun historialPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
+    fun historialPagos(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialPagos.historialPagos(request)
     }
 
 
     @PostMapping("historial-general")
-    fun historialGeneralPagos(@Valid @RequestBody request: Any?): ResponseEntity<Respuesta> {
+    fun historialGeneralPagos(@Valid @RequestBody request: Any?): ResponseEntity<Any> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialPagos.historialGeneralPagos(request)
     }

@@ -1,7 +1,6 @@
 package com.stores.controller.services.pagos
 
 import com.stores.config.CatalogoResponses
-import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import org.slf4j.Logger
@@ -16,7 +15,7 @@ class CancelacionPagos  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun cancelacionPagos(request: Any?): ResponseEntity<Respuesta>{
+    fun cancelacionPagos(request: Any?): ResponseEntity<Any>{
         try {
             logs.info("Request para el servicio de cancelacion de pagos: $request")
 
