@@ -1,6 +1,7 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.consultas.CancelacionConsultas
 import com.stores.controller.services.consultas.HistorialConsultas
@@ -26,31 +27,31 @@ class ConsultasController(
     val reprogramacionConsultas: ReprogramacionConsultas
 ) {
     @PostMapping("registro")
-    fun registroConsulta(@Valid @RequestBody request: RequestRegistroConsulta?): ResponseEntity<Any> {
+    fun registroConsulta(@Valid @RequestBody request: RequestRegistroConsulta?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroConsultas.registroConsulta(request)
     }
 
     @PostMapping("cancelacion")
-    fun cancelacionConsulta(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Any> {
+    fun cancelacionConsulta(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return cancelacionConsultas.cancelacionConsulta(request)
     }
 
     @PostMapping("reprogramacion")
-    fun reprogramacionConsulta(@Valid @RequestBody request: RequestProgramacionConsulta?): ResponseEntity<Any> {
+    fun reprogramacionConsulta(@Valid @RequestBody request: RequestProgramacionConsulta?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return reprogramacionConsultas.reprogramacionConsulta(request)
     }
 
     @PostMapping("historial")
-    fun historialConsultasCliente(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Any> {
+    fun historialConsultasCliente(@Valid @RequestBody request: RequestBusquedaConsulta?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return historialConsultas.historialConsultasCliente(request)
     }
 
     @GetMapping("historial-general")
-    fun historialGeneralConsultas(): ResponseEntity<Any> {
+    fun historialGeneralConsultas(): ResponseEntity<Respuesta> {
         return historialConsultas.historialConsultasGeneral()
     }
 }

@@ -28,7 +28,7 @@ class BajaUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun bajaUsuario(request: RequestConsultaUsuario): ResponseEntity<Any> {
+    fun bajaUsuario(request: RequestConsultaUsuario): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de eliminacion de usuario: $request")
 

@@ -1,6 +1,7 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.productos.*
 import com.stores.request.RequestConsulta
@@ -24,31 +25,31 @@ class ProductoController(
     val listadoProducto: ListadoProducto
 ) {
     @PostMapping("registro")
-    fun registroProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Any> {
+    fun registroProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroProducto.registroInventario(request)
     }
 
     @PostMapping("baja")
-    fun bajaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Any> {
+    fun bajaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaProducto.bajaInventario(request)
     }
 
     @PostMapping("modificacion")
-    fun modificacionProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Any> {
+    fun modificacionProducto(@Valid @RequestBody request: RequestProducto?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionProducto.modificacionInventario(request)
     }
 
     @PostMapping("consulta")
-    fun consultaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Any> {
+    fun consultaProducto(@Valid @RequestBody request: RequestConsultaProducto?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaProducto.consultaInventario(request)
     }
 
     @GetMapping("listado")
-    fun listadoProductos(@Valid @RequestBody request: RequestConsulta): ResponseEntity<Any> {
+    fun listadoProductos(@Valid @RequestBody request: RequestConsulta): ResponseEntity<Respuesta> {
         return listadoProducto.listadoInventario(request)
     }
 

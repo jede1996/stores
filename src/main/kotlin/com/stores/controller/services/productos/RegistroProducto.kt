@@ -18,7 +18,7 @@ class RegistroProducto  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroInventario(request: RequestProducto): ResponseEntity<Any>{
+    fun registroInventario(request: RequestProducto): ResponseEntity<Respuesta>{
         var registroNuevo = false
         val idProducto = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {

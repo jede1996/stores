@@ -1,6 +1,7 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.proveedores.*
 import com.stores.repository.ProveedorRepository
@@ -23,31 +24,31 @@ class ProveedoresController(
     val listadoProveedores: ListadoProveedores
 ) {
     @PostMapping("registro")
-    fun registroProveedores(@Valid @RequestBody request: RequestsRegistroProveedor?): ResponseEntity<Any> {
+    fun registroProveedores(@Valid @RequestBody request: RequestsRegistroProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return registroProveedores.registroProveedores(request)
     }
 
     @PostMapping("baja")
-    fun bajaProveedores(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Any> {
+    fun bajaProveedores(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return bajaProveedores.bajaProveedores(request)
     }
 
     @PostMapping("modificacion")
-    fun modificacionProveedor(@Valid @RequestBody request: RequestsModificaProveedor?): ResponseEntity<Any> {
+    fun modificacionProveedor(@Valid @RequestBody request: RequestsModificaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return modificacionProveedores.modificacionProveedores(request)
     }
 
     @PostMapping("consulta")
-    fun consultaProveedor(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Any> {
+    fun consultaProveedor(@Valid @RequestBody request: RequestConsultaProveedor?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return consultaProveedores.consultaProveedor(request)
     }
 
     @PostMapping("listado")
-    fun listadoProveedores(request: RequestConsultaProveedores?): ResponseEntity<Any> {
+    fun listadoProveedores(request: RequestConsultaProveedores?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return listadoProveedores.listadoProveedores(request)
     }

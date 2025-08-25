@@ -1,6 +1,7 @@
 package com.stores.controller.services.login
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ExtCamaDelPerroRepository
@@ -21,7 +22,7 @@ class ActualizacionContrasenna  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun actualizacontrasenna(request: Any?): ResponseEntity<Any>{
+    fun actualizacontrasenna(request: Any?): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de actualizacion de contraseña: $request")
 

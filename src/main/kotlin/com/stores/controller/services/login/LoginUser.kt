@@ -21,7 +21,7 @@ class LoginUser(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun login(request: RequesLogin): ResponseEntity<Any> {
+    fun login(request: RequesLogin): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de login: $request")
             authenticationManager.authenticate(

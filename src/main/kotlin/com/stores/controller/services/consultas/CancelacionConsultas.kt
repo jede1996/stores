@@ -1,6 +1,7 @@
 package com.stores.controller.services.consultas
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.repository.ConsultasRepository
@@ -18,7 +19,7 @@ class CancelacionConsultas  @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun cancelacionConsulta(request: RequestBusquedaConsulta): ResponseEntity<Any>{
+    fun cancelacionConsulta(request: RequestBusquedaConsulta): ResponseEntity<Respuesta>{
         try {
             logs.info("Request para el servicio de cancelacion de consulta: $request")
 

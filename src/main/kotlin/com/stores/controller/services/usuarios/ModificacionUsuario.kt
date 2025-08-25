@@ -29,7 +29,7 @@ class ModificacionUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun modificacionUsuario(request: RequestActualizacionUsuario): ResponseEntity<Any> {
+    fun modificacionUsuario(request: RequestActualizacionUsuario): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de actualizacion de usuario: $request")
 
@@ -142,7 +142,7 @@ class ModificacionUsuario @Autowired constructor(
         }
     }
 
-    fun actualizaContrasenna(request: RequestActualizacionContrasenna): ResponseEntity<Any> {
+    fun actualizaContrasenna(request: RequestActualizacionContrasenna): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de actualizacion de contraseña: $request")
 

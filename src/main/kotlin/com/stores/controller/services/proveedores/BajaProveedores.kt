@@ -19,7 +19,7 @@ class BajaProveedores @Autowired constructor(
 
     fun bajaProveedores(
         request: RequestConsultaProveedor
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de eliminacion de proveedores: $request")
 

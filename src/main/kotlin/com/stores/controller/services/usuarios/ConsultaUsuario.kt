@@ -33,7 +33,7 @@ class ConsultaUsuario @Autowired constructor(
 
     fun consultaUsuario(
         request: RequestConsultaUsuario
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de consulta de usuario: $request")
 

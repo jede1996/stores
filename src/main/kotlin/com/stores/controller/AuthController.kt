@@ -1,6 +1,7 @@
 package com.stores.controller
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.buildresponse
 import com.stores.controller.services.login.LoginUser
 import com.stores.request.*
@@ -17,7 +18,7 @@ class AuthController(
     val loginUser: LoginUser
 ) {
     @PostMapping("login")
-    fun inicioSesion(@Valid @RequestBody request: RequesLogin?): ResponseEntity<Any> {
+    fun inicioSesion(@Valid @RequestBody request: RequesLogin?): ResponseEntity<Respuesta> {
         if (request == null) return buildresponse(error = CatalogoResponses.BODY_NULL)
         return loginUser.login(request)
     }

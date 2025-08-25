@@ -18,7 +18,7 @@ class ModificacionProveedores @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun modificacionProveedores(request: RequestsModificaProveedor): ResponseEntity<Any> {
+    fun modificacionProveedores(request: RequestsModificaProveedor): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de actualizacion de proveedores: $request")
 

@@ -29,7 +29,7 @@ class RegistroUsuario @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Any> {
+    fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Respuesta> {
         var registroNuevo = false
         val idUser = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {

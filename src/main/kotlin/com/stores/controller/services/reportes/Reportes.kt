@@ -1,6 +1,7 @@
 package com.stores.controller.services.reportes
 
 import com.stores.config.CatalogoResponses
+import com.stores.config.Respuesta
 import com.stores.config.ServiceInterceptor
 import com.stores.config.buildresponse
 import com.stores.request.RequestReportes
@@ -16,7 +17,7 @@ class Reportes @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun repostePorFecha(request: RequestReportes?): ResponseEntity<Any> {
+    fun repostePorFecha(request: RequestReportes?): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de reportes: $request")
 

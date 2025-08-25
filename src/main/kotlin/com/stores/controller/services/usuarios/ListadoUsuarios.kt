@@ -19,7 +19,7 @@ class ListadoUsuarios @Autowired constructor(
 
     fun listadoUsuarios(
         request: RequestConsultaUsuarios
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de listado de usaurios: $request")
 

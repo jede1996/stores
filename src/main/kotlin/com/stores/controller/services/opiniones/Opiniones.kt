@@ -19,7 +19,7 @@ class Opiniones @Autowired constructor(
 ) {
     private val logs: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registrarOpinion(request: RequestRegistroOpinion): ResponseEntity<Any> {
+    fun registrarOpinion(request: RequestRegistroOpinion): ResponseEntity<Respuesta> {
         var registroNuevo = false
         val id = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
@@ -51,7 +51,7 @@ class Opiniones @Autowired constructor(
         }
     }
 
-    fun cerrarOpinion(request: RequestOpiniones): ResponseEntity<Any> {
+    fun cerrarOpinion(request: RequestOpiniones): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de cerrado de opiniones: $request")
 
@@ -77,7 +77,7 @@ class Opiniones @Autowired constructor(
         }
     }
 
-    fun consultarOpinion(request: RequestOpiniones): ResponseEntity<Any> {
+    fun consultarOpinion(request: RequestOpiniones): ResponseEntity<Respuesta> {
         try {
             logs.info("Request para el servicio de consulta de opiniones: $request")
 
@@ -99,7 +99,7 @@ class Opiniones @Autowired constructor(
         }
     }
 
-    fun listarOpiniones(): ResponseEntity<Any> {
+    fun listarOpiniones(): ResponseEntity<Respuesta> {
         try {
             val productosConsultados = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): List<Opiniones> {
                 return opinionesRepository.findAll()
