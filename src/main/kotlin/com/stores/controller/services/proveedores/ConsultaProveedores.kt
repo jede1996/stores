@@ -27,7 +27,7 @@ class ConsultaProveedores @Autowired constructor(
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             val proveedorConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Proveedor> {
-                return proveedorRepository.findByAplicacion(encrypt(request.aplicacion), encrypt(request.empresa))
+                return proveedorRepository.findByAplicacion(cifrado(request.aplicacion), cifrado(request.empresa))
             })
 
             if (!proveedorConsultado.isPresent) return buildresponse(error = CatalogoResponses.PROVEEDOR_INEXISTENTE)

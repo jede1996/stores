@@ -24,7 +24,7 @@ class ListadoUsuarios @Autowired constructor(
             logs.info("Request para el servicio de listado de usaurios: $request")
 
             val usuariosConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): List<UsersConsultado> {
-                return clienteRepository.findByAllUsers(encrypt(request.aplicacion!!))
+                return clienteRepository.findByAllUsers(cifrado(request.aplicacion!!))
             })
 
             return buildresponse(respuesta =  usuariosConsultado)

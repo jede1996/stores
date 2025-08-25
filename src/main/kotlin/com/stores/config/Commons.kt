@@ -9,24 +9,24 @@ import javax.crypto.spec.SecretKeySpec
 private val restoredSecretKey =
     SecretKeySpec(Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo="), "AES")
 private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo=")
-val mongoString = decrypt("eVkbyAoGgInqLXi1t2FBvHMSMfR+E7N9/rX+AQHsW9W7afomHxFvIHDo2MMA3Zo3pu4k8FVNhY7i4t0mcKzLjPA=")
+val mongoString = cifrado("eVkbyAoGgInqLXi1t2FBvHMSMfR+E7N9/rX+AQHsW9W7afomHxFvIHDo2MMA3Zo3pu4k8FVNhY7i4t0mcKzLjPA=", false)
 
-fun encrypt(data: String?): String {
-    if (data.isNullOrEmpty()) return ""
-    val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-    cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
-    return Base64.getEncoder().encodeToString(cipher.doFinal(data.toByteArray()))
-}
 
-fun decrypt(encryptedData: String?): String {
-    if (encryptedData.isNullOrEmpty()) return ""
+fun cifrado(string: String?, cifrado: Boolean = true): String {
+    if(string.isNullOrEmpty()) return ""
     val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-    cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
-    return String(cipher.doFinal(Base64.getDecoder().decode(encryptedData)))
+     return if(cifrado){
+        cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+         Base64.getEncoder().encodeToString(cipher.doFinal(string.toByteArray()))
+    }else{
+        cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+         String(cipher.doFinal(Base64.getDecoder().decode(string)))
+    }
 }
 
 enum class Aplicaciones { LunaVet, SafariVet, LaCamaDelPerro }
 
+enum class Generos { Hombre, Mujer, SinGenero }
 
 enum class Roles { Administrador, Usuario, Cliente, Medico }
 

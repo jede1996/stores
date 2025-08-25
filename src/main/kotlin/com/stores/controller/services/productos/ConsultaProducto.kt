@@ -22,7 +22,7 @@ class ConsultaProducto @Autowired constructor(
             logs.info("Request para el servicio de consulta de inventarios: $request")
 
             val prodductoConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Producto> {
-                return productoRepository.findById(encrypt(request.producto))
+                return productoRepository.findById(cifrado(request.producto))
             })
 
 

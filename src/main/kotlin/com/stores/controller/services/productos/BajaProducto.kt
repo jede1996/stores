@@ -25,7 +25,7 @@ class BajaProducto @Autowired constructor(
             logs.info("Request para el servicio de baja de productos: $request")
 
             val productoConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Producto> {
-                return productoRepository.findById(encrypt(request.producto))
+                return productoRepository.findById(cifrado(request.producto))
             })
 
             if (!productoConsultado.isPresent) return buildresponse(error = CatalogoResponses.PRODUCTO_INEXISTENTE)

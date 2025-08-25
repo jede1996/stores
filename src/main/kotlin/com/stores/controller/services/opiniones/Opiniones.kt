@@ -21,7 +21,7 @@ class Opiniones @Autowired constructor(
 
     fun registrarOpinion(request: RequestRegistroOpinion): ResponseEntity<Any> {
         var registroNuevo = false
-        val id = encrypt(UUID.randomUUID().toString().replace("-", ""))
+        val id = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de opiniones: $request")
 
@@ -56,7 +56,7 @@ class Opiniones @Autowired constructor(
             logs.info("Request para el servicio de cerrado de opiniones: $request")
 
             val opiicionConsultada = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Opiniones> {
-                return opinionesRepository.findById(encrypt(request.opinion))
+                return opinionesRepository.findById(cifrado(request.opinion))
             })
 
             if (!opiicionConsultada.isPresent) return buildresponse(error = CatalogoResponses.OPINION_INEXISTENTE)
@@ -82,7 +82,7 @@ class Opiniones @Autowired constructor(
             logs.info("Request para el servicio de consulta de opiniones: $request")
 
             val opiicionConsultada = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Opiniones> {
-                return opinionesRepository.findById(encrypt(request.opinion))
+                return opinionesRepository.findById(cifrado(request.opinion))
             })
 
             if (!opiicionConsultada.isPresent) return buildresponse(error = CatalogoResponses.OPINION_INEXISTENTE)
@@ -117,9 +117,9 @@ class Opiniones @Autowired constructor(
             opinionesRepository.save(
                 Opiniones(
                     id,
-                    encrypt(request.usuario),
-                    encrypt(request.comentario),
-                    encrypt(request.aplicacion),
+                    cifrado(request.usuario),
+                    cifrado(request.comentario),
+                    cifrado(request.aplicacion),
                     request.calificacion,
                     false,
                     Date(),

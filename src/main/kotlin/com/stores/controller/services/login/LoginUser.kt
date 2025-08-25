@@ -26,10 +26,10 @@ class LoginUser(
             logs.info("Request para el servicio de login: $request")
             authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(
-                    encrypt(request.usuario), request.contrasenna
+                    cifrado(request.usuario), request.contrasenna
                 )
             )
-            val user = camaDelPerroRepository.findByUserName(encrypt(request.usuario)).orElseThrow()
+            val user = camaDelPerroRepository.findByUserName(cifrado(request.usuario)).orElseThrow()
             return buildresponse(respuesta = ResponseAuth(jwtService.getToken(user)))
         } catch (e: Exception) {
             logs.error("Error al realizar la peticion: $e")

@@ -20,7 +20,7 @@ class RegistroProveedores @Autowired constructor(
 
     fun registroProveedores(request: RequestsRegistroProveedor): ResponseEntity<Any> {
         var registroNuevo = false
-        val idUser = encrypt(UUID.randomUUID().toString().replace("-", ""))
+        val idUser = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de proveedores: $request")
 
@@ -68,13 +68,13 @@ class RegistroProveedores @Autowired constructor(
             proveedorRepository.save(
                 Proveedor(
                     idUser,
-                    encrypt(request.empresa),
-                    encrypt(request.nombre),
-                    encrypt(request.apellidoPaterno),
-                    encrypt(request.apellidoMaterno),
+                    cifrado(request.empresa),
+                    cifrado(request.nombre),
+                    cifrado(request.apellidoPaterno),
+                    cifrado(request.apellidoMaterno),
                     request.correo,
                     request.telefono,
-                    encrypt(request.aplicacion),
+                    cifrado(request.aplicacion),
                     Date(),
                     Date()
                 )

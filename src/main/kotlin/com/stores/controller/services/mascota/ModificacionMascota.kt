@@ -26,28 +26,28 @@ class ModificacionMascota  @Autowired constructor(
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             val mascotaConsultada = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Mascota> {
-                return mascotaRepository.findById(encrypt(request.idPropietario))
+                return mascotaRepository.findById(cifrado(request.idPropietario))
             })
 
             if (!mascotaConsultada.isPresent) return buildresponse(error = CatalogoResponses.MASCOTA_INEXISTENTE)
 
             val mascota: Mascota = mascotaConsultada.get()
 
-            if (decrypt(mascota.propietario) != request.propietario) mascota.propietario = encrypt(request.propietario)
-            if (decrypt(mascota.nombre) != request.nombre) mascota.nombre = encrypt(request.nombre)
-            if (decrypt(mascota.especie) != request.especie) mascota.especie = encrypt(request.especie)
-            if (decrypt(mascota.raza) != request.raza) mascota.raza = encrypt(request.raza)
-            if (decrypt(mascota.genero) != request.genero) mascota.genero = encrypt(request.genero)
+            if (cifrado(mascota.propietario, false) != request.propietario) mascota.propietario = cifrado(request.propietario)
+            if (cifrado(mascota.nombre, false) != request.nombre) mascota.nombre = cifrado(request.nombre)
+            if (cifrado(mascota.especie, false) != request.especie) mascota.especie = cifrado(request.especie)
+            if (cifrado(mascota.raza, false) != request.raza) mascota.raza = cifrado(request.raza)
+            if (cifrado(mascota.genero, false) != request.genero) mascota.genero = cifrado(request.genero)
             if (mascota.edad != request.edad) mascota.edad = request.edad
             if (mascota.fechaNacimiento != request.fechaNacimiento) mascota.fechaNacimiento = request.fechaNacimiento
-            if (decrypt(mascota.caracteristicas) != request.caracteristicas) mascota.caracteristicas = encrypt(request.caracteristicas)
+            if (cifrado(mascota.caracteristicas, false) != request.caracteristicas) mascota.caracteristicas = cifrado(request.caracteristicas)
             if (mascota.esterilizado != request.esterilizado) mascota.esterilizado = request.esterilizado
-            if (decrypt(mascota.chip) != request.chip) mascota.chip = encrypt(request.chip)
-            if (decrypt(mascota.peso) != request.peso) mascota.peso = encrypt(request.peso)
-            if (decrypt(mascota.tamanno) != request.tamanno) mascota.tamanno = encrypt(request.tamanno)
+            if (cifrado(mascota.chip, false) != request.chip) mascota.chip = cifrado(request.chip)
+            if (cifrado(mascota.peso, false) != request.peso) mascota.peso = cifrado(request.peso)
+            if (cifrado(mascota.tamanno, false) != request.tamanno) mascota.tamanno = cifrado(request.tamanno)
             if (mascota.vacunas != request.vacunas) mascota.vacunas = request.vacunas
             if (mascota.alergias != request.alergias) mascota.alergias = request.alergias
-            if (mascota.foto != request.foto) mascota.foto = encrypt(mascota.foto)
+            if (mascota.foto != request.foto) mascota.foto = cifrado(mascota.foto)
             mascota.fechaModificacion = Date()
 
             tracer.duration(Servicios().actualizacionMascota, fun() {

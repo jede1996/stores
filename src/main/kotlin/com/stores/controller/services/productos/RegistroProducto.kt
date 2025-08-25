@@ -20,14 +20,14 @@ class RegistroProducto  @Autowired constructor(
 
     fun registroInventario(request: RequestProducto): ResponseEntity<Any>{
         var registroNuevo = false
-        val idProducto = encrypt(UUID.randomUUID().toString().replace("-", ""))
+        val idProducto = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de productos: $request")
 
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             var productoConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): Optional<Producto> {
-                return productoRepository.findByNombre(encrypt(request.nombre))
+                return productoRepository.findByNombre(cifrado(request.nombre))
             })
 
             if (productoConsultado.isPresent) return buildresponse(error = CatalogoResponses.PRODUCTO_EXISTENTE)
@@ -61,14 +61,14 @@ class RegistroProducto  @Autowired constructor(
             productoRepository.save(
                 Producto(
                     idProducto,
-                    encrypt(request.nombre),
-                    encrypt(request.descripcion),
-                    encrypt(request.categoria),
-                    encrypt(request.subcategoria),
-                    encrypt(request.estado),
+                    cifrado(request.nombre),
+                    cifrado(request.descripcion),
+                    cifrado(request.categoria),
+                    cifrado(request.subcategoria),
+                    cifrado(request.estado),
                     request.stock,
                     request.precios,
-                    encrypt(request.proveedor),
+                    cifrado(request.proveedor),
                     Date(),
                     Date()
                 )

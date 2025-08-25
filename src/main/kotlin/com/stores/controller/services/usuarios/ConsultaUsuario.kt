@@ -50,9 +50,7 @@ class ConsultaUsuario @Autowired constructor(
 
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(
-                 decrypt(   request.usuario)
-                ))
+                return clienteRepository.findById(cifrado(request.usuario))
             })
 
 
@@ -67,7 +65,7 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         lunaVet = ExtendidosRespuesta(
-                            decrypt(extentidoLunaConsultado.get().usernameLuna), extentidoLunaConsultado.get().rol
+                            cifrado(extentidoLunaConsultado.get().usernameLuna, false), extentidoLunaConsultado.get().rol
                         )
                     }
                 }
@@ -80,7 +78,7 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         safariVet = ExtendidosRespuesta(
-                            decrypt(extentidoSafariConsultado.get().usernameSafary),
+                            cifrado(extentidoSafariConsultado.get().usernameSafary, false),
                             extentidoSafariConsultado.get().rol
                         )
                     }
@@ -94,7 +92,7 @@ class ConsultaUsuario @Autowired constructor(
                         })
                     if (extentidoCamaConsultado.isPresent) {
                         camaDelPerro = ExtendidosRespuesta(
-                            decrypt(extentidoCamaConsultado.get().usernameCamaPerro), extentidoCamaConsultado.get().rol
+                            cifrado(extentidoCamaConsultado.get().usernameCamaPerro, false), extentidoCamaConsultado.get().rol
                         )
                     }
                 }

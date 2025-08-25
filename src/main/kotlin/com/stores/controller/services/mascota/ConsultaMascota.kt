@@ -22,7 +22,7 @@ class ConsultaMascota @Autowired constructor(
             logs.info("Request para el servicio de consulta de mascotas: $request")
 
             val mascotaConsultada = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Mascota> {
-                return mascotaRepository.findById(encrypt(request.mascota))
+                return mascotaRepository.findById(cifrado(request.mascota))
             })
 
             if (!mascotaConsultada.isPresent) return buildresponse(error = CatalogoResponses.MASCOTA_INEXISTENTE)

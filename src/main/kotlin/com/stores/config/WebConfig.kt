@@ -6,6 +6,8 @@ import com.mongodb.ReadPreference
 import com.mongodb.WriteConcern
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
+import com.stores.entities.Usuario
+import com.stores.repository.ClienteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.domain.Sort
@@ -16,6 +18,7 @@ import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter
 import org.springframework.data.mongodb.core.index.Index
 import org.springframework.data.mongodb.core.index.IndexOperations
+import java.util.*
 
 @Configuration
 class WebConfig : AbstractMongoClientConfiguration() {
@@ -42,7 +45,8 @@ class WebConfig : AbstractMongoClientConfiguration() {
 
 @Configuration
 class MongoIndexConfig(
-    @Autowired private val mongoTemplate: MongoTemplate
+    @Autowired private val mongoTemplate: MongoTemplate,
+    private val clienteRepository: ClienteRepository
 ) {
     init {
         val indicesUsuarios: IndexOperations = mongoTemplate.indexOps("usuario")
@@ -72,5 +76,24 @@ class MongoIndexConfig(
         indicesCamaDelPerro.ensureIndex(
             Index().on("nickname", Sort.Direction.ASC).named("nickname").unique()
         )
+
+        val admin = cifrado("admin")
+        val usuarioConsultado = clienteRepository.findById("admin")
+
+        if(!usuarioConsultado.isPresent){
+            clienteRepository.save(
+                Usuario(
+                    "admin",
+                    admin,
+                    admin,
+                    admin,
+                    cifrado(Generos.SinGenero.name),
+                    admin,
+                    cifrado(Roles.Administrador.name),
+                    Date(),
+                    Date()
+                )
+            )
+        }
     }
 }

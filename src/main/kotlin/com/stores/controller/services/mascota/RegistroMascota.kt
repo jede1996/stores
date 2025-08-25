@@ -24,12 +24,12 @@ class RegistroMascota @Autowired constructor(
 
     fun registroMascota(request: RequestMascota): ResponseEntity<Any> {
         var registroNuevo = false
-        val idMascota = encrypt(UUID.randomUUID().toString().replace("-", ""))
+        val idMascota = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de mascotas: $request")
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(request.idPropietario))
+                return clienteRepository.findById(cifrado(request.idPropietario))
             })
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
@@ -46,18 +46,18 @@ class RegistroMascota @Autowired constructor(
             mascotaRepository.save(
                 Mascota(
                     idMascota,
-                    encrypt(usuarioConsultado.get().usuario),
-                    encrypt(request.nombre),
-                    encrypt(request.especie),
-                    encrypt(request.raza),
-                    encrypt(request.genero),
+                    cifrado(usuarioConsultado.get().usuario),
+                    cifrado(request.nombre),
+                    cifrado(request.especie),
+                    cifrado(request.raza),
+                    cifrado(request.genero),
                     request.edad,
                     request.fechaNacimiento,
-                    encrypt(request.caracteristicas),
+                    cifrado(request.caracteristicas),
                     request.esterilizado,
-                    encrypt(request.chip),
-                    encrypt(request.peso),
-                    encrypt(request.tamanno),
+                    cifrado(request.chip),
+                    cifrado(request.peso),
+                    cifrado(request.tamanno),
                     request.vacunas,
                     request.alergias,
                     null,

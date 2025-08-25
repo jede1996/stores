@@ -39,7 +39,7 @@ class BajaUsuario @Autowired constructor(
             val extentidoCamaConsultado: ExtCamaDelPerro?
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(request.usuario))
+                return clienteRepository.findById(cifrado(request.usuario))
             })
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)

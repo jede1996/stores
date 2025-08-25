@@ -6,18 +6,29 @@ import java.util.*
 
 @Document("usuario")
 data class Usuario(
-    @Field("_id") var usuario: String,
+    @Field("_id")
+    var usuario: String,
+
     var nombre: String?,
-    @Field("apellido_paterno") var apellidoPaterno: String,
-    @Field("apellido_materno") var apellidoMaterno: String?,
+
+    @Field("apellido_paterno")
+    var apellidoPaterno: String,
+
+    @Field("apellido_materno")
+    var apellidoMaterno: String?,
+
     var genero: String,
-    @Field("correo_electronico") var correo: CorreosElectronicos?,
-    var telefono: Telefonos,
-    @Field("fecha_nacimiento") var fechaNacimiento: String,
-    var aplicacion: String,
-    @Field("preferencias_notificaciones") var notificaciones: Boolean,
-    @Field("fecha_registro") val fechaRegistro: Date?,
-    @Field("fecha_modificacion") var fechaModificacion: Date?,
+
+    @Field("fecha_nacimiento")
+    var fechaNacimiento: String,
+
+    var rol: String,
+
+    @Field("fecha_registro")
+    val fechaRegistro: Date?,
+
+    @Field("fecha_modificacion")
+    var fechaModificacion: Date?,
 )
 
 data class Telefonos(

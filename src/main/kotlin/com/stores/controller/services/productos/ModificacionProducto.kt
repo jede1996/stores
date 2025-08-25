@@ -23,22 +23,22 @@ class ModificacionProducto  @Autowired constructor(
             logs.info("Request para el servicio de actualizacion de productos: $request")
 
             var productoConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Producto> {
-                return productoRepository.findById(encrypt(request.producto))
+                return productoRepository.findById(cifrado(request.producto))
             })
 
             if (!productoConsultado.isPresent) return buildresponse(error = CatalogoResponses.PRODUCTO_INEXISTENTE)
 
             val producto = productoConsultado.get()
 
-            if (decrypt(producto.nombre) != request.nombre) producto.nombre = encrypt(request.nombre)
+            if (cifrado(producto.nombre, false) != request.nombre) producto.nombre = cifrado(request.nombre)
 
-            if (decrypt(producto.descripcion) != request.descripcion) producto.descripcion = encrypt(request.descripcion)
-            if (decrypt(producto.categoria) != request.categoria) producto.categoria = encrypt(request.categoria)
-            if (decrypt(producto.subcategoria) != request.subcategoria) producto.subcategoria = encrypt(request.subcategoria)
-            if (decrypt(producto.estado) != request.estado) producto.estado = encrypt(request.estado)
+            if (cifrado(producto.descripcion, false) != request.descripcion) producto.descripcion = cifrado(request.descripcion)
+            if (cifrado(producto.categoria, false) != request.categoria) producto.categoria = cifrado(request.categoria)
+            if (cifrado(producto.subcategoria, false) != request.subcategoria) producto.subcategoria = cifrado(request.subcategoria)
+            if (cifrado(producto.estado, false) != request.estado) producto.estado = cifrado(request.estado)
             if (producto.stock != request.stock) producto.stock = request.stock
             if (producto.precios != request.precios) producto.precios = request.precios
-            if (decrypt(producto.proveedor) != request.proveedor) producto.proveedor = encrypt(request.proveedor)
+            if (cifrado(producto.proveedor, false) != request.proveedor) producto.proveedor = cifrado(request.proveedor)
             producto.fechaModificacion = Date()
 
             tracer.duration(Servicios().actualizacionUsuario, fun() {

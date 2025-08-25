@@ -31,7 +31,7 @@ class RegistroUsuario @Autowired constructor(
 
     fun registroUsuario(request: RequestsRegistroUsuario): ResponseEntity<Any> {
         var registroNuevo = false
-        val idUser = encrypt(UUID.randomUUID().toString().replace("-", ""))
+        val idUser = cifrado(UUID.randomUUID().toString().replace("-", ""))
         try {
             logs.info("Request para el servicio de registro de usuarios: $request")
 
@@ -49,10 +49,10 @@ class RegistroUsuario @Autowired constructor(
 
             var usuarioConsultado = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): Optional<Usuario> {
                 return clienteRepository.findByBatosBasicos(
-                    encrypt(request.nombre),
-                    encrypt(request.apellidoPaterno),
-                    encrypt(request.apellidoMaterno),
-                    encrypt(request.fechaNacimiento)
+                    cifrado(request.nombre),
+                    cifrado(request.apellidoPaterno),
+                    cifrado(request.apellidoMaterno),
+                    cifrado(request.fechaNacimiento)
                 )
             })
 
@@ -75,7 +75,7 @@ class RegistroUsuario @Autowired constructor(
                             extLunaVetRepository.save(
                                 ExtLunaVet(
                                     usuarioConsultado.get().usuario,
-                                    encrypt(request.nickname),
+                                    cifrado(request.nickname),
                                     passwordEncoder.encode( "999999"),
                                     request.rol,
                                     Date(),
@@ -92,7 +92,7 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         lunaVet = ExtendidosRespuesta(
-                            decrypt(extentidoLunaConsultado.get().usernameLuna), extentidoLunaConsultado.get().rol
+                            cifrado(extentidoLunaConsultado.get().usernameLuna, false), extentidoLunaConsultado.get().rol
                         )
                     }
                 }
@@ -107,7 +107,7 @@ class RegistroUsuario @Autowired constructor(
                             extSafariVetRepository.save(
                                 ExtSafariVet(
                                     usuarioConsultado.get().usuario,
-                                    encrypt(request.nickname),
+                                    cifrado(request.nickname),
                                     passwordEncoder.encode( "999999"),
                                     request.rol,
                                     Date(),
@@ -123,7 +123,7 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         safariVet = ExtendidosRespuesta(
-                            decrypt(extentidoSafariConsultado.get().usernameSafary),
+                            cifrado(extentidoSafariConsultado.get().usernameSafary, false),
                             extentidoSafariConsultado.get().rol
                         )
                     }
@@ -140,7 +140,7 @@ class RegistroUsuario @Autowired constructor(
                             extCamaDelPerroRepository.save(
                                 ExtCamaDelPerro(
                                     usuarioConsultado.get().usuario,
-                                    encrypt(request.nickname),
+                                    cifrado(request.nickname),
                                     passwordEncoder.encode( "999999"),
                                     request.rol,
                                     Date(),
@@ -156,7 +156,7 @@ class RegistroUsuario @Autowired constructor(
 
                     if (extentidoCamaConsultado.isPresent) {
                         camaDelPerro = ExtendidosRespuesta(
-                            decrypt(extentidoCamaConsultado.get().usernameCamaPerro), extentidoCamaConsultado.get().rol
+                            cifrado(extentidoCamaConsultado.get().usernameCamaPerro, false), extentidoCamaConsultado.get().rol
                         )
                     }
                 }
@@ -187,15 +187,12 @@ class RegistroUsuario @Autowired constructor(
             clienteRepository.save(
                 Usuario(
                     idUser,
-                    encrypt(request.nombre),
-                    encrypt(request.apellidoPaterno),
-                    encrypt(request.apellidoMaterno),
-                    encrypt(request.genero),
-                    CorreosElectronicos(false, encrypt(request.correo)),
-                    Telefonos(false, encrypt(request.telefono)),
-                    encrypt(request.fechaNacimiento),
-                    encrypt(request.aplicacion),
-                    request.notificaciones,
+                    cifrado(request.nombre),
+                    cifrado(request.apellidoPaterno),
+                    cifrado(request.apellidoMaterno),
+                    cifrado(request.genero),
+                    cifrado(request.fechaNacimiento),
+                    cifrado(request.aplicacion),
                     Date(),
                     Date()
                 )

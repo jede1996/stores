@@ -22,7 +22,7 @@ class ListadoProveedores @Autowired constructor(
             logs.info("Servicio de listado de proveedores")
 
             val proveedoresConsultados = tracer.duration(Servicios().consultaUsuarioDatosBasicos, fun(): List<Proveedor> {
-                return proveedorRepository.findAllByAplicacion(encrypt(request.aplicacion))
+                return proveedorRepository.findAllByAplicacion(cifrado(request.aplicacion))
             })
 
             return buildresponse(respuesta =  proveedoresConsultados)

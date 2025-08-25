@@ -36,7 +36,7 @@ class ModificacionUsuario @Autowired constructor(
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(request.usuario))
+                return clienteRepository.findById(cifrado(request.usuario))
             })
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
@@ -52,19 +52,14 @@ class ModificacionUsuario @Autowired constructor(
             var camaDelPerro: ExtendidosRespuesta? = null
 
 
-            if (decrypt(cliente.nombre) != request.nombre) cliente.nombre = encrypt(request.nombre)
-            if (decrypt(cliente.apellidoPaterno) != request.apellidoPaterno) cliente.apellidoPaterno =
-                encrypt(request.apellidoPaterno)
-            if (decrypt(cliente.apellidoMaterno) != request.apellidoMaterno) cliente.apellidoMaterno =
-                encrypt(request.apellidoMaterno)
-            if (decrypt(cliente.genero) != request.genero) cliente.genero = encrypt(request.genero)
-            if (decrypt(cliente.fechaNacimiento) != request.fechaNacimiento) cliente.fechaNacimiento =
-                encrypt(request.fechaNacimiento)
-            if (decrypt(cliente.correo?.direccion) != request.correo) cliente.correo?.direccion =
-                encrypt(request.correo)
-            if (decrypt(cliente.telefono.telefono) != request.telefono) cliente.telefono.telefono =
-                encrypt(request.telefono)
-            if (cliente.notificaciones != request.notificaciones) cliente.notificaciones = request.notificaciones
+            if (cifrado(cliente.nombre, false) != request.nombre) cliente.nombre = cifrado(request.nombre)
+            if (cifrado(cliente.apellidoPaterno, false) != request.apellidoPaterno) cliente.apellidoPaterno =
+                cifrado(request.apellidoPaterno)
+            if (cifrado(cliente.apellidoMaterno, false) != request.apellidoMaterno) cliente.apellidoMaterno =
+                cifrado(request.apellidoMaterno)
+            if (cifrado(cliente.genero, false) != request.genero) cliente.genero = cifrado(request.genero)
+            if (cifrado(cliente.fechaNacimiento, false) != request.fechaNacimiento) cliente.fechaNacimiento =
+                cifrado(request.fechaNacimiento)
             cliente.fechaModificacion = Date()
 
             tracer.duration(Servicios().actualizacionUsuario, fun() {
@@ -80,10 +75,10 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         val extluna = extentidoLunaConsultado.get()
-                        extluna.usernameLuna = encrypt(request.nickname)
+                        extluna.usernameLuna = cifrado(request.nickname)
                         extluna.rol = request.rol
                         lunaVet = ExtendidosRespuesta(
-                            decrypt(extluna.usernameLuna), extluna.rol
+                            cifrado(extluna.usernameLuna, false), extluna.rol
                         )
 
                         tracer.duration(Servicios().actualizacionExtLunaVet, fun() {
@@ -100,10 +95,10 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         val extsafary = extentidoSafariConsultado.get()
-                        extsafary.usernameSafary = encrypt(request.nickname)
+                        extsafary.usernameSafary = cifrado(request.nickname)
                         extsafary.rol = request.rol
                         safariVet = ExtendidosRespuesta(
-                            decrypt(extsafary.usernameSafary), extsafary.rol
+                            cifrado(extsafary.usernameSafary, false), extsafary.rol
                         )
 
                         tracer.duration(Servicios().actualizacionExtSafariVet, fun() {
@@ -120,10 +115,10 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoCamaConsultado.isPresent) {
                         val extsaCamaperro = extentidoCamaConsultado.get()
-                        extsaCamaperro.usernameCamaPerro = encrypt(request.nickname)
+                        extsaCamaperro.usernameCamaPerro = cifrado(request.nickname)
                         extsaCamaperro.rol = request.rol
                         camaDelPerro = ExtendidosRespuesta(
-                            decrypt(extsaCamaperro.usernameCamaPerro), extsaCamaperro.rol
+                            cifrado(extsaCamaperro.usernameCamaPerro, false), extsaCamaperro.rol
                         )
 
                         tracer.duration(Servicios().actualizacionExtCamaDelPerro, fun() {
@@ -154,7 +149,7 @@ class ModificacionUsuario @Autowired constructor(
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             val usuarioConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Usuario> {
-                return clienteRepository.findById(encrypt(request.usuario))
+                return clienteRepository.findById(cifrado(request.usuario))
             })
 
             if (!usuarioConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
@@ -173,7 +168,7 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         val extluna = extentidoLunaConsultado.get()
-                        extluna.passwordLuna = encrypt(request.contrasennaNueva)
+                        extluna.passwordLuna = cifrado(request.contrasennaNueva)
 
                         tracer.duration(Servicios().actualizacionExtLunaVet, fun() {
                             extLunaVetRepository.save(extluna)
@@ -189,7 +184,7 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         val extsafary = extentidoSafariConsultado.get()
-                        extsafary.passwordSafary = encrypt(request.contrasennaNueva)
+                        extsafary.passwordSafary = cifrado(request.contrasennaNueva)
 
                         tracer.duration(Servicios().actualizacionExtSafariVet, fun() {
                             extSafariVetRepository.save(extsafary)
@@ -205,7 +200,7 @@ class ModificacionUsuario @Autowired constructor(
 
                     if (extentidoCamaConsultado.isPresent) {
                         val extsaCamaperro = extentidoCamaConsultado.get()
-                        extsaCamaperro.passwordCamaPerro = encrypt(request.contrasennaNueva)
+                        extsaCamaperro.passwordCamaPerro = cifrado(request.contrasennaNueva)
 
                         tracer.duration(Servicios().actualizacionExtCamaDelPerro, fun() {
                             extCamaDelPerroRepository.save(extsaCamaperro)

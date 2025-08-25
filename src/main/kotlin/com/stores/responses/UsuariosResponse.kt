@@ -1,7 +1,7 @@
 package com.stores.responses
 
 import com.stores.config.Roles
-import com.stores.config.decrypt
+import com.stores.config.cifrado
 import com.stores.entities.Usuario
 
 data class ResponseUsuaro (
@@ -10,9 +10,6 @@ data class ResponseUsuaro (
     val apellidoMaterno: String,
     val genero: String,
     val fechaNacimiento: String,
-    val aplicacion: String,
-    val correoElectronico: String,
-    val telefono: String,
     val extendidos: Extendidos?,
 )
 
@@ -29,14 +26,11 @@ data class ExtendidosRespuesta(
 
 fun preparaResponseUsuario(usaurio: Usuario, extendidos: Extendidos): ResponseUsuaro  {
     return ResponseUsuaro(
-        decrypt(usaurio.nombre),
-        decrypt(usaurio.apellidoPaterno),
-        decrypt(usaurio.apellidoMaterno),
-        decrypt(usaurio.genero),
-        decrypt(usaurio.fechaNacimiento),
-        decrypt(usaurio.aplicacion),
-        decrypt(usaurio.correo?.direccion),
-        decrypt(usaurio.telefono.telefono),
+        cifrado(usaurio.nombre, false),
+        cifrado(usaurio.apellidoPaterno, false),
+        cifrado(usaurio.apellidoMaterno, false),
+        cifrado(usaurio.genero, false),
+        cifrado(usaurio.fechaNacimiento, false),
         extendidos
     )
 }

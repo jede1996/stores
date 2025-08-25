@@ -25,20 +25,20 @@ class ModificacionProveedores @Autowired constructor(
             if (!validaAplicaiones(request.aplicacion)) return buildresponse(error = CatalogoResponses.APLICACION_INVALIDA)
 
             var proveedorConsultado = tracer.duration(Servicios().consultaUsuarioId, fun(): Optional<Proveedor> {
-                return proveedorRepository.findById(encrypt(request.idEmpresa))
+                return proveedorRepository.findById(cifrado(request.idEmpresa))
             })
 
             if (!proveedorConsultado.isPresent) return buildresponse(error = CatalogoResponses.USUARIO_INEXISTENTE)
 
             val proveedor = proveedorConsultado.get()
 
-            if (decrypt(proveedor.nombre) != request.nombre) proveedor.nombre = encrypt(request.nombre)
-            if (decrypt(proveedor.empresa) != request.empresa) proveedor.empresa = encrypt(request.empresa)
-            if (decrypt(proveedor.apellidoPaterno) != request.apellidoPaterno) proveedor.apellidoPaterno = encrypt(request.apellidoPaterno)
-            if (decrypt(proveedor.apellidoMaterno) != request.apellidoMaterno) proveedor.apellidoMaterno = encrypt(request.apellidoMaterno)
-            if (decrypt(proveedor.correo) != request.correo) proveedor.correo = encrypt(request.correo)
-            if (decrypt(proveedor.telefono) != request.telefono) proveedor.telefono = encrypt(request.telefono)
-            if (decrypt(proveedor.aplicacion) != request.aplicacion) proveedor.aplicacion = encrypt(request.aplicacion)
+            if (cifrado(proveedor.nombre, false) != request.nombre) proveedor.nombre = cifrado(request.nombre)
+            if (cifrado(proveedor.empresa, false) != request.empresa) proveedor.empresa = cifrado(request.empresa)
+            if (cifrado(proveedor.apellidoPaterno, false) != request.apellidoPaterno) proveedor.apellidoPaterno = cifrado(request.apellidoPaterno)
+            if (cifrado(proveedor.apellidoMaterno, false) != request.apellidoMaterno) proveedor.apellidoMaterno = cifrado(request.apellidoMaterno)
+            if (cifrado(proveedor.correo, false) != request.correo) proveedor.correo = cifrado(request.correo)
+            if (cifrado(proveedor.telefono, false) != request.telefono) proveedor.telefono = cifrado(request.telefono)
+            if (cifrado(proveedor.aplicacion, false) != request.aplicacion) proveedor.aplicacion = cifrado(request.aplicacion)
             proveedor.fechaModificacion = Date()
 
             tracer.duration(Servicios().actualizacionUsuario, fun() {
