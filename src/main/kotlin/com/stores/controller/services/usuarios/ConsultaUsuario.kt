@@ -65,7 +65,7 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoLunaConsultado.isPresent) {
                         lunaVet = ExtendidosRespuesta(
-                            cifrado(extentidoLunaConsultado.get().usernameLuna, false), extentidoLunaConsultado.get().rol
+                            cifrado(extentidoLunaConsultado.get().usernameExt, false), extentidoLunaConsultado.get().rol
                         )
                     }
                 }
@@ -78,7 +78,7 @@ class ConsultaUsuario @Autowired constructor(
 
                     if (extentidoSafariConsultado.isPresent) {
                         safariVet = ExtendidosRespuesta(
-                            cifrado(extentidoSafariConsultado.get().usernameSafary, false),
+                            cifrado(extentidoSafariConsultado.get().usernameExt, false),
                             extentidoSafariConsultado.get().rol
                         )
                     }
@@ -92,7 +92,7 @@ class ConsultaUsuario @Autowired constructor(
                         })
                     if (extentidoCamaConsultado.isPresent) {
                         camaDelPerro = ExtendidosRespuesta(
-                            cifrado(extentidoCamaConsultado.get().usernameCamaPerro, false), extentidoCamaConsultado.get().rol
+                            cifrado(extentidoCamaConsultado.get().usernameExt, false), extentidoCamaConsultado.get().rol
                         )
                     }
                 }

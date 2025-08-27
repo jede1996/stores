@@ -4,13 +4,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 
-data class DetallesResponseError(
-    val codigo: String?, val mensaje: String?, val detalle: String?,
-)
+data class DetallesResponseError(val codigo: String?, val mensaje: String?, val detalle: String?)
 
-data class Respuesta(
-    val status: Int, val respuesta: Any,
-)
+data class Respuesta(val status: Int, val respuesta: Any)
 
 enum class ResponseStatus(val status: Int, val httpStatus: HttpStatus) {
     ERROR_INESPERADO(-2, HttpStatus.INTERNAL_SERVER_ERROR),
@@ -19,9 +15,7 @@ enum class ResponseStatus(val status: Int, val httpStatus: HttpStatus) {
     PETICION_INCORRECTA(2, HttpStatus.OK),
 }
 
-enum class CatalogoResponses(
-    val estatus: ResponseStatus, val subcodigo: Int, val mensajeDefault: String,
-) {
+enum class CatalogoResponses(val estatus: ResponseStatus, val subcodigo: Int, val mensajeDefault: String) {
     VALOR_EXISTENTE(ResponseStatus.ERROR_PROTOCOLO, 0, "Un campo ya esta registrado en otro cliente"),
     NOMBRE_REQUERIDO(ResponseStatus.ERROR_PROTOCOLO, 0, "El nombre no fue enviado"),
     AP_REQUERIDO(ResponseStatus.ERROR_PROTOCOLO, 0, "El apellido paterno no fue enviado"),
@@ -49,6 +43,7 @@ enum class CatalogoResponses(
     CALIFICACION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El comentario no fue enviado"),
     OPINION_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "La opinion no fue enviado"),
     PRODUCTO_REQUERIDO(ResponseStatus.PETICION_INCORRECTA, 0, "El producto no fue enviado"),
+    APP_REQUERIDA(ResponseStatus.PETICION_INCORRECTA, 0, "las aplicacion no fue enviado"),
 
     TELEFONO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El telefono ya lo tiene registrado un usuario"),
     CORREO_EXISTENTE(ResponseStatus.PETICION_INCORRECTA, 0, "El correo ya lo tiene registrado un usuario"),
@@ -71,7 +66,7 @@ enum class CatalogoResponses(
 }
 
 fun buildresponse(
-    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = "",
+    respuesta: Any? = null, error: CatalogoResponses? = null, detalle: String? = ""
 ): ResponseEntity<Respuesta> {
     if (respuesta != null) return ResponseEntity(Respuesta(0, respuesta), ResponseStatus.EXITO.httpStatus)
     return ResponseEntity(

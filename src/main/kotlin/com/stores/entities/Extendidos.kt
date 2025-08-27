@@ -9,69 +9,77 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.Date
 
+interface IExtndidos{
+    var usuario: String
+    var usernameExt: String
+    var passwordExt: String
+    var rol: Roles
+    val fechaRegistro: Date
+    var fechaModificacion: Date
+}
 
 @Document("extendido_luna_vet")
 data class ExtLunaVet(
-    @Field("_id") var usuario: String,
-    var usernameLuna: String,
-    var passwordLuna: String,
-    var rol: Roles,
-    @Field("fecha_registro") val fechaRegistro: Date,
-    @Field("fecha_modificacion") var fechaModificacion: Date
-): UserDetails {
+    @Field("_id") override var usuario: String,
+    override var usernameExt: String,
+    override var passwordExt: String,
+    override var rol: Roles,
+    @Field("fecha_registro") override val fechaRegistro: Date,
+    @Field("fecha_modificacion") override var fechaModificacion: Date
+): UserDetails, IExtndidos {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority(rol.name))
     }
 
     override fun getPassword(): String {
-        return this.passwordLuna
+        return this.passwordExt
     }
 
     override fun getUsername(): String {
-        return this.usernameLuna
+        return this.usernameExt
     }
 }
 
 @Document("extendido_safafi_vet")
 data class ExtSafariVet(
-    @Field("_id") var usuario: String,
-    var usernameSafary: String,
-    var passwordSafary: String,
-    var rol: Roles,
-    @Field("fecha_registro") val fechaRegistro: Date,
-    @Field("fecha_modificacion") var fechaModificacion: Date,
-): UserDetails {
+    @Field("_id") override var usuario: String,
+    override var usernameExt: String,
+    override var passwordExt: String,
+    override var rol: Roles,
+    @Field("fecha_registro") override val fechaRegistro: Date,
+    @Field("fecha_modificacion") override var fechaModificacion: Date,
+): UserDetails, IExtndidos {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority(rol.name))
     }
 
     override fun getPassword(): String {
-        return this.passwordSafary
+        return this.passwordExt
     }
 
     override fun getUsername(): String {
-        return this.usernameSafary
+        return this.usernameExt
     }
 }
 
 @Document("extendido_cama_del_perro")
 data class ExtCamaDelPerro(
-    @Field("_id") var usuario: String,
-    var usernameCamaPerro: String,
-    var passwordCamaPerro: String,
-    var rol: Roles,
-    @Field("fecha_registro") val fechaRegistro: Date,
-    @Field("fecha_modificacion") var fechaModificacion: Date,
-): UserDetails {
+    @Field("_id") override var  usuario: String,
+    override var usernameExt: String,
+    override var passwordExt: String,
+    override var rol: Roles,
+    @Field("fecha_registro") override val fechaRegistro: Date,
+    @Field("fecha_modificacion") override var fechaModificacion: Date,
+): UserDetails, IExtndidos {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority(rol.name))
     }
 
     override fun getPassword(): String {
-        return this.passwordCamaPerro
+        return this.passwordExt
     }
 
     override fun getUsername(): String {
-        return this.usernameCamaPerro
+        return this.usernameExt
     }
 }

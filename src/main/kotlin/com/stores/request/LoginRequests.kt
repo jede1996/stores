@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull
 data class RequesLogin(
     @field:NotNull(message = "PASS_REQUERIDO") @field:NotEmpty(message = "PASS_REQUERIDO") val contrasenna: String?,
     @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val usuario: String?,
-    @field:NotNull(message = "USUARIO_REQUERIDO") @field:NotEmpty(message = "USUARIO_REQUERIDO") val aplicacion: String?,
+    @field:NotNull(message = "APP_REQUERIDA") @field:NotEmpty(message = "APP_REQUERIDA") val aplicacion: String?,
 )
 
 data class RequestBloqueoUsuario(

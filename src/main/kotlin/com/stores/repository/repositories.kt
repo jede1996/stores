@@ -6,10 +6,18 @@ import org.springframework.data.mongodb.repository.Query
 import java.util.*
 
 interface ConsultasRepository : MongoRepository<Consultas, String>
-interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>
-interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>
+interface ExtLunaVetRepository : MongoRepository<ExtLunaVet, String>{
+    @Query(value = "{ usernameExt: ?0 }")
+    fun findByUserName(username: String): Optional<ExtLunaVet>
+}
+
+interface ExtSafariVetRepository : MongoRepository<ExtSafariVet, String>{
+    @Query(value = "{ usernameExt: ?0 }")
+    fun findByUserName(username: String): Optional<ExtSafariVet>
+}
+
 interface ExtCamaDelPerroRepository : MongoRepository<ExtCamaDelPerro, String>{
-    @Query(value = "{ usernameCamaPerro: ?0 }")
+    @Query(value = "{ usernameExt: ?0 }")
     fun findByUserName(username: String): Optional<ExtCamaDelPerro>
 }
 
@@ -19,9 +27,7 @@ interface ProductoRepository : MongoRepository<Producto, String>{
 }
 
 interface MascotaRepository : MongoRepository<Mascota, String>{
-    @Query(
-        value = "{ propietario: ?0 }"
-    )
+    @Query(value = "{ propietario: ?0 }")
     fun findByAllMascotasByUser(propietario: String): List<Mascota>
 }
 

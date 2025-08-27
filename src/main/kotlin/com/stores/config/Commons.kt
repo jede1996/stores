@@ -11,16 +11,15 @@ private val restoredSecretKey =
 private val restoredIv = Base64.getDecoder().decode("CHF3bGpaxKP66dknejpAXXhiZO8+q2bXcu7XnS29SGo=")
 val mongoString = cifrado("eVkbyAoGgInqLXi1t2FBvHMSMfR+E7N9/rX+AQHsW9W7afomHxFvIHDo2MMA3Zo3pu4k8FVNhY7i4t0mcKzLjPA=", false)
 
-
 fun cifrado(string: String?, cifrado: Boolean = true): String {
     if(string.isNullOrEmpty()) return ""
-    val cipher = Cipher.getInstance("AES/GCM/NoPadding")
+    val cipherAESGCM = Cipher.getInstance("AES/GCM/NoPadding")
      return if(cifrado){
-        cipher.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
-         Base64.getEncoder().encodeToString(cipher.doFinal(string.toByteArray()))
+         cipherAESGCM.init(Cipher.ENCRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+         Base64.getEncoder().encodeToString(cipherAESGCM.doFinal(string.toByteArray()))
     }else{
-        cipher.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
-         String(cipher.doFinal(Base64.getDecoder().decode(string)))
+         cipherAESGCM.init(Cipher.DECRYPT_MODE, restoredSecretKey, GCMParameterSpec(128, restoredIv))
+         String(cipherAESGCM.doFinal(Base64.getDecoder().decode(string)))
     }
 }
 
@@ -45,36 +44,39 @@ data class Servicios(
     val consultaUsuarioDatosBasicos: String = "Consulta por datos basicos",
     val consultaUsuarioTelefono: String = "Consulta por telefono",
     val consultaUsuarioCorreo: String = "Consulta por correo",
+    val registroUsuario: String = "Registro de usuario",
+    val actualizacionUsuario: String = "Actualizacion de usuario",
+    val eliminaUsuario: String = "Eliminacion de usuario",
+
     val consultaMascotasPorId: String = "Consulta mascotas por Id",
     val consultaMascotasPorusuario: String = "Consulta mascotas por usuario",
+    val registroMascota: String = "Registro de mascota",
+    val registroFotoMascota: String = "Registro de foto de la mascota",
+    val actualizacionMascota: String = "Actualizacion de mascota",
+    val actualizacionFotoMascota: String = "Actualizacion de foto de la mascota",
     val consultaProductoPorId: String = "Consulta producto por Id",
-    val consultaExtLunaVet: String = "Consulta de extendido para luna vet",
-    val consultaExtSafariVet: String = "Consulta de extendido para safari vet",
-    val consultaExtCamaDelPerro: String = "Consulta de extendido para cama del perro",
 
     val registroProducto: String = "Registro de producto",
-    val registroUsuario: String = "Registro de usuario",
-    val registroFotoMascota: String = "Registro de foto de la mascota",
-    val registroMascota: String = "Registro de mascota",
-    val registroExtLunaVet: String = "Registro de extendido para luna vet",
-    val registroExtSafariVet: String = "Registro  de extendido para safari vet",
-    val registroExtCamaDelPerro: String = "Registro de extendido para cama del perro",
-
-    val actualizacionFotoMascota: String = "Actualizacion de foto de la mascota",
     val actualizacionProducto: String = "Actualizacion de producto",
-    val actualizacionMascota: String = "Actualizacion de mascota",
-    val actualizacionUsuario: String = "Actualizacion de usuario",
-    val actualizacionExtLunaVet: String = "Actualizacion de extendido para luna vet",
-    val actualizacionExtSafariVet: String = "Actualizacion  de extendido para safari vet",
-    val actualizacionExtCamaDelPerro: String = "Actualizacion de extendido para cama del perro",
-
     val eliminaProducto: String = "Eliminacion de producto",
-    val eliminaUsuario: String = "Eliminacion de usuario",
+
+    val consultaExtLunaVet: String = "Consulta de extendido para luna vet",
+    val registroExtLunaVet: String = "Registro de extendido para luna vet",
+    val actualizacionExtLunaVet: String = "Actualizacion de extendido para luna vet",
     val eliminaExtLunaVet: String = "Eliminacion de extendido para luna vet",
+
+    val consultaExtSafariVet: String = "Consulta de extendido para safari vet",
+    val registroExtSafariVet: String = "Registro  de extendido para safari vet",
+    val actualizacionExtSafariVet: String = "Actualizacion  de extendido para safari vet",
     val eliminaExtSafariVet: String = "Eliminacion  de extendido para safari vet",
+
+    val consultaExtCamaDelPerro: String = "Consulta de extendido para cama del perro",
+    val registroExtCamaDelPerro: String = "Registro de extendido para cama del perro",
+    val actualizacionExtCamaDelPerro: String = "Actualizacion de extendido para cama del perro",
     val eliminaExtCamaDelPerro: String = "Eliminacion de extendido para cama del perro",
 
     val anulaRegistro: String = "Anulacion de registro",
+
     val preparacionRespuesta: String = "Preparacion respuesta"
 )
 
